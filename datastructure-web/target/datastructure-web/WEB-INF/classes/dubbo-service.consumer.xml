@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://code.alibabatech.com/schema/dubbo
+        http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+	<!-- 消费方应用名，用于计算依赖关系，不是匹配条件，不要与提供方一样 -->
+	<dubbo:application name="platform-service.consumer" />
+	<dubbo:registry address="${pp.zookeeper.location}" />
+	
+	<!-- 调用端无需指定端口号 -->
+	<!-- <dubbo:protocol id="rmi" name="rmi" port="${pp.rmi.port}" host="${pp.host}">
+		<dubbo:parameter key="rmiSocketPort" value="${pp.zookeeper.socket.port}" />
+	</dubbo:protocol> -->
+	
+	<!-- 生成远程服务代理 -->
+	<!-- <dubbo:reference id="service4PHRConsumer" interface="com.zhijieyun.mongo.service.Service4PHR" /> -->
+
+	<dubbo:reference id="zjyLogServiceConsumer" interface="com.zhijieyun.zjylog.service.IZjyLogService" />
+	<dubbo:reference id="zjyLogUtilsServiceConsumer" interface="com.zhijieyun.zjylog.service.IZjyLogUtilsService" />
+
+</beans>

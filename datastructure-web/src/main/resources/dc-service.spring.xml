@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+
+    <!-- 要想获取到applicationContext，必须先将bean注入到容器之中 -->
+    <bean id="dubboServiceConsumer" class="com.zhijieyun.datastructure.dubbo.DubboServiceConsumer"/>
+    
+    <bean id="zjyLogUtil" class="com.zhijieyun.datastructure.util.ZjyLogUtil" />
+    
+  <!--   <bean id="triggerService" class="elastic_job_lite.service.impl.TriggerServiceImpl"/> -->
+
+</beans>

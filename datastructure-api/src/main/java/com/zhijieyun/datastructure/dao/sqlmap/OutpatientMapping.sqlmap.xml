@@ -1,0 +1,625 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD iBatis Mapper 3.0 //EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<!-- define mapping from database to class -->
+<mapper namespace="com.zhijieyun.datastructure.dao.mapper.OutpatientMapper">
+     <sql id="sqlHead">
+        select  *  from (select temp.*,row_number() over (partition by temp."mzId",temp."orgCode" order by temp.id ) as group_idx from(
+     </sql>
+	<!-- 门诊挂号Map -->
+	<resultMap id="getOpRegister" type="java.util.HashMap">
+		<result property="id" column="id" />
+		<result property="mzId" column="mzId" />
+		<result property="serviceTime" column="serviceTime" />
+		<result property="serviceDoctorCode" column="serviceDoctorCode" />
+		<result property="sourceID" column="sourceID" />
+		<result property="mpiID" column="mpiID" />
+		<result property="mpiid" column="mpiID" />
+		<result property="hrn" column="hrn" />
+		<result property="metaSetCode" column="metaSetCode" />
+		<result property="name" column="pname" />
+		<result property="pname" column="pname" />
+		<result property="idcard" column="idcard" />
+		<result property="dob" column="dob" />
+		<result property="sexCode" column="sex" />
+		<result property="sex" column="sex" />
+		<result property="orgName" column="orgName" />
+		<result property="orgCode" column="orgCode" />
+		<result property="doctorName" column="doctorName" />
+		<result property="deptName" column="deptName" />
+		<result property="deptCode" column="deptCode" />
+	</resultMap>
+	
+	<select id="queryBatchOutpatients" parameterType="java.util.List" resultMap="getOpRegister">
+	    <!-- 筛选数据sql重复数据取第一个数据 -->  
+	    select  *  from (select temp.*,row_number() over (partition by temp."mzId",temp."orgCode" order by temp.id ) as group_idx from(
+		select
+		    id$ as id,
+			OUTPATIENT_NUM as "mzId",
+			to_char(CREATED_AT, 'yyyy-MM-dd hh24:mi:ss') as "serviceTime",
+			DOCTOR_CODE as "serviceDoctorCode",
+			SOURCEID$ as "sourceID",
+			MPIID$ as "mpiID",
+			HEALTH_RECORD_NUM as "hrn",
+			'HB001'as "metaSetCode",
+			PNAME as "pname",
+			Idcard_Num as "idcard",
+			to_char(BORN_DATE, 'yyyy-MM-dd hh24:mi:ss') as "dob",
+			SEX_CODE as "sex",
+			ORG_NAME as "orgName",
+			ORG_CODE as "orgCode",
+			DEP_NAME as "deptName",
+			DEP_CODE as "deptCode",
+			DOCTOR_NAME as "doctorName"
+		from 
+			PT_OP_REGISTER t where  
+		   <foreach collection="list" index="item" item="item" open="(" separator=" or " close=")">
+             t.id$= ${item}
+           </foreach>
+         <!-- 筛选数据sql结束 -->
+         ) temp) temprow_number where group_idx=1
+	</select>
+	
+
+   	<select id="getOpRegisterByMap" parameterType="map" resultMap="getOpRegister">
+		select
+		    id$ as id,
+			OUTPATIENT_NUM as "mzId",
+			to_char(CREATED_AT, 'yyyy-MM-dd hh24:mi:ss') as "serviceTime",
+			DOCTOR_CODE as "serviceDoctorCode",
+			SOURCEID$ as "sourceID",
+			MPIID$ as "mpiID",
+			HEALTH_RECORD_NUM as "hrn",
+			'HB001'as "metaSetCode",
+			PNAME as "pname",
+			Idcard_Num as "idcard",
+			to_char(BORN_DATE, 'yyyy-MM-dd hh24:mi:ss') as "dob",
+			SEX_CODE as "sex",
+			ORG_NAME as "orgName",
+			ORG_CODE as "orgCode",
+			DEP_NAME as "deptName",
+			DEP_CODE as "deptCode",
+			DOCTOR_NAME as "doctorName",
+			${param}
+		from 
+			${tempTableName} t
+	</select>
+	
+	<!-- 门诊处方（主表兼从表）查询Map -->
+	<resultMap id="getOpRecipeMap" type="java.util.HashMap">
+		<result property="id" column="idr" />
+		<result property="name" column="name" />
+		<result property="mzId" column="mzIdr" />
+		<result property="pname" column="namer" />
+		<result property="sex" column="sexr" />
+		<result property="mpiid" column="mpiidr" />
+		<result property="orgCode" column="orgCoder" />
+		<result property="serviceTime" column="serviceTimer" />
+		<result property="orderId" column="orderIdr" />
+		<result property="doctorCode" column="doctorCoder" />
+		<result property="prescriptionCategory" column="prescriptionCategoryr" />
+		<result property="prescriptionType" column="prescriptionTyper" />
+		<result property="deptCode" column="deptCoder" />
+		<result property="pname" column="pnamer" />
+		<result property="sexCode" column="sexCoder" />
+		<result property="sexName" column="sexNamer" />
+		<result property="dob" column="dobr" />
+		<result property="indentificationNo" column="indentificationNor" />
+		<result property="orgName" column="orgNamer" />
+		<result property="doctorName" column="doctorNamer" />
+		<result property="deptName" column="deptNamer" />
+		<result property="age" column="ager" />
+		<result property="address" column="addressr" />
+		<result property="diagnosticName" column="diagnosticNamer" />
+		<result property="auditorName" column="auditorNamer" />
+		<result property="sigPreDispenserName" column="sigPreDispenserNamer" />
+		<result property="sigCheckDispenserName" column="sigCheckDispenserNamer" />
+		<result property="sigDispenserName" column="sigDispenserNamer" />
+		<result property="fee" column="feer" />
+		<collection property="opRecipeDiagList"  ofType="java.util.HashMap" javaType="java.util.ArrayList">
+				<result property="id" column="idd" />
+                <result property="mzId" column="mzIdd" />
+				<result property="orgCode" column="orgCoded" />
+				<result property="orgName" column="orgNamed" />
+				<result property="diagnoseId" column="diagnoseIdd" />
+				<result property="orderId" column="orderIdd" />
+				<result property="diagnosisTypeCode" column="diagnosisTypeCoded" />
+				<result property="diagnosisTypeName" column="diagnosisTypeNamed" />
+				<result property="diseaseCode" column="diseaseCoded" />
+				<result property="diseaseName" column="diseaseNamed" />
+				<result property="isSuspect" column="isSuspectd" />
+				<result property="personIdentityType" column="personIdentityTyped" />
+				<result property="personIdentityNumber" column="personIdentityNumberd" />
+				<result property="modifierFlags" column="modifierFlagsd" />
+	    </collection>
+	    <collection property="opRecipeItemList"  ofType="java.util.HashMap" javaType="java.util.ArrayList">
+	            <result property="id" column="idi" />
+           		<result property="mzId" column="mzIdi" />
+				<result property="orgCode" column="orgCodei" />
+				<result property="prescriptionId" column="prescriptionIdi" />
+				<result property="prescriptionGroup" column="prescriptionGroupi" />
+				<result property="itemCode" column="itemCodei" />
+				<result property="itemName" column="itemNamei" />
+				<result property="scale" column="scalei" />
+				<result property="count" column="counti" />
+				<result property="countUnit" column="countUniti" />
+				<result property="unitPrice" column="unitPricei" />
+				<result property="dosage" column="dosagei" />
+				<result property="dosageUnit" column="dosageUniti" />
+				<result property="useWay" column="useWayi" />
+				<result property="numberOfTimes" column="numberOfTimesi" />
+				<result property="useDrugDays" column="useDrugDaysi" />
+				<result property="chinesePayCounter" column="chinesePayCounteri" />
+				<result property="statusFlag" column="statusFlagi" />
+				<result property="obsoletePeople" column="obsoletePeoplei" />
+				<result property="obsoleteTime" column="obsoleteTimei" />
+				<result property="medicineDispensingMethod" column="medicineDispensingMethodi" />
+				<result property="skinTestResults" column="skinTestResultsi" />
+				<result property="orgName" column="orgNamei" />
+				<result property="drugAmount" column="drugAmounti" />
+				<result property="prescriptionNo" column="prescriptionNoi" />
+	    </collection>
+	</resultMap>
+	
+	<!-- 门诊费用（主表兼从表）查询Map -->
+	<resultMap id="getOpChargeMap" type="java.util.HashMap">
+	    <result property="id" column="idp" />
+	    <result property="name" column="name" />
+		<result property="mzId" column="mzIdp" />
+		<result property="orgCode" column="orgCodep" />
+		<result property="mpiid" column="mpiidp" />
+		<result property="settlementId" column="settlementIdp" />
+		<result property="orgName" column="orgNamep" />
+		<result property="createdAt" column="createdAtp" />
+		<result property="invoiceNum" column="invoiceNump" />
+		<result property="chargeSceneCode" column="chargeSceneCodep" />
+		<result property="chargeSceneName" column="chargeSceneNamep" />
+		<result property="chargeStatus" column="chargeStatusp" />
+		<result property="patientSource" column="patientSourcep" />
+		<result property="chargeModeCode" column="chargeModeCodep" />
+		<result property="chargeModeName" column="chargeModeNamep" />
+		<result property="settlementAmount" column="settlementAmountp" />
+		<result property="selfAmount" column="selfAmountp" />
+		<result property="settlementPersonCode" column="settlementPersonCodep" />
+		<result property="settlementPersonName" column="settlementPersonNamep" />
+		<result property="personIdentityType" column="personIdentityTypep" />
+		<result property="personIdentityNumber" column="personIdentityNumberp" />
+		<result property="modifierFlags" column="modifierFlagsp" />
+		<result property="serviceTime" column="serviceTimep" />
+	    <collection property="feeDetailsList"  ofType="java.util.HashMap" javaType="java.util.ArrayList">
+	            <result property="id" column="idd" />
+	       		<result property="orgCode" column="orgCoded" />
+				<result property="mzId" column="mzIdd" />
+				<result property="orgName" column="orgNamed" />
+				<result property="chargeId" column="chargeIdd" />
+				<result property="orderId" column="orderIdd" />
+				<result property="settlementId" column="settlementIdd" />
+				<result property="depCode" column="depCoded" />
+				<result property="depName" column="depNamed" />
+				<result property="prescriberCode" column="prescriberCoded" />
+				<result property="prescriberName" column="prescriberNamed" />
+				<result property="performerCode" column="performerCoded" />
+				<result property="performerName" column="performerNamed" />
+				<result property="chargeClassifiedCode" column="chargeClassifiedCoded" />
+				<result property="chargeClassifiedName" column="chargeClassifiedNamed" />
+				<result property="chargeTime" column="chargeTimed" />
+				<result property="itemCode" column="itemCoded" />
+				<result property="itemName" column="itemNamed" />
+				<result property="itemUnit" column="itemUnitd" />
+				<result property="itemPrice" column="itemPriced" />
+				<result property="itemTypeCode" column="itemTypeCoded" />
+				<result property="itemTypeName" column="itemTypeNamed" />
+				<result property="itemCount" column="itemCountd" />
+				<result property="itemReceivableAmount" column="itemReceivableAmountd" />
+				<result property="itemPaidCmount" column="itemPaidCmountd" />
+	    </collection>
+    </resultMap>
+	
+	<!-- 门（急）诊病历（主表）Map -->
+	<resultMap id="getOpEmroEmeMap" type="java.util.HashMap">
+	    <result property="id" column="ide" />
+	    <result property="name" column="name" />
+		<result property="mzId" column="mzIde" />
+		<result property="orgCode" column="orgCodee" />
+		<result property="mpiid" column="mpiide" />
+		<result property="serviceTime" column="serviceTimee" />
+		<result property="orgName" column="orgNamee" />
+		<result property="createdAt" column="createdAte" />
+		<result property="caseHistoryId" column="caseHistoryIde" />
+		<result property="pname" column="pnamee" />
+		<result property="sexCode" column="sexCodee" />
+		<result property="bornDate" column="bornDatee" />
+		<result property="deptCode" column="deptCodee" />
+		<result property="deptName" column="deptNamee" />
+		<result property="doctorCode" column="doctorCodee" />
+		<result property="doctorName" column="doctorNamee" />
+		<result property="commAddress" column="commAddresse" />
+		<result property="age" column="agee" />
+		<result property="falgFirstVisit" column="falgFirstVisite" />
+		<result property="presentIllness" column="presentIllnesse" />
+		<result property="pastHistory" column="pastHistorye" />
+		<result property="falgAllergyHistory" column="falgAllergyHistorye" />
+		<result property="allergyHistory" column="allergyHistorye" />
+		<result property="chiefComplaint" column="chiefComplainte" />
+		<result property="examinationRecord" column="examinationRecorde" />
+		<collection property="opEmroEmeDiagList"  ofType="java.util.HashMap" javaType="java.util.ArrayList">
+	            <result property="id" column="idd" />
+	    		<result property="orgCode" column="orgCoded" />
+				<result property="orgName" column="orgNamed" />
+				<result property="mzId" column="mzIdd" />
+				<result property="createdAt" column="createdAtd" />
+				<result property="caseHistoryId" column="caseHistoryIdd" />
+				<result property="fourDiagnosis" column="fourDiagnosisd" />
+				<result property="diseaseCode" column="diseaseCoded" />
+				<result property="disease" column="diseased" />
+				<result property="tmDiseaseCode1" column="tmDiseaseCode1d" />
+				<result property="tmDiseaseName1" column="tmDiseaseName1d" />
+				<result property="tmDiseaseCode2" column="tmDiseaseCode2d" />
+				<result property="tmDiseaseName2" column="tmDiseaseName2d" />
+				<result property="examItem" column="examItemd" />
+				<result property="examResult" column="examResultd" />
+				<result property="tmdiagnosisBasis" column="tmdiagnosisBasisd" />
+				<result property="treatmentMethod" column="treatmentMethodd" />
+		</collection>
+		<collection property="opEmroEmeOrdersList"  ofType="java.util.HashMap" javaType="java.util.ArrayList">
+		        <result property="id" column="ido" />
+		        <result property="orgCode" column="orgCodeo" />
+				<result property="orgName" column="orgNameo" />
+				<result property="mzId" column="mzIdo" />
+				<result property="createdAt" column="createdAto" />
+				<result property="orderId" column="orderIdo" />
+				<result property="orderItemTypeCode" column="orderItemTypeCodeo" />
+				<result property="orderItemTypeName" column="orderItemTypeNameo" />
+				<result property="orderItem" column="orderItemo" />
+				<result property="orderNotes" column="orderNoteso" />
+				<result property="depCode" column="depCodeo" />
+				<result property="depName" column="depNameo" />
+				<result property="prescriberCode" column="prescriberCodeo" />
+				<result property="prescriberName" column="prescriberNameo" />
+				<result property="prescribeDate" column="prescribeDateo" />
+				<result property="auditorCode" column="auditorCodeo" />
+				<result property="auditorName" column="auditorNameo" />
+				<result property="auditDate" column="auditDateo" />
+				<result property="performDeptCode" column="performDeptCodeo" />
+				<result property="performDeptName" column="performDeptNameo" />
+				<result property="performerCode" column="performerCodeo" />
+				<result property="performerName" column="performerNameo" />
+				<result property="performDate" column="performDateo" />
+				<result property="performStatus" column="performStatuso" />
+				<result property="cancelDocCode" column="cancelDocCodeo" />
+				<result property="cancelDocName" column="cancelDocNameo" />
+				<result property="cancelDate" column="cancelDateo" />
+				<result property="outpatientNum" column="outpatientNumo" />
+				<result property="applyNum" column="applyNumo" />
+				<result property="caseHistoryId" column="caseHistoryIdo" />
+		</collection>
+	</resultMap>
+	
+	<!--根据 mzId orgCode recipeId(可选参数) 门诊处方（主表兼从表）查询 -->
+	<select id="getOpRecipeByMap" parameterType="map" resultMap="getOpRecipeMap">
+	    <!-- <include refid="dc.dao.mapper.CommonTempMapper.sqlHead"/> -->
+	    SELECT 
+			pr.ID$ as idr,
+			'门诊处方' as "name",
+			pr.MPIID$ as mpiidr,
+			pr.OUTPATIENT_NUM as mzIdr,
+			pr.ORG_CODE as orgCoder,
+			to_char(pr.PRESCRIBE_DATE, 'yyyy-mm-dd hh24:mi:ss') as serviceTimer,
+			pr.RECIPE_ID as orderIdr,
+			pr.DOCTOR_CODE as doctorCoder,
+			pr.RECIPE_TYPE_CODE as prescriptionCategoryr,
+			pr.RECIPE_CLINIC_CODE as prescriptionTyper,
+			pr.DEP_CODE as deptCoder,
+			pr.PNAME as namer,
+			pr.SEX_CODE as sexr,
+			TO_CHAR(pr.BORN_DATE, 'yyyy-mm-dd') as dobr,
+			pr.IDCARD_NUM as indentificationNor,
+			pr.ORG_NAME as orgNamer,
+			pr.DOCTOR_NAME as doctorNamer,
+			pr.DEP_NAME as deptNamer,
+			pr.AGE_YEARS AS ager,
+			'' AS addressr,
+			'' AS diagnosticNamer,
+			pr.AUDITOR_NAME AS auditorNamer,
+			'' AS sigPreDispenserNamer,
+			'' AS sigCheckDispenserNamer,
+			'' AS sigDispenserNamer,
+			'' AS feer,
+			pd.ID$ as idd,
+			pd.OUTPATIENT_NUM as mzIdd,
+			pd.ORG_CODE as orgCoded,
+			pd.ORG_NAME as orgNamed,
+			pd.DIAGNOSE_ID as diagnoseIdd,
+			pd.RECIPE_ID as orderIdd,
+			pd.DIAGNOSIS_TYPE_CODE as diagnosisTypeCoded,
+			pd.DIAGNOSIS_TYPE_NAME as
+			diagnosisTypeNamed,
+			pd.DISEASE_CODE as diseaseCoded,
+			pd.DISEASE_NAME asdiseaseNamed,
+			pd.IS_SUSPECT as isSuspectd,
+			'' as personIdentityTyped,
+			'' as personIdentityNumberd,
+			'' as modifierFlagsd,
+			pi.ID$ as idi,
+			pi.OUTPATIENT_NUM as mzIdi,
+			pi.ORG_CODE as orgCodei,
+			pi.RECIPE_ITEM_ID as prescriptionIdi,
+			pi.GROUP_NO as prescriptionGroupi,
+			pi.DRUG_CODE as itemCodei,
+			pi.DRUG_NAME as itemNamei,
+			pi.SPEC as scalei,
+			pi.QUANTITY as counti,
+			pi.UNIT as countUniti,
+			pi.DRUG_PRICE as unitPricei,
+			to_char(pi.UNIT_DOSE,'990.99') as dosagei,
+			pi.DOSAGE_UNIT as dosageUniti,
+			pi.DRUG_ROUTE_NAME as useWayi,
+			pi.DRUG_FREQUENCY as numberOfTimesi,
+			pi.DURATION_DAYS as useDrugDaysi,
+			pi.HERB_NUM as chinesePayCounteri,
+			pi.STATUS_CODE as statusFlagi,
+			pi.CDOCTOR_NAME as obsoletePeoplei,
+			TO_CHAR(pi.CANCEL_TIME, 'yyyy-mm-dd hh24:mi:ss') as obsoleteTimei,
+			pi.MEDICATION_METHOD as medicineDispensingMethodi,
+			pi.SKIN_TEST_RESULT as
+			skinTestResultsi,
+			pi.RECIPE_ID as prescriptionNoi,
+			pi.ORG_NAME as orgNamei,
+			to_char(pi.DRUG_AMOUNT,'9990.99') as drugAmountr,
+			pr.org_code AS "orgCodeTemp",
+			pr.outpatient_num AS "mzIdTemp",
+			${param}
+		    FROM
+		     PT_OP_RECIPE pr
+		    left join PT_OP_RECIPE_DIAG  pd on pr.outpatient_num=pd.outpatient_num and pr.org_code=pd.org_code and pr.recipe_id=pd.recipe_id
+		    left join PT_OP_RECIPE_ITEM  pi on pr.outpatient_num=pi.outpatient_num and pr.org_code=pi.org_code  and pr.recipe_id=pi.recipe_id
+			<!-- <include refid="dc.dao.mapper.CommonTempMapper.sqlEnd"/> -->
+			where
+			<foreach collection="data" index="index" item="item" open="" separator=" or " close="">
+             ( pr.OUTPATIENT_NUM=#{item.mzId} and pr.ORG_CODE=#{item.orgCode} )
+           </foreach>
+	</select>
+     
+    <!--根据mzId，orgCode查询 门诊费用（主表兼从表） -->
+	<select id="getOpChargeByMap" parameterType="map" resultMap="getOpChargeMap">
+	   <!--  <include refid="dc.dao.mapper.CommonTempMapper.sqlHead"/> -->
+				 select
+			      pee.ID$ as idp,
+			      pee.MPIID$ as mpiidp,
+			      '门诊费用' as "name",
+			      pee.OUTPATIENT_NUM AS mzIdp,
+			      pee.ORG_CODE as orgCodep,
+			      to_char(pee.SETTLEMENT_TIME, 'yyyy-mm-dd hh24:mi:ss') as
+			      serviceTimep,
+			      pee.SETTLEMENT_ID AS settlementIdp,
+			      pee.ORG_NAME as orgNamep,
+			      to_char(pee.CREATED_AT, 'yyyy-mm-dd hh24:mi:ss') as createdAtp,
+			      pee.INVOICE_NUM as invoiceNump,
+			      pee.CHARGE_SCENE_CODE as
+			      chargeSceneCodep,
+			      pee.CHARGE_SCENE_NAME as chargeSceneNamep,
+			      pee.CHARGE_STATUS as
+			      chargeStatusp,
+			      pee.PATIENT_SOURCE as patientSourcep,
+			      pee.CHARGE_MODE_CODE as
+			      chargeModeCodep,
+			      pee.CHARGE_MODE_NAME as chargeModeNamep,
+			      pee.SETTLEMENT_AMOUNT as
+			      settlementAmountp,
+			      pee.SELF_AMOUNT as selfAmountp,
+			      pee.SETTLEMENT_PERSON_CODE as
+			      settlementPersonCodep,
+			      pee.SETTLEMENT_PERSON_NAME as settlementPersonNamep,
+			      '' as personIdentityTypep,
+			      '' as personIdentityNumberp,
+			      '' as modifierFlagsp,
+			      d.ID$ as idd,
+			      d.ORG_CODE as orgCoded,
+			      d.ORG_NAME as orgNamed,
+			      d.OUTPATIENT_NUM as mzIdd,
+			      d.CHARGE_ID as chargeIdd,
+			      d.PRESCRIPTION_ID as
+			      orderIdd,
+			      d.SETTLEMENT_ID as settlementIdd,
+			      d.DEP_CODE as depCoded,
+			      d.DEP_NAME as
+			      depNamed,
+			      d.PRESCRIBER_CODE as prescriberCoded,
+			      d.PRESCRIBER_NAME as
+			      prescriberNamed,
+			      d.PERFORMER_CODE as performerCoded,
+			      d.PERFORMER_NAME as
+			      performerNamed,
+			      d.CHARGE_CLASSIFIED_CODE as chargeClassifiedCoded,
+			      d.CHARGE_CLASSIFIED_NAME as chargeClassifiedNamed,
+			      to_char(d.CHARGE_TIME, 'yyyy-mm-dd hh24:mi:ss') as chargeTimed,
+			      d.ITEM_CODE as itemCoded,
+			      d.ITEM_NAME as itemNamed,
+			      d.ITEM_UNIT as itemUnitd,
+			      d.ITEM_PRICE as itemPriced,
+			      d.ITEM_TYPE_CODE as itemTypeCoded,
+			      d.ITEM_TYPE_NAME as itemTypeNamed,
+			      d.ITEM_COUNT as itemCountd,
+			      d.ITEM_RECEIVABLE_AMOUNT as
+			      itemReceivableAmountd,
+			      d.ITEM_PAID_CMOUNT as itemPaidCmount,
+			      pee.org_code AS "orgCodeTemp",
+			      pee.outpatient_num AS "mzIdTemp",
+					${param}
+			       from   PT_OP_CHARGE pee left join pt_op_charge_detail d 
+			      on d.OUTPATIENT_NUM = pee.OUTPATIENT_NUM and  d.org_code =  pee.ORG_CODE and d.settlement_id=pee.settlement_id
+	       <!-- <include refid="dc.dao.mapper.CommonTempMapper.sqlEnd"/> -->
+	       			where
+			<foreach collection="data" index="index" item="item" open="" separator=" or " close="">
+             ( pee.OUTPATIENT_NUM=#{item.mzId} and pee.ORG_CODE=#{item.orgCode} )
+           </foreach>
+	</select>
+	
+	<!--根据orgCode,mzId查询 门诊就诊 -->
+	<select id="queryOutPatientRecord" parameterType="map" resultType="map">
+	   <!--  <include refid="dc.dao.mapper.CommonTempMapper.sqlHead"/> -->
+		select 
+		     id$ as "id",
+		    '门诊就诊' as "name",
+			ORG_CODE as "orgCode",
+			ORG_NAME as "orgName",
+			OUTPATIENT_NUM as "outpatientNum",
+			OUTPATIENT_NUM as "mzId",
+			to_char(CREATED_AT, 'yyyy-mm-dd hh24:mi:ss') as "createdAt",
+			VISIT_ID as "visitId",
+			FALG_FIRST_VISIT as
+			"falgFirstVisit",
+			PNAME as "pname",
+			IDCARD_NUM as "idcardNum",
+			IDCARD_TYPE as "idcardType",
+			OTHER_ID_NUM as "otherIdNum",
+			EMERGENCY_MARK as "emergencyMark",
+			DEPT_CODE as "deptCode",
+			DEPT_NAME as
+			"deptName",
+			to_char(TREATMENT_DATE, 'yyyy-mm-dd hh24:mi:ss') as
+			"serviceTime",
+			DOCTOR_CODE as "doctorCode",
+			DOCTOR_NAME as "doctorName",
+			ADMIN_ILLNESS_CODE as "adminIllnessCode",
+			ADMIN_ILLNESS_NAME as
+			"adminIllnessName",
+			TREATMENT_METHOD as "treatmentMethod",
+			TCM_WM_MARK_CODE as "tmWmMarkCode",
+			DIAGNOSE_TYPE_CODE as
+			"diagnoseTypeCode",
+			DIAGNOSE_EXPLAIN as "diagnoseExplain",
+			CHIEF_COMPLAINT as "chiefComplaint",
+			MEDICAL_HISTORY as
+			"medicalHistory",
+			EXAMINATION_RECORD as "examinationRecord",
+			DISEASE_NAME as "diseaseName",
+			DISEASE_CODE as "diseaseCode",
+			DISEASE_CONTINUE_TIME as "diseaseContinueTime",
+			DISEASE_DESCRIP as
+			"diseaseDescrip",
+			PRESSURE_H as "pressureH",
+			PRESSURE_L as "pressureL",
+			TEMPERATURE as "temperature",
+			CHARGE_TOTAL as "chargeTotal",
+			CHARGE_SELF as "chargeSelf",
+			'' as "personIdentityType",
+			'' as
+			"personIdentityNumber",
+			'' as "isSubsequentVisit",
+			'' as
+			"clinicalMedicineTypeCode",
+			'' as "doorClinicNumber",
+			'' as
+			"patientsAttributes",
+			'' as "clinicType",
+			'' as "seeNature",
+			'' as
+			"consultationTime",
+			'' as "completionTime",
+			'' as "underObservation",
+			''
+			as "modifierFlags",
+			'' as "securityClassification",
+			t.org_code AS "orgCodeTemp",
+			t.outpatient_num AS "mzIdTemp",
+			${param}
+		from PT_OP_RECORD t
+		<!-- <include refid="dc.dao.mapper.CommonTempMapper.sqlEnd"/> -->
+			where
+			<foreach collection="data" index="index" item="item" open="" separator=" or " close="">
+             ( t.OUTPATIENT_NUM=#{item.mzId} and t.ORG_CODE=#{item.orgCode} )
+           </foreach>
+	</select>
+
+     <!-- 门（急）诊病历表（主表兼从表(PT_EMRO_EME_DIAG、PT_EMRO_EME_ORDERS)） -->
+	<select id="getOpEmroEmeByMap" parameterType="map" resultMap="getOpEmroEmeMap">
+	    <!-- <include refid="dc.dao.mapper.CommonTempMapper.sqlHead"/> -->
+		SELECT 
+		      pee.ID$ as ide,
+		      '门急诊病例' as "name",
+		      pee.MPIID$ as mpiide,
+		      pee.OUTPATIENT_NUM AS mzIde,
+		      pee.ORG_CODE as orgCodee,
+		      to_char(pee.VISITING_DATE, 'yyyy-mm-dd hh24:mi:ss') as serviceTimee,
+		      pee.ORG_NAME as orgNamee,
+		      to_char(pee.CREATED_AT, 'yyyy-mm-dd hh24:mi:ss') as createdAte,
+		      pee.CASE_HISTORY_ID as caseHistoryIde,
+		      pee.PNAME as pnamee,
+		      pee.SEX_CODE as sexCodee,
+		      to_char(pee.BORN_DATE, 'yyyy-mm-dd hh24:mi:ss') as bornDatee,
+		      pee.DEPT_CODE as deptCodee,
+		      pee.DEPT_NAME as deptNamee,
+		      pee.DOCTOR_CODE as doctorCodee,
+		      pee.DOCTOR_NAME as doctorNamee,
+		      pee.COMM_ADDRESS as commAddresse,
+		      pee.AGE_YEARS as agee,
+		      pee.FALG_FIRST_VISIT as falgFirstVisite,
+		      pee.PRESENT_ILLNESS as presentIllnesse,
+		      pee.PAST_HISTORY as pastHistorye,
+		      pee.FALG_ALLERGY_HISTORY as falgAllergyHistorye,
+		      pee.ALLERGY_HISTORY as allergyHistorye,
+		      pee.CHIEF_COMPLAINT as chiefComplainte,
+		      pee.EXAMINATION_RECORD as examinationRecorde,
+		      pee.org_code AS "orgCodeTemp",
+			  pee.outpatient_num AS "mzIdTemp",
+		      ${param},
+		      peed.ID$ as idd,
+					peed.ORG_CODE as orgCoded,
+					peed.ORG_NAME as orgNamed,
+					peed.OUTPATIENT_NUM as mzIdd,
+					to_char(peed.CREATED_AT, 'yyyy-mm-dd hh24:mi:ss') as createdAtd,
+					peed.CASE_HISTORY_ID as caseHistoryIdd,
+					peed.FOUR_DIAGNOSIS as fourDiagnosisd,
+					peed.DISEASE_CODE as diseaseCoded,
+					peed.DISEASE as diseased,
+					peed.TM_DISEASE_CODE1 as tmDiseaseCode1d,
+					peed.TM_DISEASE_NAME1 as tmDiseaseName1d,
+					peed.TM_DISEASE_CODE2 as tmDiseaseCode2d,
+					peed.TM_DISEASE_NAME2 as tmDiseaseName2d,
+					peed.EXAM_ITEM as examItemd,
+					peed.EXAM_RESULT as examResultd,
+					peed.TMDIAGNOSIS_BASIS as tmdiagnosisBasisd,
+					peed.TREATMENT_METHOD as treatmentMethodd,
+		      		peeo.ID$ as ido,
+					peeo.ORG_CODE as orgCodeo,
+					peeo.ORG_NAME as orgNameo,
+					peeo.OUTPATIENT_NUM as outpatientNumo,
+					to_char(peeo.CREATED_AT, 'yyyy-mm-dd hh24:mi:ss') as createdAto,
+					peeo.CASE_HISTORY_ID as caseHistoryIdo,
+					peeo.ORDER_ID as orderIdo,
+					peeo.ORDER_ITEM_TYPE_CODE as orderItemTypeCodeo,
+					peeo.ORDER_ITEM_TYPE_NAME as orderItemTypeNameo,
+					peeo.ORDER_ITEM as orderItemo,
+					peeo.ORDER_NOTES as orderNoteso,
+					peeo.DEP_CODE as depCodeo,
+					peeo.DEP_NAME as depNameo,
+					peeo.PRESCRIBER_CODE as prescriberCodeo,
+					peeo.PRESCRIBER_NAME as prescriberNameo,
+					to_char(peeo.PRESCRIBE_DATE, 'yyyy-mm-dd hh24:mi:ss') as prescribeDateo,
+					peeo.AUDITOR_CODE as auditorCodeo,
+					peeo.AUDITOR_NAME as auditorNameo,
+					to_char(peeo.AUDIT_DATE, 'yyyy-mm-dd hh24:mi:ss') as auditDateo,
+					peeo.PERFORM_DEPT_CODE as performDeptCodeo,
+					peeo.PERFORM_DEPT_NAME as performDeptNameo,
+					peeo.PERFORMER_CODE as performerCodeo,
+					peeo.PERFORMER_NAME as performerNameo,
+					to_char(peeo.PERFORM_DATE, 'yyyy-mm-dd hh24:mi:ss') as performDateo,
+					peeo.PERFORM_STATUS as performStatuso,
+					peeo.CANCEL_DOC_CODE as cancelDocCodeo,
+					peeo.CANCEL_DOC_NAME as cancelDocNameo,
+					to_char(peeo.CANCEL_DATE, 'yyyy-mm-dd hh24:mi:ss') as cancelDateo,
+					peeo.APPLY_NUM as applyNum
+		    FROM
+		      PT_EMRO_EME pee
+		      left join  PT_EMRO_EME_DIAG peed on pee.Outpatient_Num=peed.outpatient_num and pee.Org_Code=peed.org_code and pee.case_history_id=peed.case_history_id
+		      left join PT_EMRO_EME_ORDERS peeo on pee.Outpatient_Num=peeo.outpatient_num and pee.Org_Code=peeo.org_code and pee.case_history_id=peeo.case_history_id
+           <!-- <include refid="dc.dao.mapper.CommonTempMapper.sqlEnd"/> -->
+           			where
+			<foreach collection="data" index="index" item="item" open="" separator=" or " close="">
+             ( pee.OUTPATIENT_NUM=#{item.mzId} and pee.ORG_CODE=#{item.orgCode} )
+           </foreach>
+	</select>
+
+</mapper>
+

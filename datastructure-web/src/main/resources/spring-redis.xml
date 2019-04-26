@@ -1,0 +1,328 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context-3.0.xsd"
+	default-lazy-init="false">
+
+	<!-- redis数据源 -->
+	
+	<bean id="poolConfig" class="redis.clients.jedis.JedisPoolConfig">
+		<!-- 最大空闲数 -->
+		<property name="maxIdle" value="${redis.maxIdle}" />
+		<!-- 最大连接数 -->
+		<property name="maxTotal" value="${redis.maxTotal}" />
+		<!-- 获取连接的最大等待时间 -->
+		<property name="maxWaitMillis" value="${redis.maxWaitMillis}" />
+		<!-- 连接超时时是否阻塞, false时报异常, ture阻塞直到超时, 默认true -->
+		<property name="blockWhenExhausted" value="${redis.blockWhenExhausted}" />
+		<!-- 返回连接时，检测连接是否成功 -->
+		<property name="testOnBorrow" value="${redis.testOnBorrow}" />
+	</bean>
+
+	<!-- Spring-redis连接池管理工厂 -->
+	
+	<bean id="jedisConnectionFactory1"
+		class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
+		<!-- IP地址 -->
+		<property name="hostName" value="${redis.host}" />
+		<!-- 端口号 -->
+		<property name="port" value="${redis.port}" />
+		<!-- 密码 -->
+		<property name="password" value="${redis.password}" />
+		<!-- 超时时间 默认2000 -->
+		<property name="timeout" value="${redis.timeout}" />
+		<!-- 连接池配置引用 -->
+		<property name="poolConfig" ref="poolConfig" />
+		<!-- usePool：是否使用连接池 -->
+		<property name="usePool" value="true" />
+		<!-- 库名，dbIndex -->
+		<property name="database" value="1" />
+	</bean>
+	
+	<bean id="jedisConnectionFactory2"
+		class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
+		<!-- IP地址 -->
+		<property name="hostName" value="${redis.host}" />
+		<!-- 端口号 -->
+		<property name="port" value="${redis.port}" />
+		<!-- 密码 -->
+		<property name="password" value="${redis.password}" />
+		<!-- 超时时间 默认2000 -->
+		<property name="timeout" value="${redis.timeout}" />
+		<!-- 连接池配置引用 -->
+		<property name="poolConfig" ref="poolConfig" />
+		<!-- usePool：是否使用连接池 -->
+		<property name="usePool" value="true" />
+		<!-- 库名，dbIndex -->
+		<property name="database" value="2" />
+	</bean>
+	
+	<bean id="jedisConnectionFactory3"
+		class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
+		<!-- IP地址 -->
+		<property name="hostName" value="${redis.host}" />
+		<!-- 端口号 -->
+		<property name="port" value="${redis.port}" />
+		<!-- 密码 -->
+		<property name="password" value="${redis.password}" />
+		<!-- 超时时间 默认2000 -->
+		<property name="timeout" value="${redis.timeout}" />
+		<!-- 连接池配置引用 -->
+		<property name="poolConfig" ref="poolConfig" />
+		<!-- usePool：是否使用连接池 -->
+		<property name="usePool" value="true" />
+		<!-- 库名，dbIndex -->
+		<property name="database" value="3" />
+	</bean>
+	
+	<bean id="jedisConnectionFactory4"
+		class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
+		<!-- IP地址 -->
+		<property name="hostName" value="${redis.host}" />
+		<!-- 端口号 -->
+		<property name="port" value="${redis.port}" />
+		<!-- 密码 -->
+		<property name="password" value="${redis.password}" />
+		<!-- 超时时间 默认2000 -->
+		<property name="timeout" value="${redis.timeout}" />
+		<!-- 连接池配置引用 -->
+		<property name="poolConfig" ref="poolConfig" />
+		<!-- usePool：是否使用连接池 -->
+		<property name="usePool" value="true" />
+		<!-- 库名，dbIndex -->
+		<property name="database" value="4" />
+	</bean>
+	
+	<bean id="jedisConnectionFactory5"
+		class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
+		<!-- IP地址 -->
+		<property name="hostName" value="${redis.host}" />
+		<!-- 端口号 -->
+		<property name="port" value="${redis.port}" />
+		<!-- 密码 -->
+		<property name="password" value="${redis.password}" />
+		<!-- 超时时间 默认2000 -->
+		<property name="timeout" value="${redis.timeout}" />
+		<!-- 连接池配置引用 -->
+		<property name="poolConfig" ref="poolConfig" />
+		<!-- usePool：是否使用连接池 -->
+		<property name="usePool" value="true" />
+		<!-- 库名，dbIndex -->
+		<property name="database" value="5" />
+	</bean>
+	
+	<bean id="jedisConnectionFactory6"
+		class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
+		<!-- IP地址 -->
+		<property name="hostName" value="${redis.host}" />
+		<!-- 端口号 -->
+		<property name="port" value="${redis.port}" />
+		<!-- 密码 -->
+		<property name="password" value="${redis.password}" />
+		<!-- 超时时间 默认2000 -->
+		<property name="timeout" value="${redis.timeout}" />
+		<!-- 连接池配置引用 -->
+		<property name="poolConfig" ref="poolConfig" />
+		<!-- usePool：是否使用连接池 -->
+		<property name="usePool" value="true" />
+		<!-- 库名，dbIndex -->
+		<property name="database" value="6" />
+	</bean>
+	
+	<bean id="jedisConnectionFactory7"
+		class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
+		<!-- IP地址 -->
+		<property name="hostName" value="${redis.host}" />
+		<!-- 端口号 -->
+		<property name="port" value="${redis.port}" />
+		<!-- 密码 -->
+		<property name="password" value="${redis.password}" />
+		<!-- 超时时间 默认2000 -->
+		<property name="timeout" value="${redis.timeout}" />
+		<!-- 连接池配置引用 -->
+		<property name="poolConfig" ref="poolConfig" />
+		<!-- usePool：是否使用连接池 -->
+		<property name="usePool" value="true" />
+		<!-- 库名，dbIndex -->
+		<property name="database" value="7" />
+	</bean>
+
+	<!-- redis template definition -->
+	
+	<bean id="redisTemplate1" class="org.springframework.data.redis.core.RedisTemplate">
+		<property name="connectionFactory" ref="jedisConnectionFactory1" />
+		<property name="keySerializer">
+			<bean
+				class="org.springframework.data.redis.serializer.StringRedisSerializer" />
+		</property>
+		<property name="valueSerializer">
+			<!-- <bean
+				class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer" /> -->
+				<bean class="org.springframework.data.redis.serializer.StringRedisSerializer" />
+		</property>
+		<property name="hashKeySerializer">
+			<bean
+				class="org.springframework.data.redis.serializer.StringRedisSerializer" />
+		</property>
+		<property name="hashValueSerializer">
+			<bean
+				class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer" />
+		</property>
+		<!--开启事务 -->
+		<property name="enableTransactionSupport" value="true"></property>
+	</bean>
+	
+	<bean id="redisTemplate2" class="org.springframework.data.redis.core.RedisTemplate">
+		<property name="connectionFactory" ref="jedisConnectionFactory2" />
+		<property name="keySerializer">
+			<bean
+				class="org.springframework.data.redis.serializer.StringRedisSerializer" />
+		</property>
+		<property name="valueSerializer">
+			<!-- <bean
+				class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer" /> -->
+				<bean class="org.springframework.data.redis.serializer.StringRedisSerializer" />
+		</property>
+		<property name="hashKeySerializer">
+			<bean
+				class="org.springframework.data.redis.serializer.StringRedisSerializer" />
+		</property>
+		<property name="hashValueSerializer">
+			<bean
+				class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer" />
+		</property>
+		<!--开启事务 -->
+		<property name="enableTransactionSupport" value="true"></property>
+	</bean>
+	
+	<bean id="redisTemplate3" class="org.springframework.data.redis.core.RedisTemplate">
+		<property name="connectionFactory" ref="jedisConnectionFactory3" />
+		<property name="keySerializer">
+			<bean
+				class="org.springframework.data.redis.serializer.StringRedisSerializer" />
+		</property>
+		<property name="valueSerializer">
+			<!-- <bean
+				class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer" /> -->
+				<bean class="org.springframework.data.redis.serializer.StringRedisSerializer" />
+		</property>
+		<property name="hashKeySerializer">
+			<bean
+				class="org.springframework.data.redis.serializer.StringRedisSerializer" />
+		</property>
+		<property name="hashValueSerializer">
+			<bean
+				class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer" />
+		</property>
+		<!--开启事务 -->
+		<property name="enableTransactionSupport" value="true"></property>
+	</bean>
+	
+	<bean id="redisTemplate4" class="org.springframework.data.redis.core.RedisTemplate">
+		<property name="connectionFactory" ref="jedisConnectionFactory4" />
+		<property name="keySerializer">
+			<bean
+				class="org.springframework.data.redis.serializer.StringRedisSerializer" />
+		</property>
+		<property name="valueSerializer">
+			<!-- <bean
+				class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer" /> -->
+				<bean class="org.springframework.data.redis.serializer.StringRedisSerializer" />
+		</property>
+		<property name="hashKeySerializer">
+			<bean
+				class="org.springframework.data.redis.serializer.StringRedisSerializer" />
+		</property>
+		<property name="hashValueSerializer">
+			<bean
+				class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer" />
+		</property>
+		<!--开启事务 -->
+		<property name="enableTransactionSupport" value="true"></property>
+	</bean>
+	
+	<bean id="redisTemplate5" class="org.springframework.data.redis.core.RedisTemplate">
+		<property name="connectionFactory" ref="jedisConnectionFactory5" />
+		<property name="keySerializer">
+			<bean
+				class="org.springframework.data.redis.serializer.StringRedisSerializer" />
+		</property>
+		<property name="valueSerializer">
+			<!-- <bean
+				class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer" /> -->
+				<bean class="org.springframework.data.redis.serializer.StringRedisSerializer" />
+		</property>
+		<property name="hashKeySerializer">
+			<bean
+				class="org.springframework.data.redis.serializer.StringRedisSerializer" />
+		</property>
+		<property name="hashValueSerializer">
+			<bean
+				class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer" />
+		</property>
+		<!--开启事务 -->
+		<property name="enableTransactionSupport" value="true"></property>
+	</bean>
+	
+	<bean id="redisTemplate6" class="org.springframework.data.redis.core.RedisTemplate">
+		<property name="connectionFactory" ref="jedisConnectionFactory6" />
+		<property name="keySerializer">
+			<bean
+				class="org.springframework.data.redis.serializer.StringRedisSerializer" />
+		</property>
+		<property name="valueSerializer">
+			<!-- <bean
+				class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer" /> -->
+				<bean class="org.springframework.data.redis.serializer.StringRedisSerializer" />
+		</property>
+		<property name="hashKeySerializer">
+			<bean
+				class="org.springframework.data.redis.serializer.StringRedisSerializer" />
+		</property>
+		<property name="hashValueSerializer">
+			<bean
+				class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer" />
+		</property>
+		<!--开启事务 -->
+		<property name="enableTransactionSupport" value="true"></property>
+	</bean>
+	
+	<bean id="redisTemplate7" class="org.springframework.data.redis.core.RedisTemplate">
+		<property name="connectionFactory" ref="jedisConnectionFactory7" />
+		<property name="keySerializer">
+			<bean
+				class="org.springframework.data.redis.serializer.StringRedisSerializer" />
+		</property>
+		<property name="valueSerializer">
+			<!-- <bean
+				class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer" /> -->
+				<bean class="org.springframework.data.redis.serializer.StringRedisSerializer" />
+		</property>
+		<property name="hashKeySerializer">
+			<bean
+				class="org.springframework.data.redis.serializer.StringRedisSerializer" />
+		</property>
+		<property name="hashValueSerializer">
+			<bean
+				class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer" />
+		</property>
+		<!--开启事务 -->
+		<property name="enableTransactionSupport" value="true"></property>
+	</bean>
+
+	<!--自定义redis工具类,在需要缓存的地方注入此类 -->
+	<bean id="redisManager" class="com.zhijieyun.datastructure.util.RedisManager">
+		<property name="redisTemplate_healthTree" ref="redisTemplate1" />    		<!-- 构建过健康树的mpiid -->
+		<property name="redisTemplate_publicHealth" ref="redisTemplate2" />  		<!-- 构建过公卫的mpiid -->
+		<property name="redisTemplate_healthTreeRecord" ref="redisTemplate3" /> 	<!-- 需要构建的健康树的mpiid、id -->
+		<property name="redisTemplate_inhos" ref="redisTemplate4" />  		 		<!-- 需要构建的住院记录的id、sourceid -->
+		<property name="redisTemplate_outpatient" ref="redisTemplate5" />  	 		<!-- 需要构建的门诊记录的id、sourceid -->
+		<property name="redisTemplate_publicHealthRecord" ref="redisTemplate6" /> 	<!-- 需要构建的公卫的mpiid、id -->
+		<property name="redisTemplate_personalInfo" ref="redisTemplate7" /> 	    <!-- 需要构建的个人基本信息的mpiid、id -->
+	</bean>
+	
+</beans>

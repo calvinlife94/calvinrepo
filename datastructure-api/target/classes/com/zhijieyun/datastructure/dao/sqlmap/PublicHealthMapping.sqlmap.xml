@@ -1,0 +1,2595 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD iBatis Mapper 3.0 //EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<!-- define mapping from database to class -->
+<mapper namespace="com.zhijieyun.datastructure.dao.mapper.PublicHealthMapper">
+   	<!--服务活动索引数据查询hrn -->
+	<resultMap id="getMetaSetCodeMap" type="java.util.HashMap">
+		<result property="sourceID" column="sourceID" />
+		<result property="serviceTime" column="serviceTime" />
+		<result property="putOnRecordDate" column="serviceTime" />
+		<result property="mpiID" column="mpiID" />
+		<result property="mpiid" column="mpiID" />
+		<result property="hrn" column="hrn" />
+		<result property="idcardNum" column="idcard" />
+		<result property="idcard" column="idcard" />
+		<result property="metaSetCode" column="metaSetCode" />
+		<result property="pname" column="pname" />
+		<result property="dob" column="dob" />
+		<result property="birthday" column="dob" />
+		<result property="sex" column="sex" />
+		<result property="sexCode" column="sex" />
+		<result property="serviceOrgCode" column="serviceOrgCode" />
+		<result property="orgCode" column="serviceOrgCode" />
+		<result property="serviceOrgName" column="serviceOrgName" />
+		<result property="serviceDoctorName" column="serviceDoctorName" />
+	</resultMap>
+   	
+   	<!--个人信息查询  -->
+   	<resultMap id="getChssInfoMap" type="java.util.HashMap">
+	<result property="id" column="id" />
+	<result property="name" column="name" />
+	<result property="mpiid" column="mpiid" />
+	<result property="orgCode" column="orgCode" />
+	<result property="upLoadFlag" column="upLoadFlag" />
+	<result property="personalFileIdentifier" column="personalFileIdentifier" />
+	<result property="identifierType" column="identifierType" />
+	<result property="personalIdType" column="personalIdType" />
+	<result property="personalIdNumber" column="personalIdNumber" />
+	<result property="idType" column="idType" />
+	<result property="idNo" column="iDNo" />
+	<result property="idCardNumber" column="iDCardNumber" />
+	<result property="healthFileNumber" column="healthFileNumber" />
+	<result property="citizenHealthCardNumber" column="citizenHealthCardNumber" />
+	<result property="territorialArea" column="territorialArea" />
+	<result property="sexCode" column="sexCode" />
+	<result property="pname" column="pname" />
+	<result property="residentTypeCode" column="residentTypeCode" />
+	<result property="residentTypeName" column="residentTypeName" />
+	<result property="maritalStatus" column="maritalStatus" />
+	<result property="birthDate" column="birthDate" />
+	<result property="birthplace" column="birthplace" />
+	<result property="nationalCode" column="nationalCode" />
+	<result property="nationalName" column="nationalName" />
+	<result property="nationality" column="nationality" />
+	<result property="mobileNo" column="mobileNo" />
+	<result property="myTelephoneNumber" column="myTelephoneNumber" />
+	<result property="workUnitZipCode" column="workUnitZipCode" />
+	<result property="workUnitZipName" column="workUnitZipName" />
+	<result property="workUnitAddress" column="workUnitAddress" />
+	<result property="DivisionCode" column="DivisionCode" />
+	<result property="residenceProvinceCode" column="residenceProvinceCode" />
+	<result property="residenceProvince" column="residenceProvince" />
+	<result property="residencecityCode" column="residencecityCode" />
+	<result property="residenceCity" column="residenceCity" />
+	<result property="residenceCountyCode" column="residenceCountyCode" />
+	<result property="residenceCounty" column="residenceCounty" />
+	<result property="residenceCountrysideCode" column="residenceCountrysideCode" />
+	<result property="residenceCountryside" column="residenceCountryside" />
+	<result property="residenceResidenceCode" column="residenceResidenceCode" />
+	<result property="residenceResidence" column="residenceResidence" />
+	<result property="residenceVillage" column="residenceVillage" />
+	<result property="residenceRoad" column="residenceRoad" />
+	<result property="residenceBuildingNo" column="residenceBuildingNo" />
+	<result property="residenceDoorNumber" column="residenceDoorNumber" />
+	<result property="currentAddress" column="currentAddress" />
+	<result property="AdminPlaceResidence" column="AdminPlaceResidence" />
+	<result property="birthPlaceProvinceCode" column="birthPlaceProvinceCode" />
+	<result property="birthPlaceProvince" column="birthPlaceProvince" />
+	<result property="birthPlaceCityCode" column="birthPlaceCityCode" />
+	<result property="birthPlaceCity" column="birthPlaceCity" />
+	<result property="birthPlaceCountyCode" column="birthPlaceCountyCode" />
+	<result property="birthPlaceCounty" column="birthPlaceCounty" />
+	<result property="birthPlaceCountrysideCode" column="birthPlaceCountrysideCode" />
+	<result property="birthPlaceCountryside" column="birthPlaceCountryside" />
+	<result property="birthPlaceResidenceCode" column="birthPlaceResidenceCode" />
+	<result property="birthPlaceResidence" column="birthPlaceResidence" />
+	<result property="birthPlaceVillage" column="birthPlaceVillage" />
+	<result property="birthPlaceRoad" column="birthPlaceRoad" />
+	<result property="birthPlaceBuildingNo" column="birthPlaceBuildingNo" />
+	<result property="birthPlaceDoorNumber" column="birthPlaceDoorNumber" />
+	<result property="residence" column="residence" />
+	<result property="addressZipCode" column="addressZipCode" />
+	<result property="contactName" column="contactName" />
+	<result property="contactConCode" column="contactConCode" />
+	<result property="contactConName" column="contactConName" />
+	<result property="addressVarchar" column="addressVarchar" />
+	<result property="contactPerson" column="contactPerson" />
+	<result property="contactNumber" column="contactNumber" />
+	<result property="phoneNumberContact" column="phoneNumberContact" />
+	<result property="surgicalHistory" column="surgicalHistory" />
+	<result property="operationHistory" column="operationHistory" />
+	<result property="historyTrauma" column="historyTrauma" />
+	<result property="bloodTransfusionMark" column="bloodTransfusionMark" />
+	<result property="hereditaryDiseaseHistory" column="hereditaryDiseaseHistory" />
+	<result property="environmentalCategoryCode" column="environmentalCategoryCode" />
+	<result property="securityClassification" column="securityClassification" />
+	<result property="modifierFlags" column="modifierFlags" />
+	<result property="creatDate" column="creatDate" />
+	<collection property="familyHistoryList"  ofType="java.util.HashMap" javaType="java.util.ArrayList">
+		   <result property="id" column="id1" />
+		   <result property="diseaseName" column="diseaseName1" />
+		   <result property="relationship" column="relationship1" />
+	</collection>
+	<collection property="PastTraumaHistoryList"  ofType="java.util.HashMap" javaType="java.util.ArrayList">
+		   <result property="id" column="id2" />
+		   <result property="traumaName" column="traumaName2" />
+		   <result property="traumaTime" column="traumaTime2" />
+	</collection>
+	<collection property="previousOperativeHistoryList"  ofType="java.util.HashMap" javaType="java.util.ArrayList">
+		   <result property="id" column="id3" />
+		   <result property="operationName" column="operationName3" />
+		   <result property="operationTime" column="operationTime3" />		
+	</collection>
+	<collection property="pastDiseaseHistoryList"  ofType="java.util.HashMap" javaType="java.util.ArrayList">
+		   <result property="id" column="id4" />
+		   <result property="medicalHistoryName" column="medicalHistoryName4" />
+		   <result property="diagnoseTime" column="diagnoseTime4" />		
+	</collection>
+	<collection property="pastBloodTransfusionHistoryList"  ofType="java.util.HashMap" javaType="java.util.ArrayList">
+		   <result property="id" column="id5" />
+		   <result property="transfusionReason" column="transfusionReason5" />
+		   <result property="transfusionTime" column="transfusionTime5" />		
+	</collection>
+</resultMap>
+   	
+   	<!-- 健康体检主表兼从表Map -->
+	<resultMap id="getJktjExaminfoMap" type="java.util.HashMap">
+		<result property="ID" column="IDh" />
+		<result property="name" column="name" />
+		<result property="uploadflag" column="uploadflagh" />
+		<result property="hemoglobinValue" column="hemoglobinValue" />
+		<result property="whiteBloodCellsCount" column="whiteBloodCellsCount" />
+		<result property="plateletCount" column="plateletCount" />
+		<result property="urineProteinDetectionCode" column="urineProteinDetectionCode" />
+		<result property="urineSugerResultCode" column="urineSugerResultCode" />
+		<result property="urineKetoneDetetionCode" column="urineKetoneDetetionCode" />
+		<result property="urineOccultBloodTestCode" column="urineOccultBloodTestCode" />
+		<result property="urineAlbumin" column="urineAlbumin" />
+		<result property="stoolOccultBloodFlag" column="stoolOccultBloodFlag" />
+		<result property="saccharifyHemoglobinValue" column="saccharifyHemoglobinValue" />
+		<result property="feraseValue" column="feraseValue" />
+		<result property="serumAspartateValue" column="serumAspartateValue" />
+		<result property="albuminConcentration" column="albuminConcentration" />
+		<result property="totalBilirubin" column="totalBilirubin" />
+		<result property="contectBilirubinValue" column="contectBilirubinValue" />
+		<result property="serumCreatinineValue" column="serumCreatinineValue" />
+		<result property="bloodUreaNitrogenValue" column="bloodUreaNitrogenValue" />
+		<result property="bloodPotassiumConcentration" column="bloodPotassiumConcentration" />
+		<result property="bloodSodiumConcentration" column="bloodSodiumConcentration" />
+		<result property="totalCholesterol" column="totalCholesterol" />
+		<result property="triglycerideValue" column="triglycerideValue" />
+		<result property="meDetectionValue" column="meDetectionValue" />
+		<result property="heDetectionValue" column="heDetectionValue" />
+		<result property="mpiid" column="mpiidh" />
+		<result property="orgName" column="orgNameh" />
+		<result property="grdaid" column="grdaidh" />
+		<result property="orgCode" column="orgCodeh" />
+		<result property="recordTime" column="recordTimeh" />
+		<result property="orderId" column="orderIdh" />
+		<result property="symptomCode" column="symptomCodeh" />
+		<result property="patientName" column="patientNameh" />
+		<result property="sportFrequencyCode" column="sportFrequencyCodeh" />
+		<result property="exerciseTime" column="exerciseTimeh" />
+		<result property="dietHabitsCode" column="dietHabitsCodeh" />
+		<result property="smokStatusCode" column="smokStatusCodeh" />
+		<result property="daySmok" column="daySmokh" />
+		<result property="giveUpSmokAge" column="giveUpSmokAgeh" />
+		<result property="dayDrink" column="dayDrinkh" />
+		<result property="giveUpDrinkAge" column="giveUpDrinkAgeh" />
+		<result property="drinkTypeCode" column="drinkTypeCodeh" />
+		<result property="sportTime" column="sportTimeh" />
+		<result property="sportMethodDesc" column="sportMethodDesch" />
+		<result property="beginSmokAge" column="beginSmokAgeh" />
+		<result property="drinkFrequencyCode" column="drinkFrequencyCodeh" />
+		<result property="giveUpDrinkFlag" column="giveUpDrinkFlagh" />
+		<result property="beginDrinkAge" column="beginDrinkAgeh" />
+		<result property="drunkFlag" column="drunkFlagh" />
+		<result property="pulseRate" column="pulseRateh" />
+		<result property="leftShrink" column="leftShrinkh" />
+		<result property="rightShrink" column="rightShrinkh" />
+		<result property="high" column="highh" />
+		<result property="weight" column="weighth" />
+		<result property="physiqueIndex" column="physiqueIndexh" />
+		<result property="bodyTemperature" column="bodyTemperatureh" />
+		<result property="breathRate" column="breathRateh" />
+		<result property="leftRelax" column="leftRelaxh" />
+		<result property="rightRelax" column="rightRelaxh" />
+		<result property="waist" column="waisth" />
+		<result property="throatCheckResultCode" column="throatCheckResultCodeh" />
+		<result property="rightBareVision" column="rightBareVisionh" />
+		<result property="listenCheckResultCode" column="listenCheckResultCodeh" />
+		<result property="eyegroundCheckUnusualFlag" column="eyegroundCheckUnusualFlagh" />
+		<result property="skinCheckResultCode" column="skinCheckResultCodeh" />
+		<result property="lymphNodeCheckResultCode" column="lymphNodeCheckResultCodeh" />
+		<result property="lungUnusualDesc" column="lungUnusualDesch" />
+		<result property="lungLuoyinDesc" column="lungLuoyinDesch" />
+		<result property="heartZayinFlag" column="heartZayinFlagh" />
+		<result property="abdomenPainFlag" column="abdomenPainFlagh" />
+		<result property="abdomenBaokuaiFlag" column="abdomenBaokuaiFlagh" />
+		<result property="abdomenDesc" column="abdomenDesch" />
+		<result property="liverBigDesc" column="liverBigDesch" />
+		<result property="spleenBigDesc" column="spleenBigDesch" />
+		<result property="abdomenMoveFlag" column="abdomenMoveFlagh" />
+		<result property="legsEdemaResultCode" column="legsEdemaResultCodeh" />
+		<result property="anusCheckResultCode" column="anusCheckResultCodeh" />
+		<result property="vaginaUnusualFlag" column="vaginaUnusualFlagh" />
+		<result property="cervicalUnusualFlag" column="cervicalUnusualFlagh" />
+		<result property="uterineBodyUnusualFlag" column="uterineBodyUnusualFlagh" />
+		<result property="attachmentUnusualFlag" column="attachmentUnusualFlagh" />
+		<result property="leftBareVision" column="leftBareVisionh" />
+		<result property="leftRectifyVision" column="leftRectifyVisionh" />
+		<result property="rightRectifyVision" column="rightRectifyVisionh" />
+		<result property="sportStatusCode" column="sportStatusCodeh" />
+		<result property="eyegroundCheckDesc" column="eyegroundCheckDesch" />
+		<result property="scleraCheckResultCode" column="scleraCheckResultCodeh" />
+		<result property="barrelChestFlag" column="barrelChestFlagh" />
+		<result property="lungUnusaulBreathFlag" column="lungUnusaulBreathFlagh" />
+		<result property="mouthLookCheckCode" column="mouthLookCheckCodeh" />
+		<result property="toothDesc" column="toothDesch" />
+		<result property="lungRaleFlag" column="lungRaleFlagh" />
+		<result property="heartRate" column="heartRateh" />
+		<result property="heartRateTypeCode" column="heartRateTypeCodeh" />
+		<result property="heartNoiseDesc" column="heartNoiseDesch" />
+		<result property="abdomenPainDesc" column="abdomenPainDesch" />
+		<result property="liverBigFlag" column="liverBigFlagh" />
+		<result property="spleenBigFlag" column="spleenBigFlagh" />
+		<result property="abdomenMoveDesc" column="abdomenMoveDesch" />
+		<result property="footArteriopalmusCode" column="footArteriopalmusCodeh" />
+		<result property="breastChectResultCode" column="breastChectResultCodeh" />
+		<result property="vulvaUnusualFlag" column="vulvaUnusualFlagh" />
+		<result property="vulvaUnusualDesc" column="vulvaUnusualDesch" />
+		<result property="vaginaUnusualDesc" column="vaginaUnusualDesch" />
+		<result property="cervicalUnusualDesc" column="cervicalUnusualDesch" />
+		<result property="uterineBodyUnusualDesc" column="uterineBodyUnusualDesch" />
+		<result property="attachmentUnusualDesc" column="attachmentUnusualDesch" />
+		<result property="otherCheckResult" column="otherCheckResulth" />
+		<result property="cervicalPictureFlag" column="cervicalPictureFlagh" />
+		<result property="cervicalPictureDesc" column="cervicalPictureDesch" />
+		<result property="xdtbz" column="xdtbzh" />
+		<result property="eCGUnusualFlag" column="eCGUnusualFlagh" />
+		<result property="BmodeUnusualFlag" column="BmodeUnusualFlagh" />
+		<result property="BmodeUnusualDesc" column="BmodeUnusualDesch" />
+		<result property="eCGUnusualDesc" column="eCGUnusualDesch" />
+		<result property="chestXrayUnusualDesc" column="chestXrayUnusualDesch" />
+		<result property="OtherHelpCheck" column="OtherHelpCheckh" />
+		<result property="agedAbilityAssessCode" column="agedAbilityAssessCodeh" />
+		<result property="agedCognitiveAssess" column="agedCognitiveAssessh" />
+		<result property="HealthAppraiseDesc" column="HealthAppraiseDesch" />
+		<result property="agedCognitiveAssessCode" column="agedCognitiveAssessCodeh" />
+		<result property="agedEmotionAssess" column="agedEmotionAssessh" />
+		<result property="elderlyDepression" column="elderlyDepressionh" />
+		<result property="healthAssessFlag" column="healthAssessFlagh" />
+		<result property="dutyDoctorName" column="dutyDoctorNameh" />
+		<result property="healthNumber" column="healthNumberh" />
+		<result property="healthGuideCode" column="healthGuideCodeh" />
+		<result property="targetWeight" column="targetWeighth" />
+		<result property="adviseVaccineCode" column="adviseVaccineCodeh" />
+		<result property="zytzflCode" column="zytzflCodeh" />
+		<result property="zytzflpdjgCode" column="zytzflpdjgCodeh" />
+		<result property="beginSmokAge" column="beginSmokAgeh" />
+		<result property="chestXrayUnusualFlag" column="chestXrayUnusualFlagh" />
+		<collection property="healthExamDrugList"  ofType="java.util.HashMap" javaType="java.util.ArrayList">
+		    		<result property="id" column="idh1" />
+		    		<result property="drugUseTotalDose" column="drugUseTotalDoseh1" />
+					<result property="medComplianceCode" column="medComplianceCodeh1" />
+					<result property="chineseMedCode" column="chineseMedCodeh1" />
+					<result property="useDrugUnit" column="useDrugUnith1" />
+					<result property="drugUsage" column="drugUsageh1" />
+					<result property="drugUseRate" column="drugUseRateh1" />
+					<result property="drugUseTimeDose" column="drugUseTimeDoseh1" />
+					<result property="drugUseWayCode" column="drugUseWayCodeh1" />
+					<result property="healthExamTableCode" column="healthExamTableCodeh1" />
+					<result property="drugName" column="drugNameh1" />
+					<result property="drugUseTotalDoseUnit" column="drugUseTotalDoseUnith1" />
+					<result property="medicationTime" column="medicationTimeh1" />
+		</collection>
+		<collection property="healthExamVaccinationList"  ofType="java.util.HashMap" javaType="java.util.ArrayList">
+		           	<result property="id" column="idh4" />
+		           	<result property="vaccineNameCode" column="vaccineNameCodeh4" />
+					<result property="vaccineName" column="vaccineNameh4" />
+					<result property="vaccinationDate" column="vaccinationDateh4" />
+					<result property="healthExamTableCode" column="healthExamTableCodeh4" />
+					<result property="vaccineBatch" column="vaccineBatchh4" />
+					<result property="vaccinatedUnitName" column="vaccinatedUnitNameh4" />
+					<result property="recordId" column="recordIdh4" />
+		</collection>
+		<collection property="inHistoryOfHospitalList"  ofType="java.util.HashMap" javaType="java.util.ArrayList">
+		           	<result property="id" column="idh2" />
+		           	<result property="recordId" column="recordIdh2" />
+					<result property="orgCode" column="orgCodeh2" />
+					<result property="healthExamTableCode" column="healthExamTableCodeh2" />
+					<result property="admissionDate" column="admissionDateh2" />
+					<result property="dischargeDate" column="dischargeDateh2" />
+					<result property="hospitalizationCause" column="hospitalizationCauseh2" />
+					<result property="hospitalizationCode" column="hospitalizationCodeh2" />
+					<result property="oldOrgCode" column="oldOrgCodeh2" />
+					<result property="hospitalized" column="hospitalizedh2" />
+					<result property="securityClassification" column="securityClassificationh2" />
+					<result property="modifierFlags" column="modifierFlagsh2" />
+					<result property="dataCreateTime" column="dataCreateTimeh2" />
+		</collection>
+		<collection property="familyHistoryList"  ofType="java.util.HashMap" javaType="java.util.ArrayList">
+		            <result property="id" column="idh3" />
+		           	<result property="recordId" column="recordIdh3" />
+					<result property="orgCode" column="orgCodeh3" />
+					<result property="examinationRecordId" column="examinationRecordIdh3" />
+					<result property="familyBedConstructionDate" column="familyBedConstructionDateh3" />
+					<result property="familyBedWithdrawalDate" column="familyBedWithdrawalDateh3" />
+					<result property="familyBedConstructionReasons" column="familyBedConstructionReasonsh3" />
+					<result property="oldOrgCode" column="oldOrgCodeh3" />
+					<result property="familyNumber" column="familyNumberh3" />
+					<result property="securityClassification" column="securityClassificationh3" />
+					<result property="modifierFlags" column="modifierFlagsh3" />
+					<result property="dataCreateTime" column="dataCreateTimeh3" />
+		</collection>
+	</resultMap>
+	
+	<!-- 传染病报告表Map -->
+	<resultMap id="InfectiousDiseaseManagementMap" type="java.util.HashMap">
+		<result property="ID" column="ID" />
+		<result property="name" column="name" />
+		<result property="infectDiseaseCardNum" column="infectDiseaseCardNum" />
+		<result property="cardTypeCode" column="cardTypeCode" />
+		<result property="names" column="names" />
+		<result property="parentName" column="parentName" />
+		<result property="idTypeCode" column="idTypeCode" />
+		<result property="idNum" column="idNum" />
+		<result property="sex" column="sex" />
+		<result property="bornDate" column="bornDate" />
+		<result property="workunitName" column="workunitName" />
+		<result property="telephone" column="telephone" />
+		<result property="familyTele" column="familyTele" />
+		<result property="provinceName" column="provinceName" />
+		<result property="cityName" column="cityName" />
+		<result property="areaName" column="areaName" />
+		<result property="townName" column="townName" />
+		<result property="villageName" column="villageName" />
+		<result property="houseNo" column="houseNo" />
+		<result property="patientBelongCode" column="patientBelongCode" />
+		<result property="patientOccupationCode" column="patientOccupationCode" />
+		<result property="firSymptomDate" column="firSymptomDate" />
+		<result property="onsetTypeCode" column="onsetTypeCode" />
+		<result property="diagnosticStatusCode" column="diagnosticStatusCode" />
+		<result property="diagnoseDate" column="diagnoseDate" />
+		<result property="deathDate" column="deathDate" />
+		<result property="infectTypeCode" column="infectTypeCode" />
+		<result property="infectNameCode" column="infectNameCode" />
+		<result property="otherMonitorInfectName" column="otherMonitorInfectName" />
+		<result property="reviseDiseaseName" column="reviseDiseaseName" />
+		<result property="abandonCardReason" column="abandonCardReason" />
+		<result property="reportDrName" column="reportDrName" />
+		<result property="reportOrgName" column="reportOrgName" />
+		<result property="reportOrgTele" column="reportOrgTele" />
+		<result property="reportDate" column="reportDate" />
+		<result property="householdProvince" column="householdProvince" />
+		<result property="householdCity" column="householdCity" />
+		<result property="householdArea" column="householdArea" />
+		<result property="householdTown" column="householdTown" />
+		<result property="householdVillage" column="householdVillage" />
+		<result property="householdHouseNo" column="householdHouseNo" />
+		<result property="workProvince" column="workProvince" />
+		<result property="workCity" column="workCity" />
+		<result property="workArea" column="workArea" />
+		<result property="workTown" column="workTown" />
+		<result property="workVillage" column="workVillage" />
+		<result property="workHouseNo" column="workHouseNo" />
+	</resultMap>
+	
+	<!-- 预防接种主表Map -->
+	<resultMap id="VaccinationRecordMap" type="java.util.HashMap">
+		<result property="ID" column="IDh" />
+		<result property="name" column="name" />
+		<result property="recordTime" column="recordTimeh" />
+		<result property="orgCode" column="orgCodeh" />
+		<result property="vaccinationId" column="vaccinationIdh" />
+		<result property="healthRecordCode" column="healthRecordCodeh" />
+		<result property="birthdayGb" column="birthdayGbh" />
+		<collection property="vaccinationRVaccinationList"  ofType="java.util.HashMap" javaType="java.util.ArrayList">
+		     	<result property="ID" column="IDh1" />
+		     	<result property="vaccinationId" column="vaccinationIdh1" />
+				<result property="vaccineNameCd" column="vaccineNameCdh1" />
+				<result property="needleSort" column="needleSorth1" />
+				<result property="vaccDate" column="vaccDateh1" />
+				<result property="vaccineCode" column="vaccineCodeh1" />
+		</collection>
+	</resultMap>
+	
+	<!-- 健康档案-产后42天检查map -->
+	<resultMap id="getPostpartumExaminationMap" type="java.util.HashMap">
+		<result property="ID" column="ID" />
+		<result property="name" column="name" />
+		<result property="mpiid" column="mpiid" />
+		<result property="healthRecordCode" column="healthRecordCode" />
+		<result property="nameGb" column="nameGb" />
+		<result property="uterineDesc" column="uterineDesc" />
+		<result property="uterine" column="uterine" />
+		<result property="referralGb" column="referralGb" />
+		<result property="rollInRegionCodeGb" column="rollInRegionCodeGb" />
+		<result property="rollInDepartmentGb" column="rollInDepartmentGb" />
+		<result property="referralReasons" column="referralReasons" />
+		<result property="healthRecordCode" column="healthRecordCode" />
+		<result property="inputManGb" column="inputManGb" />
+		<result property="visitDateGb" column="visitDateGb" />
+		<result property="sbpGb" column="sbpGb" />
+		<result property="dbpgb" column="dbpgb" />
+		<result property="healthInstructionGb" column="healthInstructionGb" />
+		<result property="healthStateGb" column="healthStateGb" />
+		<result property="psychologyStateGb" column="psychologyStateGb" />
+		<result property="lmamillaStstusGb" column="lmamillaStstusGb" />
+		<result property="rmamillaStstusGb" column="rmamillaStstusGb" />
+		<result property="smellMarkGb" column="smellMarkGb" />
+		<result property="lymaDescGb" column="lymaDescGb" />
+		<result property="cutGb" column="cutGb" />
+		<result property="recordId" column="recordId" />
+		<result property="recoveryGb" column="recoveryGb" />
+		<result property="healthDescGb" column="healthDescGb" />
+		<result property="closeGb" column="closeGb" />
+		<result property="breast" column="breast" />
+		<result property="uterineGb" column="uterineGb" />
+		<result property="uterineDescGb" column="uterineDescGb" />
+		<result property="cutDesc" column="cutDesc" />
+		<result property="cardType" column="cardType" />
+		<result property="cardid" column="cardid" />
+		<result property="specialRecord" column="specialRecord" />
+		<result property="pulses" column="pulses" />
+		<result property="weight" column="weight" />
+		<result property="breastFlag" column="breastFlag" />
+		<result property="breastDesc" column="breastDesc" />
+		<result property="lactoStatus" column="lactoStatus" />
+		<result property="otherState" column="otherState" />
+		<result property="haematoglobin" column="haematoglobin" />
+		<result property="wbcCount" column="wbcCount" />
+		<result property="bloodPlatelet" column="bloodPlatelet" />
+		<result property="wbcCountType" column="wbcCountType" />
+		<result property="rbcCount" column="rbcCount" />
+		<result property="urineGlucoseQuantifyGb" column="urineGlucoseQuantifyGb" />
+		<result property="urinePh" column="urinePh" />
+		<result property="urineSpecificGravity" column="urineSpecificGravity" />
+		<result property="urineProteinQuantifyGb" column="urineProteinQuantifyGb" />
+		<result property="chpeDayGb" column="chpeDayGb" />
+		<result property="infantConclusion" column="infantConclusion" />
+		<result property="rollOutDepaCodeGb" column="rollOutDepaCodeGb" />
+		<result property="appointmentDate" column="appointmentDate" />
+		<result property="nextVisitDateGb" column="nextVisitDateGb" />
+		<result property="childbirthDate" column="childbirthDate" />
+		<result property="leaveDate" column="leaveDate" />
+	</resultMap>
+	
+	<!-- 健康档案-产后访视map -->
+	<resultMap id="getPostpartumVisitMap" type="java.util.HashMap">
+		<result property="ID" column="ID" />
+		<result property="name" column="name" />
+		<result property="residentHealthCode" column="residentHealthCode" />
+		<result property="doctorName" column="doctorName" />
+		<result property="temperature" column="temperature" />
+		<result property="palaceMark" column="palaceMark" />
+		<result property="palaceRemarks" column="palaceRemarks" />
+		<result property="referralMark" column="referralMark" />
+		<result property="changeIntoHospitalName" column="changeIntoHospitalName" />
+		<result property="changeIntoDepartmentName" column="changeIntoDepartmentName" />
+		<result property="referralReason" column="referralReason" />
+		<result property="nextFollowDate" column="nextFollowDate" />
+		<result property="followDate" column="followDate" />
+		<result property="shrinkPressure" column="shrinkPressure" />
+		<result property="diastolePressure" column="diastolePressure" />
+		<result property="maternalHealthMark" column="maternalHealthMark" />
+		<result property="maternalHealthRemarks" column="maternalHealthRemarks" />
+		<result property="maternalHealthTypeCode" column="maternalHealthTypeCode" />
+		<result property="healthRemarks" column="healthRemarks" />
+		<result property="maternalHealthTypeCode" column="maternalHealthTypeCode" />
+		<result property="healthRemarks" column="healthRemarks" />
+		<result property="psychologyRemarks" column="psychologyRemarks" />
+		<result property="leftBreastResultCode" column="leftBreastResultCode" />
+		<result property="rightBreastResultCode" column="rightBreastResultCode" />
+		<result property="lochiaMark" column="lochiaMark" />
+		<result property="lochiaRemarks" column="lochiaRemarks" />
+		<result property="woundHealCode" column="woundHealCode" />
+		<result property="childbirthDate" column="childbirthDate" />
+		<result property="leaveDate" column="leaveDate" />
+
+	</resultMap>
+	
+	<!--健康档案-糖尿病Map -->
+	<resultMap id="serviceDiabetesVisitCardMap" type="java.util.HashMap">
+	    <result property="ID" column="IDt" />
+	    <result property="name" column="name" />
+		<result property="PNAME" column="PNAMEt" />
+		<result property="confirmedDate" column="confirmedDatet" />
+		<result property="orgCode" column="orgCodet" />
+		<result property="deptCode" column="deptCodet" />
+		<result property="deptName" column="deptNamet" />
+		<result property="doctorName" column="doctorNamet" />
+		<result property="orgName" column="orgNamet" />
+		<result property="serviceTime" column="serviceTimet" />
+		<result property="diabetesManagementCardId" column="diabetesManagementCardIdd" />
+			<result property="medicalDate" column="medicalDate" />
+			<result property="medicalOrg" column="medicalOrg" />
+			<result property="caseSource" column="caseSource" />
+			<result property="dmType" column="dmType" />
+			<result property="diseaseType" column="diseaseType" />
+			<result property="cardDate" column="cardDate" />
+			<result property="lesionsCode" column="lesionsCode" />
+			
+	    <collection property="diabetesVisitCardList"  ofType="java.util.HashMap" javaType="java.util.ArrayList">
+	        <result property="id" column="idd" />
+			<result property="labCheckDate" column="labCheckDated" />
+			<result property="sourceid" column="sourceidd" />
+			<result property="labAssistCheckResult" column="labAssistCheckResultd" />
+			<result property="labAssistCheckItem" column="labAssistCheckItemd" />
+			<result property="targetDayDrink" column="targetDayDrinkd" />
+			<result property="targetSportFreCode" column="targetSportFreCoded" />
+			<result property="targetSportTime" column="targetSportTimed" />
+			<result property="targetMainEat" column="targetMainEatd" />
+			<result property="type2DiabetesNo" column="type2DiabetesNod" />
+			<result property="contryHealthNumber" column="contryHealthNumberd" />
+			<result property="dutyDoctorName" column="dutyDoctorNamed" />
+			<result property="doctorName" column="doctorNamed" />
+			<result property="doctorCode" column="doctorCoded" />
+			<result property="nextTimeFollowDate" column="nextTimeFollowDated" />
+			<result property="followUpOrgCode" column="followUpOrgCoded" />
+			<result property="followUpOrgName" column="followUpOrgNamed" />
+			<result property="deptName" column="deptNamed" />
+			<result property="serviceTime" column="serviceTimed" />
+			<result property="daySmok" column="daySmokd" />
+			<result property="dayDrink" column="dayDrinkd" />
+			<result property="sportFrequencyCode" column="sportFrequencyCoded" />
+			<result property="sportTime" column="sportTimed" />
+			<result property="mainEat" column="mainEatd" />
+			<result property="relax" column="relaxd" />
+			<result property="weight" column="weightd" />
+			<result property="height" column="heightd" />
+			<result property="symptomCode" column="symptomCoded" />
+			<result property="symptomName" column="symptomNamed" />
+			<result property="drugBadReactionFlag" column="drugBadReactionFlagd" />
+			<result property="drugBadReactionDesc" column="drugBadReactionDescd" />
+			<result property="shrink" column="shrinkd" />
+			<result property="physiqueIndex" column="physiqueIndexd" />
+			<result property="arteryPulseFlag" column="arteryPulseFlagd" />
+			<result property="otherPositivePhysique" column="otherPositivePhysiqued" />
+			<result property="aidCheckItem" column="aidCheckItemd" />
+			<result property="aidCheckResult" column="aidCheckResultd" />
+			<result property="rummagerName" column="rummagerNamed" />
+			<result property="limosisBG" column="limosisBGd" />
+			<result property="afterMeal2hourBG" column="afterMeal2hourBGd" />
+			<result property="saccharifyHemoglobin" column="saccharifyHemoglobind" />
+			<result property="drugUseFrequency" column="drugUseFrequencyd" />
+			<result property="drugUseTotalDoseUnit" column="drugUseTotalDoseUnitd" />
+			<result property="drugUseTimeDose" column="drugUseTimeDosed" />
+			<result property="drugUseTotalDose" column="drugUseTotalDosed" />
+			<result property="drugUseWayCode" column="drugUseWayCoded" />
+			<result property="medicalTypeCode" column="medicalTypeCoded" />
+			<result property="insulinUseType" column="insulinUseTyped" />
+			<result property="insulinUseDose" column="insulinUseDosed" />
+			<result property="followUpTypeCode" column="followUpTypeCoded" />
+			<result property="followEvalCode" column="followEvalCoded" />
+			<result property="psychologicalEvalCode" column="psychologicalEvalCoded" />
+			<result property="followRegimensEvalCode" column="followRegimensEvalCoded" />
+			<result property="medComplianceCode" column="medComplianceCoded" />
+			<result property="hypoglycemiaCode" column="hypoglycemiaCoded" />
+			<result property="referralFlag" column="referralFlagd" />
+			<result property="referralReason" column="referralReasond" />
+			<result property="turnMedicalOrgName" column="turnMedicalOrgNamed" />
+			<result property="turnDeptName" column="turnDeptNamed" />
+			<result property="nextVisitDate" column="nextVisitDated" />
+			<result property="targetWeight" column="targetWeightd" />
+			<result property="targetPhysiqueIndex" column="targetPhysiqueIndexd" />
+			<result property="targetDaySmok" column="targetDaySmokd" />
+			<result property="drugName" column="drugNamed" />
+			<result property="insulinUseFrequency" column="insulinUseFrequencyd" />
+			<result property="targerSportFreCode" column="targerSportFreCoded" />
+		</collection>
+	</resultMap>
+	
+	<!--健康档案-精神病Map -->
+	<resultMap id="serviceHeavyPsychiatricVisitMap" type="java.util.HashMap">
+		<result property="ID" column="IDh" />
+		<result property="name" column="name" />
+		<result property="doctorName" column="doctorNameh" />
+		<result property="serviceTime" column="serviceTimeh" />
+		<result property="deptName" column="deptNameh" />
+		<result property="deptCode" column="deptCodeh" />
+		<result property="orgCode" column="orgCodeh" />
+		<result property="orgName" column="orgNameh" />
+		<result property="mentalIllnessManagementCardId" column="mentalIllnessManagementCardIdh" />
+	    <collection property="heavyPsychiatricVisitList"  ofType="java.util.HashMap" javaType="java.util.ArrayList">
+			<result property="id" column="idt" />
+			<result property="mpiId" column="mpiIdt" />
+			<result property="majorPsychiatricFollowRecordId" column="majorPsychiatricFollowRecordIdt" />
+			<result property="managementCode" column="managementCodet" />
+			<result property="mentalIllnessManagementCardId" column="mentalIllnessManagementCardIdt" />
+			<result property="numberFollow" column="numberFollowt" />
+			<result property="pname" column="pnamet" />
+			<result property="followDoctor" column="followDoctort" />
+			<result property="mentalIllnessMark" column="mentalIllnessMarkt" />
+			<result property="followDoctorCode" column="followDoctorCodet" />
+			<result property="confirmedDiseaseName" column="confirmedDiseaseNamet" />
+			<result property="currentSymptomCode" column="currentSymptomCodet" />
+			<result property="currentSymptomName" column="currentSymptomNamet" />
+			<result property="previousTreatmentCategoryCode" column="previousTreatmentCategoryCodet" />
+			<result property="treatmentCode" column="treatmentCodet" />
+			<result property="mentalRehMeasuresCode" column="mentalRehMeasuresCodet" />
+			<result property="mentalRehMeasuresName" column="mentalRehMeasuresNamet" />
+			<result property="surveyStartTime" column="surveyStartTimet" />
+			<result property="surveyClosingTime" column="surveyClosingTimet" />
+			<result property="illnessFamilySocietyCode" column="illnessFamilySocietyCodet" />
+			<result property="illnessFamilySocietyName" column="illnessFamilySocietyNamet" />
+			<result property="hazardRatingCode" column="hazardRatingCodet" />
+			<result property="currentFunctionalStatus" column="currentFunctionalStatust" />
+			<result property="housework" column="houseworkt" />
+			<result property="productionLaborWork" column="productionLaborWorkt" />
+			<result property="learningAbility" column="learningAbilityt" />
+			<result property="socialInteraction" column="socialInteractiont" />
+			<result property="minorNuisances" column="minorNuisancest" />
+			<result property="createDisturbanceTime" column="createDisturbanceTimet" />
+			<result property="causeTroubleTime" column="causeTroubleTimet" />
+			<result property="autolesionTime" column="autolesionTimet" />
+			<result property="attemptedSuicideTime" column="attemptedSuicideTimet" />
+			<result property="hospitalizationCode" column="hospitalizationCodet" />
+			<result property="lastHospitalDate" column="lastHospitalDatet" />
+			<result property="captivityCaseCode" column="captivityCaseCodet" />
+			<result property="currentWorkeStatus" column="currentWorkeStatust" />
+			<result property="marriageStatus" column="marriageStatust" />
+			<result property="parentStatus" column="parentStatust" />
+			<result property="socialWithdrawal" column="socialWithdrawalt" />
+			<result property="socialActivitiesOutsideHome" column="socialActivitiesOutsideHomet" />
+			<result property="familyActivities" column="familyActivitiest" />
+			<result property="familyFunction" column="familyFunctiont" />
+			<result property="interestConcernOutsideWorld" column="interestConcernOutsideWorldt" />
+			<result property="responsibilityPlanning" column="responsibilityPlanningt" />
+			<result property="totalPoints" column="totalPointst" />
+			<result property="selfKnowledgeEvaluationCode" column="selfKnowledgeEvaluationCodet" />
+			<result property="sleepStatusCode" column="sleepStatusCodet" />
+			<result property="dietCode" column="dietCodet" />
+			<result property="socialCaseClassificationCode" column="socialCaseClassificationCodet" />
+			<result property="socialCaseClassificationName" column="socialCaseClassificationNamet" />
+			<result property="socialFunctionEvaluationCode" column="socialFunctionEvaluationCodet" />
+			<result property="sociopathy" column="sociopathyt" />
+			<result property="auxiliaryInspectionMark" column="auxiliaryInspectionMarkt" />
+			<result property="auxiliaryInspectionItems" column="auxiliaryInspectionItemst" />
+			<result property="auxiliaryInspectionResults" column="auxiliaryInspectionResultst" />
+			<result property="checkPersonName" column="checkPersonNamet" />
+			<result property="checkDate" column="checkDatet" />
+			<result property="adverseDrugReactionMarkers" column="adverseDrugReactionMarkerst" />
+			<result property="drugReactionsAdverse" column="drugReactionsAdverset" />
+			<result property="effectCategoryCode" column="effectCategoryCodet" />
+			<result property="effectCategoryName" column="effectCategoryNamet" />
+			<result property="patientsMentalIllnessCode" column="patientsMentalIllnessCodet" />
+			<result property="medicationComplianceCode" column="medicationComplianceCodet" />
+			<result property="evaluationClassification" column="evaluationClassificationt" />
+			<result property="referralLogo" column="referralLogot" />
+			<result property="referralReason" column="referralReasont" />
+			<result property="transferOrgName" column="transferOrgNamet" />
+			<result property="transferDetName" column="transferDetNamet" />
+			<result property="treatmentOptions" column="treatmentOptionst" />
+			<result property="followUpDate" column="followUpDatet" />
+			<result property="nextVisitDate" column="nextVisitDatet" />
+			<result property="rehabilitationInstruction" column="rehabilitationInstructiont" />
+			<result property="checkPersonnelNo" column="checkPersonnelNot" />
+			<result property="checkPersonnelName" column="checkPersonnelNamet" />
+			<result property="familyHistoryMentalIllness" column="familyHistoryMentalIllnesst" />
+			<result property="familyNameMentalIllness" column="familyNameMentalIllnesst" />
+			<result property="pastMajorSymptomCode" column="pastMajorSymptomCodet" />
+			<result property="pastMajorSymptomName" column="pastMajorSymptomNamet" />
+			<result property="followUpOrgCode" column="followUpOrgCodet" />
+			<result property="followUpOrgName" column="followUpOrgNamet" />
+			<result property="creatDate" column="creatDatet" />
+			<result property="modifierFlag" column="modifierFlagt" />
+			<result property="securityClassification" column="securityClassificationt" />
+			
+			<result property="doctorName" column="doctorNamet" />
+			<result property="serviceTime" column="serviceTimet" />
+			<result property="deptName" column="deptNamet" />
+			    <collection property="mapqueryHeavyPsychiatricVisitDrug"  ofType="java.util.HashMap" javaType="java.util.ArrayList">
+					<result property="id" column="IDr" />
+					<result property="orgCode" column="orgCoder" />
+					<result property="majorRecordId" column="majorRecordIdr" />
+					<result property="drugCode" column="drugCoder" />
+					<result property="drugName" column="drugNamer" />
+					<result property="drugType" column="drugTyper" />
+					<result property="singleDose" column="singleDoser" />
+					<result property="referenceDose" column="referenceDoser" />
+					<result property="dosageDrugDseUnit" column="dosageDrugDseUnitr" />
+					<result property="secondDoseMedicine" column="secondDoseMediciner" />
+					<result property="totalDosageMedicationUsed" column="totalDosageMedicationUsedr" />
+					<result property="drugUsePathwayCode" column="drugUsePathwayCoder" />
+					<result property="drugFrequency" column="drugFrequencyr" />
+					<result property="chineseMedicineCategoryCode" column="chineseMedicineCategoryCoder" />
+					<result property="chineseMedicineCategoryName" column="chineseMedicineCategoryNamer" />
+					<result property="creatDate" column="creatDater" />
+					<result property="modifierFlags" column="modifierFlagsr" />
+					<result property="securityClassification" column="securityClassificationr" />
+				</collection>
+		</collection>
+	</resultMap>
+	
+	<!--健康档案-高血压Map -->
+	<resultMap id="serviceMadmenManagingCardMap" type="java.util.HashMap">
+		<result property="ID" column="IDt" />
+		<result property="name" column="name" />
+		<result property="doctorName" column="doctorNamet" />
+		<result property="serviceTime" column="serviceTimet" />
+		<result property="deptName" column="deptNamet" />
+		<result property="deptCode" column="deptCodet" />
+		<result property="orgCode" column="orgCodet" />
+		<result property="orgName" column="orgNamet" />
+		<result property="hypertensionManagementCardId" column="hypertensionManagementCardIdt" />
+		
+		<result property="endManageDate" column="endManageDate" />
+		<result property="endReason" column="endReason" />
+		<result property="caseSource" column="caseSource" />
+		<result property="selfCareAbility" column="selfCareAbility" />
+		<result property="diseaseType" column="diseaseType" />
+		<result property="cardDate" column="cardDate" />
+		
+	    <collection property="hypertensivePatVisitList"  ofType="java.util.HashMap" javaType="java.util.ArrayList">
+			<result property="id" column="idp" />
+			<result property="labCheckDate" column="labCheckDatep" />
+			<result property="labAssistCheckResult" column="labAssistCheckResultp" />
+			<result property="labAssistCheckItem" column="labAssistCheckItemp" />
+			<result property="labRummagerName" column="labRummagerNamep" />
+			<result property="drugUseWayCode" column="drugUseWayCodep" />
+			<result property="aidCheckResult" column="aidCheckResult" />
+			<result property="followUpTypeCode" column="followUpTypeCodep" />
+			<result property="psychologicalEvalCode" column="psychologicalEvalCodep" />
+			<result property="referralFlag" column="referralFlagp" />
+			<result property="referralReason" column="referralReasonp" />
+			<result property="trunMedicalOrgName" column="trunMedicalOrgNamep" />
+			<result property="trunDeptName" column="trunDeptNamep" />
+			<result property="targetWeight" column="targetWeightp" />
+			<result property="targetPhysiqueIndex" column="targetPhysiqueIndexp" />
+			<result property="targetSaltIntakeCode" column="targetSaltIntakeCodep" />
+			<result property="followUpOrgName" column="followUpOrgNamep" />
+			<result property="sportTime" column="sportTimep" />
+			<result property="symptomCode" column="symptomCodep" />
+			<result property="symptomName" column="symptomNamep" />
+			<result property="nextVisitDate" column="nextVisitDatep" />
+			<result property="targetDaySmok" column="targetDaySmokp" />
+			<result property="followUpOrgCode" column="followUpOrgCodep" />
+			<result property="dutyDoctorName" column="dutyDoctorNamep" />
+			<result property="targetDayDrink" column="targetDayDrinkp" />
+			<result property="targerSportFreCode" column="targerSportFreCodep" />
+			<result property="targerSportTime" column="targerSportTimep" />
+			<result property="doctorCode" column="doctorCodep" />
+			<result property="hypeFollowRecordNo" column="hypeFollowRecordNop" />
+			<result property="patientName" column="patientNamep" />
+			<result property="doctorName" column="doctorNamep" />
+			<result property="contryHealthNumber" column="contryHealthNumberp" />
+			<result property="thisTimeFollowDate" column="thisTimeFollowDatep" />
+			<result property="nextTimeFollowDate" column="nextTimeFollowDatep" />
+			<result property="daySmok" column="daySmokp" />
+			<result property="sportFrequencyCode" column="sportFrequencyCodep" />
+			<result property="saltIntakeCode" column="saltIntakeCodep" />
+			<result property="drugBadReactionDesc" column="drugBadReactionDescp" />
+			<result property="dayDrink" column="dayDrinkp" />
+			<result property="drugBadReactionFlag" column="drugBadReactionFlagp" />
+			<result property="aidCheckItem" column="aidCheckItemp" />
+			<result property="rummagerName" column="rummagerNamep" />
+			<result property="checkDate" column="checkDatep" />
+			<result property="shrink" column="shrinkp" />
+			<result property="relax" column="relaxp" />
+			<result property="weight" column="weightp" />
+			<result property="height" column="heightp" />
+			<result property="heartRate" column="heartRatep" />
+			<result property="otherPositivePhysique" column="otherPositivePhysiquep" />
+			<result property="drugUseFrequency" column="drugUseFrequencyp" />
+			<result property="medicalTypeCode" column="medicalTypeCodep" />
+			<result property="followEvalCode" column="followEvalCodep" />
+			<result property="followRegimensEvalCode" column="followRegimensEvalCodep" />
+			<result property="medComplianceCode" column="medComplianceCodep" />
+			<result property="drugUseTotalDose" column="drugUseTotalDosep" />
+			<result property="drugUseTimeDose" column="drugUseTimeDosep" />
+			<result property="drugUseTotalDoseUnit" column="drugUseTotalDoseUnitp" />
+			<result property="physiqueIndex" column="physiqueIndexp" />
+			<result property="drugName" column="drugNamep" />
+			
+			<result property="serviceTime" column="serviceTimep" />
+			<result property="deptName" column="deptNamep" />
+		</collection>
+	</resultMap>
+	
+	<!-- 服务活动索引数据查询metaSetCode -->
+	<select id="getMetaSetCodeByHrn" parameterType="map" resultMap="getMetaSetCodeMap">
+		select
+			SOURCEID as sourceID,
+			to_char(SERVICE_RECORDTIME, 'yyyy-mm-dd ') as serviceTime,
+			MPIID as mpiID,
+			HRN as hrn,
+			METASET_CODE as metaSetCode,
+			NAME as pname,
+			to_char(dob, 'yyyy-mm-dd ') as dob,
+			sex as sex,
+			SERVICE_ORGCODE as serviceOrgCode,
+			SERVICE_ORGNAME as
+			serviceOrgName,
+			SERVICE_DOCTORNAME as serviceDoctorName,
+			idcard AS idcard
+		from
+			ds_serviceactive_index ix 
+		where 
+			  <!-- ix.id &gt; #{lastMaxid}
+			  and  --> ix.mpiid=#{mpiid,jdbcType=VARCHAR}
+	</select>
+	
+	<!-- 健康体检主表兼从表查询 -->
+	<select id="getJktjExaminfoByIdMap" parameterType="map" resultMap="getJktjExaminfoMap">
+			select 
+			  phh.UPLOADFLAG$ as uploadflag,
+			  '健康体检' as "name",
+		      phh.ID$ as IDh,
+		      phh.MPIID$ as mpiidh,
+		      '' AS grdaidh,
+		      '' as orgCodeh,
+		      to_char(phh.PHYSICAL_DATE, 'yyyy-mm-dd ') as recordTimeh,
+		      phh.HEALTH_TABLE_NUM AS orderIdh,
+		      phh.SYMPTOM_CODE as symptomCodeh,
+		      phh.NAMES as patientNameh,
+		      phh.HEMOGLOBIN_VALUE as hemoglobinValue,
+		      phh.WHITE_BLOOD_VALUE as whiteBloodCellsCount,
+		       phh.PLATELET_VALUE as plateletCount,
+		      phh.URINE_PROTEIN_VALUE as urineProteinDetectionCode,
+		        phh.NT_VALUE as urineSugerResultCode,
+		      phh.URINE_CODE as urineKetoneDetetionCode,
+		       phh.BLD_CODE as urineOccultBloodTestCode,
+		      phh.URINE_PROTEIN as urineAlbumin,
+		      phh.FECAL_OCCULT_BLOOD as stoolOccultBloodFlag,
+		      phh.SUGAR_HEMOGLOBIN_VALUE as saccharifyHemoglobinValue,
+		      phh.SERUM_ALANINE_VALUE as feraseValue,
+		      phh.SERUM_ASPARTATE_VALUE as serumAspartateValue,
+		      phh.PROTEIN_CONCENTRATION as albuminConcentration,
+		      phh.TOTAL_BILIRUBIN_VALUE as totalBilirubin,
+		      phh.CONJUGATED_BILIRUBIN as contectBilirubinValue,
+		      phh.BLOOD_CREATININE_TEST as serumCreatinineValue,
+		      phh.BLOOD_UREA_NITROGEN as bloodUreaNitrogenValue,
+		      phh.BLOOD_POTASSIUM as bloodPotassiumConcentration,
+		      phh.BLOOD_SODIUM as bloodSodiumConcentration,
+		      phh.TOTAL_CHOLESTEROL as totalCholesterol,
+		      phh.TRIGLYCERIDE as triglycerideValue,
+		      phh.SERUM_CHOLESTEROL_LOW as meDetectionValue,
+		      phh.SERUM_CHOLESTEROL_HEIGHT as heDetectionValue,
+		      phh.STEEL_FREQUENCY as sportFrequencyCodeh,
+		      phh.STEEL_MONTH as exerciseTimeh,
+		      phh.DITE_HABIT_CODE as dietHabitsCodeh,
+		      phh.SMOKE_STATUS_CODE as smokStatusCodeh,
+		      phh.SMOKE_COUNT_DAY as daySmokh,
+		      phh.QUIT_SMOKE_AGE as giveUpSmokAgeh,
+		      phh.DRINK_AMOUNT as dayDrinkh,
+		      phh.QUIT_DRINK_AGE as giveUpDrinkAgeh,
+		      phh.DRINK_KIND_CODE as drinkTypeCodeh,
+		      phh.MOTION_WHEN_LONG as sportTimeh,
+		      phh.STEEL_TYPE_REMARKS as sportMethodDesch,
+		      '' as beginSmokAgeh,
+		      phh.DRINK_FREQUENCY as drinkFrequencyCodeh,
+		      phh.QUIT_DRINK_MARK as giveUpDrinkFlagh,
+		      phh.START_DRINK_AGE as beginDrinkAgeh,
+		      phh.DRUNK_MARK as drunkFlagh,
+		      phh.PULSE_RATE as pulseRateh,
+		      phh.LEFT_SHRINK_PRESSURE as leftShrinkh,
+		      phh.RIGHT_SHRINK_PRESSURE as rightShrinkh,
+		      phh.HEIGHT as highh,
+		      phh.WEIGTH as weighth,
+		      phh.BODY_MASS_INDEX as physiqueIndexh,
+		      phh.TEMPERATURE as bodyTemperatureh,
+		      phh.RESPIRATORY_RATE as breathRateh,
+		      phh.LEFT_DIASTOLE_PRESSURE as leftRelaxh,
+		      phh.RIGHT_DIASTOLE_PRESSURE as rightRelaxh,
+		      phh.WAIST as waisth,
+		      phh.PHARYNX_TEST_CODE as throatCheckResultCodeh,
+		      phh.EYE_RIGHT_VALUE as rightBareVisionh,
+		      phh.HEARING_TEST_CODE as listenCheckResultCodeh,
+		      phh.EYE_ABNORMAL_MARK as eyegroundCheckUnusualFlagh,
+		      phh.SKIN_TEST_CODE as skinCheckResultCodeh,
+		      phh.GLAND_TEST_CODE as lymphNodeCheckResultCodeh,
+		      phh.LUNGS_BREATH_REMARKS as lungUnusualDesch,
+		      phh.LUNGS_RALE_REMARKS as lungLuoyinDesch,
+		      phh.HEART_NOISE_MARK as heartZayinFlagh,
+		      phh.ABDOMEN_TENDERNESS_MARK as abdomenPainFlagh,
+		      phh.ABDOMEN_PIECE_MARK as abdomenBaokuaiFlagh,
+		      phh.ABDOMEN_PIECE_REMARKS as abdomenDesch,
+		      phh.LIVER_BIG_REMARKS as liverBigDesch,
+		      phh.SPLEEN_BIG_REMARKS as spleenBigDesch,
+		      phh.ABDOMEN_MOVE_MARK as abdomenMoveFlagh,
+		      phh.LEGS_EDEMA_CODE as legsEdemaResultCodeh,
+		      phh.ANUS_TEST_CODE as anusCheckResultCodeh,
+		      phh.VAGINA_MARK as vaginaUnusualFlagh,
+		      phh.CERVICAL_MARK as cervicalUnusualFlagh,
+		      phh.PALACE_MARK as uterineBodyUnusualFlagh,
+		      phh.REVIEW_MAK as attachmentUnusualFlagh,
+		      phh.EYE_LEFT_VALUE as leftBareVisionh,
+		      phh.EYE_LEFT_CORRECT_VALUE as leftRectifyVisionh,
+		      phh.EYE_RIGHT_CORRECT_VALUE as rightRectifyVisionh,
+		      phh.MOTION_STATE_CODE as sportStatusCodeh,
+		      phh.EYE_ABNORMAL_REMARKS as eyegroundCheckDesch,
+		      phh.SCLERA_TEST_CODE as scleraCheckResultCodeh,
+		      phh.BARREL_CHEST_MARK as barrelChestFlagh,
+		      phh.LUNGS_BREATH_MARK as lungUnusaulBreathFlagh,
+		      phh.LIPS_TEST_CODE as mouthLookCheckCodeh,
+		      phh.DENTITION_REMARKS as toothDesch,
+		      phh.PHARYNX_TEST_CODE as lungRaleFlagh,
+		      phh.HEART_RATE as heartRateh,
+		      phh.HEART_RATE_CODE as heartRateTypeCodeh,
+		      phh.HEART_NOISE_RMARKS as heartNoiseDesch,
+		      phh.ABDOMEN_TENDERNESS_REMARKS as abdomenPainDesch,
+		      phh.LIVER_BIG_MARK as liverBigFlagh,
+		      phh.SPLEEN_BIG_MARK as spleenBigFlagh,
+		      phh.ABDOMEN_MOVE_REMARKS as abdomenMoveDesch,
+		      phh.FOOT_DORSUM_CODE as footArteriopalmusCodeh,
+		      phh.BREAST_TEST_CODE as breastChectResultCodeh,
+		      phh.VULVA_MARK as vulvaUnusualFlagh,
+		      phh.VULVA_REMARKS as vulvaUnusualDesch,
+		      phh.VAGINA_REMARKS as vaginaUnusualDesch,
+		      phh.CERVICAL_REMARKS as cervicalUnusualDesch,
+		      phh.PALACE_REMARKS as uterineBodyUnusualDesch,
+		      phh.REVIEW_REMARKS as attachmentUnusualDesch,
+		      phh.OTHER_TEST_RESULT as otherCheckResulth,
+		      phh.CERVICAL_SMEAR_MARK as cervicalPictureFlagh,
+		      phh.CERVICAL_SMEAR_REMARKS as cervicalPictureDesch,
+		      phh.ELECTROCARDIOGRAM_MARK as eCGUnusualFlagh,
+		      phh.CHEST_X_RAY_MARK as chestXrayUnusualFlagh,
+		      phh.B_MODE_MARK as BmodeUnusualFlagh,
+		      phh.B_MODE_REMARKS as BmodeUnusualDesch,
+		      phh.ELECTROCARDIOGRAM_REMARKS as eCGUnusualDesch,
+		      phh.CHEST_X_RAY_REMARKS as chestXrayUnusualDesch,
+		      phh.AUXILIARY_TEST as OtherHelpCheckh,
+		      phh.OLD_HEALTH_CODE as agedAbilityAssessCodeh,
+		      phh.OLD_COGNITION_SCORE as agedCognitiveAssessh,
+		      phh.HEALTH_ABNORMAL_REMARKS as HealthAppraiseDesch,
+		      phh.OLD_COGNITION_CODE as agedCognitiveAssessCodeh,
+		      phh.OLD_EMOTION_CODE as agedEmotionAssessh,
+		      phh.OLD_DEPRESSED_SCORE as elderlyDepressionh,
+		      phh.HEALTH_ABNORMAL_MARK as healthAssessFlagh,
+		      phh.DOCTOR_NAME as dutyDoctorNameh,
+		      phh.HEALTH_TABLE_NUM as healthNumberh,
+		      phh.HEALTH_GUIDANCE_CODE as healthGuideCodeh,
+		      phh.TARGET_WEIGTH as targetWeighth,
+		      phh.PROPOSAL_VACCINE_CODE as adviseVaccineCodeh,
+		      phh.ZY_CONSTITUTION_TYPE_CODE as zytzflCodeh,
+		      phh.ZY_CONSTITUTION_RESULT_CODE as zytzflpdjgCodeh,
+		      '' as beginSmokAgeh,
+		      phh1.id$ as idh1,
+		      phh1.DOSAGE as drugUseTotalDoseh1,
+					phh1.DRUG_COMPLIANCE as medComplianceCodeh1,
+					phh1.CHINESE_MEDICINE_CODE as chineseMedCodeh1,
+					phh1.DRUG_USE_TIME as useDrugUnith1,
+					phh1.USAGES as drugUsageh1,
+					phh1.USING_DRUG_FREQ as drugUseRateh1,
+					phh1.DOSE_SINGLE as drugUseTimeDoseh1,
+					phh1.DRUG_WAY_CD as drugUseWayCodeh1,
+					'' as medicationTimeh1,
+					phh1.HEALTH_TABLE_NUM as healthExamTableCodeh1,
+					phh1.DRUG_NAME as drugNameh1,
+					phh1.DOSE_UNIT as drugUseTotalDoseUnith1,
+		      phh4.ID$ as idh4,
+					phh4.VACCINE_CODE as vaccineNameCodeh4,
+					phh4.VACCINE_NAME as vaccineNameh4,
+					to_char(phh4.INOCULATE_DATE, 'YYYY-MM-DD ') as vaccinationDateh4,
+					phh4.HEALTH_TABLE_NUM as healthExamTableCodeh4,
+					phh4.VACCINE_BATCH_NUMBER as vaccineBatchh4,
+					phh4.ORG_NAME as vaccinatedUnitNameh4,
+					phh4.HEALTH_TABLE_NUM as recordIdh4,
+		      phh2.ID$ as idh2,
+					phh2.HEALTH_TABLE_NUM as recordIdh2,
+					'' as orgCodeh2,
+					phh2.HEALTH_TABLE_NUM as healthExamTableCodeh2,
+					to_char(phh2.ADMISSION_DATE, 'YYYY-MM-DD ') as admissionDateh2,
+					to_char(phh2.DISCHARGE_DATE, 'YYYY-MM-DD ') as dischargeDateh2,
+					phh2.ADMISSION_REASON as hospitalizationCauseh2,
+					'' as hospitalizationCodeh2,
+					phh2.ORG_NAME as oldOrgCodeh2,
+					phh2.CASE_NUM as hospitalizedh2,
+					'' as securityClassificationh2,
+					'' as modifierFlagsh2,
+					'' as dataCreateTimeh2,
+		      phh3.ID$ as idh3,
+					phh3.HEALTH_TABLE_NUM as recordIdh3,
+					'' as orgCodeh3,
+					phh3.HEALTH_TABLE_NUM as examinationRecordIdh3,
+					to_char(phh3.BED_CREATED_DATE, 'YYYY-MM-DD ') as familyBedConstructionDateh3,
+					to_char(phh3.BED_REMOVED_DATE, 'YYYY-MM-DD ') as familyBedWithdrawalDateh3,
+					phh3.BED_CREATED_REASON as familyBedConstructionReasonsh3,
+					phh3.ORG_NAME as oldOrgCodeh3,
+					phh3.CASE_NUM as familyNumberh3,
+					'' as securityClassificationh3,
+					'' as modifierFlagsh3,
+					'' as dataCreateTimeh3
+		    from PT_HC_H02 phh
+		    left join PT_HC_H0201 phh1 on phh.health_table_num=phh1.health_table_num 
+		    left join PT_HC_H0204 phh4 on phh.health_table_num=phh4.health_table_num 
+		    left join PT_HC_H0202 phh2 on phh.health_table_num=phh2.health_table_num 
+		    left join PT_HC_H0203 phh3 on phh.health_table_num=phh3.health_table_num 
+		where 
+			phh.id$ in 
+        <foreach collection="H02" index="index" item="item" open="(" separator="," close=")">
+               ${item}
+         </foreach>
+	</select>
+     
+	<!-- 根据id查询传染病管理记录 -->
+	<select id="queryServiceInfectiousDiseaseManagementById"
+		parameterType="map" resultMap="InfectiousDiseaseManagementMap">
+		select
+			ID$ as ID,
+			'传染病报告卡' as "name",
+			INFECT_DISEASE_CARD_NUM
+			as infectDiseaseCardNum,
+			CARD_TYPE_CODE as cardTypeCode,
+			NAMES as names,
+			PARENT_NAME as parentName,
+			ID_TYPE_CODE as idTypeCode,
+			ID_NUM as idNum,
+			SEX as sex,
+			to_char(BORN_DATE, 'yyyy-mm-dd ') as bornDate,
+			WORKUNIT_NAME as workunitName,
+			TELEPHONE as telephone,
+			FAMILY_TELE as familyTele,
+			PROVINCE_NAME as
+			provinceName,
+			CITY_NAME as cityName,
+			AREA_NAME as areaName,
+			TOWN_NAME as
+			townName,
+			VILLAGE_NAME as villageName,
+			HOUSE_NO as houseNo,
+			PATIENT_BELONG_CODE as patientBelongCode,
+			PATIENT_OCCUPATION_CODE as
+			patientOccupationCode,
+			to_char(FIR_SYMPTOM_DATE, 'yyyy-mm-dd ') as firSymptomDate,
+			ONSET_TYPE_CODE as onsetTypeCode,
+			DIAGNOSTIC_STATUS_CODE as
+			diagnosticStatusCode,
+			to_char(DIAGNOSE_DATE, 'yyyy-mm-dd ') as diagnoseDate,
+			to_char(DEATH_DATE, 'yyyy-mm-dd ') as deathDate,
+			INFECT_TYPE_CODE as infectTypeCode,
+			(select g.ITEM_NAME
+			 from GWC_BASEDATA_DETAIL g
+			 where g.ITEM_CODE = i.INFECT_NAME_CODE
+				   and g.BASEDATACLASS_CODE = 'CV05.01.017') as infectNameCode,
+			OTHER_MONITOR_INFECT_NAME as otherMonitorInfectName,
+			REVISE_DISEASE_NAME as reviseDiseaseName,
+			ABANDON_CARD_REASON as
+			abandonCardReason,
+			REPORT_DR_NAME as reportDrName,
+			REPORT_ORG_NAME as
+			reportOrgName,
+			REPORT_ORG_TELE as reportOrgTele,
+			to_char(REPORT_DATE, 'yyyy-mm-dd ') as reportDate,
+			HOUSEHOLD_PROVINCE as householdProvince,
+			HOUSEHOLD_CITY as
+			householdCity,
+			HOUSEHOLD_AREA as householdArea,
+			HOUSEHOLD_TOWN as
+			householdTown,
+			HOUSEHOLD_VILLAGE as householdVillage,
+			HOUSEHOLD_HOUSE_NO as householdHouseNo,
+			WORK_PROVINCE as workProvince,
+			WORK_CITY as workCity,
+			WORK_AREA as workArea,
+			WORK_TOWN as workTown,
+			WORK_VILLAGE as workVillage,
+			WORK_HOUSE_NO as workHouseNo
+		FROM PT_HC_H24 i
+		WHERE i.ID$ in 
+        <foreach collection="H24" index="index" item="item" open="(" separator="," close=")">
+               #{item}
+         </foreach>
+	</select>
+    
+    <!-- 根据id查询预防接种记录 详情 -->
+	<select id="queryVaccinationRecordById" parameterType="map" resultMap="VaccinationRecordMap">
+	    select 
+	      phh.ID$ as IDh,
+	      '儿童免疫接种信息' as "name",
+	      to_char(phh.HAPPENTIME, 'YYYY-MM-DD ') as recordTimeh,
+	      '' as orgCodeh,
+	      phh.HEALTH_RECORD_CODE as vaccinationIdh,
+	      phh.HEALTH_RECORD_CODE as healthRecordCodeh,
+	      to_char(phh.BIRTHDAY_GB, 'YYYY-MM-DD ') as birthdayGbh,
+	      phh1.id$ as idh1,
+	           (select g.ITEM_NAME  from GWC_BASEDATA_DETAIL g where  g.BASEDATACLASS_CODE ='CV08.50.001' and g.ITEM_CODE = phh1. VACCINE_NAME_CD) as vaccineNameCdh1,
+				phh1.NEEDLE_SORT as needleSorth1,
+				to_char(phh1.VACC_DATE,'yyyy-mm-dd ') as vaccDateh1,
+				phh1.VACCINE_NAME_CD as vaccineCodeh1
+	    FROM
+	      PT_HC_H42 phh
+	      left join PT_HC_H4202 phh1 on phh1.health_record_code=phh.health_record_code
+		WHERE 
+			phh.ID$ in 
+	        <foreach collection="H42" index="index" item="item" open="(" separator="," close=")">
+	               #{item}
+	         </foreach>
+	</select>
+
+    <!-- 健康档案-产后42天检查 -->
+	<select id="queryServicePostpartumExaminationRecordById"
+		parameterType="map" resultMap="getPostpartumExaminationMap">
+		select 
+			ID$ as ID,
+			'产后42天检查' as "name",
+			MPIID$ as mpiid,
+			HEALTH_RECORD_CODE as healthRecordCode,
+			NAME_GB as nameGb,
+			UTERINE as
+			uterine,
+			UTERINE_DESC as uterineDesc,
+			REFERRAL_GB as referralGb,
+			ROLL_IN_REGION_CODE_GB as rollInRegionCodeGb,
+			ROLL_IN_DEPARTMENT_GB as
+			rollInDepartmentGb,
+			REFERRAL_REASONS as referralReasons,
+			INPUT_MAN_GB as
+			inputManGb,
+			to_char(p.VISIT_DATE_GB,'yyyy-mm-dd ') as visitDateGb,
+			SBP_GB as sbpGb,
+			DBP_GB as
+			dbpgb,
+			HEALTH_INSTRUCTION_GB as healthInstructionGb,
+			HEALTH_STATE_GB as
+			healthStateGb,
+			PSYCHOLOGY_STATE_GB as psychologyStateGb,
+			(select
+				f.ITEM_NAME
+			 from GWC_BASEDATA_DETAIL f
+			 where 
+			 	f.BASEDATACLASS_CODE = 'CV04.10.012'
+				and f.ITEM_CODE = p.LMAMILLA_STSTUS_GB) as lmamillaStstusGb,
+			(select f1.ITEM_NAME
+			 from GWC_BASEDATA_DETAIL f1
+			 where
+			 	f1.BASEDATACLASS_CODE = 'CV04.10.012'
+				and f1.ITEM_CODE =p.RMAMILLA_STSTUS_GB) as rmamillaStstusGb,
+			SMELL_MARK_GB as
+			smellMarkGb,
+			LYMA_DESC_GB as lymaDescGb,
+			CUT_GB as cutGb,
+			RECORD_ID as
+			recordId,
+			RECOVERY_GB as recoveryGb,
+			HEALTH_DESC_GB as healthDescGb,
+			CLOSE_GB as closeGb,
+			'' as breast,
+			UTERINE_GB as uterineGb,
+			UTERINE_DESC_GB as uterineDescGb,
+			CUT_DESC as cutDesc,
+			CARD_TYPE as
+			cardType,
+			CARDID as cardid,
+			'' as specialRecord,
+			'' as pulses,
+			'' as
+			weight,
+			BREAST_FLAG as breastFlag,
+			BREAST_DESC as breastDesc,
+			'' as
+			lactoStatus,
+			OTHER_STATE as otherState,
+			'' as haematoglobin,
+			'' as
+			wbcCount,
+			'' as bloodPlatelet,
+			'' as wbcCountType,
+			'' as rbcCount,
+			'' as
+			urineGlucoseQuantifyGb,
+			'' as urinePh,
+			'' as urineSpecificGravity,
+			'' as
+			urineProteinQuantifyGb,
+			'' as chpeDayGb,
+			'' as infantConclusion,
+			ROLL_OUT_DEPA_CODE_GB as rollOutDepaCodeGb,
+			'' as appointmentDate,
+			to_char(p.NEXT_VISIT_DATE_GB,'yyyy-mm-dd ') as nextVisitDateGb
+		FROM PT_HC_H16 p
+		WHERE 
+			p.ID$ in 
+	        <foreach collection="H16" index="index" item="item" open="(" separator="," close=")">
+	               #{item}
+	         </foreach>
+	</select>
+    
+    <!-- 健康档案-新生儿访视基本信息（主表） -->
+    <select id="queryNeonatalVisitRecordById" parameterType="map" resultType="map">
+		select 
+			ID$ as "ID",
+			'新生儿访视基本信息' as "name",
+			RECORD_NO as "childVisitationNumber",
+			NEWBORN_CARD_TYPE as "childIdCardType",
+			NEWBORN_CARD_ID as "childIdCardNumb",
+			TEL_FATHER as "fatherTele",
+			TEL_MOTHER as "montherTele",
+			'' as "birthMediCertificateNo",
+			NAMES as "childName",
+			GENDER_CD as "childSexCode",
+			TO_CHAR(NEWBORN_BIRTH_DATE, 'yyyy-mm-dd ') as "childBirthdayDate",
+			'' as "placeBirthCategoryCode",
+			'' as "circumstancesBirth",
+			BIRTH_PREG_WEEKS as "gestationalWeeksBirth",
+			NEWBORN_HEAVY as "birthWeight",
+			GESTATION_COMPLICATION_HISTRY as "maternalComplicationsPregnancy",
+			NEWBORN_LONG as "birthLength",
+			'' as "bornHeadCircumference",
+			'' as "bornChest",
+			'' as "birthHealthStatusCode",
+			SUFFOCATION as "signsNeonatalAsphyxiation",
+			APGAR_VALUE as "apgarTestNumbOne",
+			'' as "apgarTestNumbfive",
+			'' as "apgarTestNumbTen",
+			IS_MULTIPLE_BIRTH as "twinMark",
+			NAME_MOTHER as "motherName",
+			'' as "motherAgeAtBirth",
+			'' as "motherCountryCode",
+			'' as "motherNationCode",
+			'' as "motherCardIdType",
+			'' as "motherCardId",
+			TO_CHAR(MOTHER_BIRTH_DATE, 'yyyy-mm-dd ') as "motherBirthDate",
+			(select t1.item_name
+			 from GWC_BASEDATA_DETAIL t1
+			 where 
+			 	t1.basedataclass_code = 'GBT6565.2009'
+				and t1.item_code = t.OCCUPATION_MOTHER_TYPE) as "motherOccupationType",
+			'' as "motherWorkName",
+			NAME_FATHER as "fatherName",
+			'' as "fatherAgeBirth",
+			'' as "fatherCountryCode",
+			'' as "fatherNationCode",
+			'' as "fatherCardIdType",
+			'' as "fatherCardId",
+			TO_CHAR(FATHER_BIRTH_DATE, 'yyyy-mm-dd ') as "fatherBirthDate",
+			(select t2.item_name
+			 from GWC_BASEDATA_DETAIL t2
+			 where t2.basedataclass_code = 'GBT6565.2009'
+			 and t2.item_code = t.OCCUPATION_FATHER_STYPE) as "fatherOccupationType",
+			'' as "fatherWorkName",
+			'' as "birthplace",
+			'' as "birthAddressProvince",
+			'' as "birthAddressProvinceCode",
+			'' as "birthAddressCity",
+			'' as "birthAddressCityCode",
+			'' as "birthAddressCounty",
+			'' as "birthAddressCountyCode",
+			'' as "birthAddressRural",
+			'' as "birthAddressRuralCode",
+			'' as "birthAddressVillage",
+			'' as "birthAddrHouseNo",
+			'' as "currentAddressProvince",
+			ADDRESS_PROVINCE_NOW as "currentAddressProvinceCode",
+			ADDRESS_CITY_NOW as "currentAddressCity",
+			'' as "currentAddressCityCode",
+			'' as "currentAddressCounty",
+			ADDRESS_COUNTY_NOW as "currentAddressCountyCode",
+			'' as "currentAddressRuralCode",
+			ADDRESS_COUNTRY_NOW as "currentAddressRural",
+			ADDRESS_VILLAGE_NOW as "currentAddressVillage",
+			ADDRESS_DOORPLATE_NOW as "currentAddrHouseNo",
+			DE_ORG_NAME as "midwiferyInstitutionName",
+			FEED_WAY_CODE as "feedWayCategoryCode",
+			'' as "mpiId",
+			'' as "neonatalVisitRecordNo",
+			'' as "orgCode",
+			'' as "neonatalVisit",
+			'' as "childVisitNo",
+			'' as "personIdentiType",
+			'' as "personIdentiNo",
+			BELLY_TF as "abdPalpationMark",
+			BELLY_TEST_RESULT as "abdPalpationAb",
+			UMBILICAL_CORD_MARK as "umbilicalCordAbMark",
+			UMBILICAL_CORD_TEST_RESULT as "funicleExamineCode",
+			LAST_DELIVERY_CODE as "lastDeliveryCode",
+			BACKBONE_TF as "abnSpiExamCode",
+			BACKBONE_TEST_RESULT as "spineExamResult",
+			'' as "montherBabySameRoom",
+			'' as "feedMethodName",
+			FEED_WAY_CODE as "feedMethodCode",
+			'' as "infantAppetite",
+			NURSE_FREQUENCY as "eachDayEatMilkTime",
+			NURSE_AMOUNT as "dailyMilkConsum",
+			FLAG_VOMITING as "vomitingLogo",
+			'' as "infantAppStateCode",
+			'' as "infantSleep",
+			'' as "infantSleepCode",
+			'' as "charInfantFeces",
+			NEO_STOOL_RECORD as "charInfantFeceCode",
+			NEO_STOOL_TIMES as "babyDefecateDaily",
+			'' as "nonExBreastFeedCause",
+			NEO_BODY_TEMP as "infantBodyTemp",
+			WEIGHT as "infantWeight",
+			'' as "infantileMentalCond",
+			'' as "infantileMentalCondCode",
+			'' as "infantComplexion",
+			COMPLEXION_TEST_RESULT as "infantComplexionCode",
+			'' as "babySizeHeadHematoma",
+			SKIN_TEST_CODEE as "infantSkinCond",
+			'' as "infantSkinCondCode",
+			EYE_TF as "abEyeAppMarks",
+			EYE_ASPECT_TEST_RESULT as "abEyeAppResDes",
+			'' as "babyEyesAbnor",
+			'' as "babyearAbnor",
+			NB_HEARING_TEST as "neonatalHearCode",
+			HEARING_CODE as "neonatalHearResultCode",
+			SCREEN_DISEASE_COSE as "neonatalHearProCode",
+			JAUN_PART as "jaundiceSiteCode",
+			PR as "pulseFrequency",
+			BREATHE_FREQ as "respiratoryRate",
+			'' as "babyNoseAbnor",
+			'' as "babyMouthAbnor",
+			NOSE_TF as "abnNasalSigns",
+			NOSE_TEST_RESULT as "nasalExamDes",
+			ORAL_CAVITY_TF as "abnSignsOralExam",
+			ORAL_CAVITY_TEST_RESULT as "abnSignsOralExamDes",
+			ANUS_TF as "abnSignsAnusExam",
+			ANUS_TEST_RESULT as "abnSignsAnusExamDes",
+			'' as "babyHeadNormal",
+			NEO_HEART_AUSC_TF as "abnCardiacAusMark",
+			NEO_HEART_AUSC_RESULT as "abnCardiacAusDes",
+			'' as "abBabyHeart",
+			LIMBS_TF as "abnMoveLimb",
+			LIMBS_TEST_RESULT as "limbExamResult",
+			NECK_MASS_TF as "neckMarker",
+			NECK_MASS_TEST_RESULT as "neckMassExamDes",
+			NEO_LUNG_AUSC_TF as "abLungAuscultaMark",
+			NEO_LUNG_AUSC_RESULT as "abLungAuscultaDes",
+			'' as "abBabyLungs",
+			'' as "abBabyBelly",
+			'' as "abBabyHip",
+			'' as "condBabyGenital",
+			'' as "condBabyGenitalCode",
+			BREGAM_TRANS_DIA as "bregmaTranDiameter",
+			BREGAM_VERT_DIA as "bregmaLongitudinalDiameter",
+			BREGAM_TENSION as "bregmaStrainCode",
+			'' as "bregmaStrainMark",
+			EAR_TF as "abEarCheckMark",
+			EAR_TEST_RESULT as "abEarCheckMarkDes",
+			EXTERNALIA_TF as "abMarksGenitalExam",
+			EXTERNALIA_TF as "abMarksGenitalExamDes",
+			NEO_ABNORMAL_MARK as "neonatalMalformationMark",
+			NEO_ABNORMAL_DESCR as "neonatalMalformationDes",
+			'' as "babyIsCongenitalDeformity",
+			'' as "infantUmbilicalCordCond",
+			'' as "hipRedCase",
+			'' as "checkBedSummaryDes",
+			'' as "newbornDes",
+			VISIT_DOCTOR_NAME as "inspectorName",
+			'' as "inspectorCode",
+			'' as "registryCode",
+			'' as "registryName",
+			'' as "neonatalSysObserAppDate",
+			'' as "followUpDate",
+			'' as "inspectionUnit",
+			TO_CHAR(FOLLOW_DATE, 'yyyy-mm-dd ') as "visitDate",
+			NEXT_FOLLOW_ADDRESS as "visitNextTime",
+			TO_CHAR(NEXT_FOLLOW_DATE, 'yyyy-mm-dd ') as "visitNextDate",
+			'' as "specialCaseRecord",
+			t.VISIT_HEALTH_CODE as "childHealthGuideCateCode",
+			'' as "guidanceHandle",
+			REFERRAL_MARK as "handlingGuidance",
+			CHANGE_INTO_HOSPITAL_NAME as "shiftToOrgName",
+			CHANGE_INTO_DEPARTMENT_NAME as "shiftToDetName",
+			REFERRAL_REASON as "referralReason",
+			'' as "securityClassification",
+			'' as "modifierFlags"
+		from 
+			PT_HC_H09 t
+		WHERE 
+			t.ID$ in 
+        <foreach collection="H09" index="index" item="item" open="(" separator="," close=")">
+               #{item}
+         </foreach>
+	</select>
+	
+	<!-- 健康档案-残疾人管理基本信息（主表 -->
+	<select id="querydisabledManagementById" parameterType="string" resultType="map">
+		select 
+		   id$ as "ID",
+		   CJ_ID as "disabilityNum", 
+	       to_char(CRIPPLE_DATE, 'yyyy-mm-dd') as "crippleDate", 
+	       DISABILITY_NUM AS "disabilityNum", 
+	       d1.item_name as "disabilityReason", 
+	       d2.item_name as "disabilityType", 
+	       d3.item_name as "disabilityRoutine", 
+	       GUARDIAN_NAME AS "guardianName", 
+	       GUARDIAN_TEL AS "guardianTel", 
+	       to_char(DATAACQUISITION_DATE, 'yyyy-mm-dd hh24:mi:ss') as "dataacquisitionDate", 
+	       DATAACQUISITION_ORG_NAME AS "dataacquisitionOrgName", 
+	       DATAACQUISITION_PEO_CODE AS  "dataacquisitionPeoCode"
+	  from PT_HC_H54 t
+	  left join GWC_BASEDATA_DETAIL d1
+	    on t.DISABILITY_REASON = d1.item_code
+	   and d1.basedataclass_code = 'SD0000.02'
+	  left join GWC_BASEDATA_DETAIL d2
+	    on t.DISABILITY_TYPE = d2.item_code
+	   and d2.basedataclass_code = 'SD0000.03'
+	  left join GWC_BASEDATA_DETAIL d3
+	    on t.DISABILITY_ROUTINE = d3.item_code
+	   and d3.basedataclass_code = 'SD0000.04'
+	 where t.id$ in
+	 <foreach collection="H54" index="index" item="item" open="(" separator="," close=")">
+               #{item}
+     </foreach>
+	</select>
+	
+    
+    <!-- 健康档案-产后访视 -->
+    <select id="queryServicePostpartumVisitRecordById"
+		parameterType="map" resultMap="getPostpartumVisitMap">
+		select 
+			ID$ as ID,
+			'产后访视' as "name",
+			POSTPARTUM_VISIT_CODE
+			as residentHealthCode,
+			FOLLOW_DOCTOR_NAME as doctorName,
+			TEMPERATURE as
+			temperature,
+			PALACE_MARK as palaceMark,
+			PALACE_REMARKS as palaceRemarks,
+			REFERRAL_MARK as referralMark,
+			CHANGE_INTO_HOSPITAL_NAME as
+			changeIntoHospitalName,
+			CHANGE_INTO_DEPARTMENT_NAME as
+			changeIntoDepartmentName,
+			REFERRAL_REASON as referralReason,
+			to_char(ph.NEXT_FOLLOW_DATE,'yyyy-mm-dd ') as nextFollowDate,
+			to_char(ph.FOLLOW_DATE,'yyyy-mm-dd ') as followDate,
+			SHRINK_PRESSURE as shrinkPressure,
+			DIASTOLE_PRESSURE as
+			diastolePressure,
+			MATERNAL_HEALTH_MARK as maternalHealthMark,
+			MATERNAL_HEALTH_REMARKS as maternalHealthRemarks,
+			MATERNAL_HEALTH_TYPE_CODE as maternalHealthTypeCode,
+			HEALTH_REMARKS as
+			healthRemarks,
+			PSYCHOLOGY_REMARKS as psychologyRemarks,
+			(select
+				g.ITEM_NAME
+			 from GWC_BASEDATA_DETAIL g
+			 where 
+				g.BASEDATACLASS_CODE = 'CV04.10.012'
+				and g.ITEM_CODE = ph.LEFT_BREAST_RESULT_CODE) as leftBreastResultCode,
+			(select f.ITEM_NAME
+			 from GWC_BASEDATA_DETAIL f
+			 where 
+			 	f.BASEDATACLASS_CODE = 'CV04.10.012'
+				and f.ITEM_CODE = ph.RIGHT_BREAST_RESULT_CODE) as rightBreastResultCode,
+			LOCHIA_MARK as lochiaMark,
+			LOCHIA_REMARKS as lochiaRemarks,
+			(select 
+				e.ITEM_NAME
+			from
+				GWC_BASEDATA_DETAIL e
+			where e.BASEDATACLASS_CODE = 'CV05.01.011'
+				  and e.ITEM_CODE = ph.WOUND_HEAL_CODE) as woundHealCode,
+			'' as childbirthDate,
+			'' as leaveDate
+		from PT_HC_H17 ph
+		WHERE 
+			ph.ID$ in 
+        <foreach collection="H17" index="index" item="item" open="(" separator="," close=")">
+               #{item}
+         </foreach>
+	</select>
+	
+	<select id="queryBatchPersonals" parameterType="java.util.List" resultMap="getChssInfoMap">
+	    	 select 
+		      ph.id$ as id,
+		      '个人基本信息' as "name",
+		      ph.MPIID$ as "mpiid",
+		      ph.ORG_CODE as "orgCode",
+		      ph.UPLOADFLAG$ as "upLoadFlag",
+		      '' as "personalFileIdentifier",
+		      '' as "identifierType",
+		      '' as "personalIdType",
+		      '' as "personalIdNumber",
+		      ph.ORTHER_ID_NO_CD as "idType",
+		      ph.ID_NO as "idNo",
+		      ph.ID_NO as "idCardNumber",
+		      ph.HEALTH_RECORD_CODE as "healthFileNumber",
+		      '' as "citizenHealthCardNumber",
+		      '' as "territorialArea",
+		      ph.GENDER_CD as "sexCode",
+		      ph.NAMES as "pname",
+		      '' as "residentTypeCode",
+		      '' as "residentTypeName",
+		      ph.MARITAL_ST_NAME as "maritalStatus",
+		      to_char(ph.BIRTH_DATE, 'yyyy-mm-dd ') as "birthDate",
+		      '' as "birthplace",
+		      ph.NATION_CD as "nationalCode",
+		      ph.NATION as "nationalName",
+		      '' as "nationality",
+		      '' as "mobileNo",
+		      ph.TEL as "myTelephoneNumber",
+		      '' as "workUnitZipCode",
+		      ph.WOKING_UNIT_NAME as "workUnitZipName",
+		      '' as "workUnitAddress",
+		      '' as "DivisionCode",
+		      '' as "residenceProvinceCode",
+		      '' as "residenceProvince",
+		      '' as "residencecityCode",
+		      '' as "residenceCity",
+		      '' as "residenceCountyCode",
+		      '' as "residenceCounty",
+		      '' as "residenceCountrysideCode",
+		      '' as "residenceCountryside",
+		      '' as "residenceResidenceCode",
+		      ph.VILLAGE_NAME as "residenceResidence",
+		      '' as "residenceVillage",
+		      '' as "residenceRoad",
+		      '' as "residenceBuildingNo",
+		      '' as "residenceDoorNumber",
+		      ph.ADDR as "currentAddress",
+		      '' as "AdminPlaceResidence",
+		      '' as "birthPlaceProvinceCode",
+		      '' as "birthPlaceProvince",
+		      '' as "birthPlaceCityCode",
+		      '' as "birthPlaceCity",
+		      '' as "birthPlaceCountyCode",
+		      '' as "birthPlaceCounty",
+		      '' as "birthPlaceCountrysideCode",
+		      '' as "birthPlaceCountryside",
+		      '' as "birthPlaceResidenceCode",
+		      '' as "birthPlaceResidence",
+		      '' as "birthPlaceVillage",
+		      '' as "birthPlaceRoad",
+		      '' as "birthPlaceBuildingNo",
+		      '' as "birthPlaceDoorNumber",
+		      ph.REG_ADDR as "residence",
+		      '' as "addressZipCode",
+		      ph.LINKMAN as "contactName",
+		      '' as "contactConCode",
+		      '' as "contactConName",
+		      '' as "addressVarchar",
+		      '' as "contactPerson",
+		      '' as "contactNumber",
+		      ph.LINKMAN_TEL as "phoneNumberContact",
+		      ph.IS_OPERATION as "surgicalHistory",
+		      '' as "operationHistory",
+		      ph.IS_TRAUMA as "historyTrauma",
+		      ph.IS_TRANSFUSION as "bloodTransfusionMark",
+		      ph.GENETIC_DEC as "hereditaryDiseaseHistory",
+		      ph.ERF_EXPOSURE_CODE as "environmentalCategoryCode",
+		      '' as "securityClassification",
+		      '' as "modifierFlags",
+		      '' as "creatDate",
+		      phh1.id$ as id1,
+		      phh1.disease_name as "diseaseName1",
+		      <!-- phh1.relationship AS "relationship1", -->
+		      (    select  t.item_name  from  GWC_BASEDATA_DETAIL t where t.basedataclass_code='DE02.01.017.00' and t.item_code =phh1.relationship)  AS "relationship1",
+		      phh2.id$ as id2,
+		      phh2.trauma_name AS "traumaName2",
+		      to_char(phh2.trauma_time, 'yyyy-mm-dd ') as "traumaTime2",
+		      phh3.id$ as id3,
+		      phh3.operation_name AS operationName3,
+		      to_char(phh3.operation_time, 'yyyy-mm-dd ') as "operationTime3",
+		      phh4.id$ as id4,
+		      phh4.Medical_History_Name as "medicalHistoryName4",
+		      to_char(phh4.diagnose_time, 'yyyy-mm-dd ') as "diagnoseTime4",
+		      phh5.id$ as id5,
+		      phh5.transfusion_reason as "transfusionReason5",
+		      to_char(phh5.transfusion_time, 'yyyy-mm-dd ') as "transfusionTime5"
+		      
+		    from pt_hc_h01 ph
+		    left join  PT_HC_H0101 phh1 on  ph.HEALTH_RECORD_CODE=phh1.HEALTH_RECORD_CODE <!-- 个人基本信息-家族史 -->
+		    left join  PT_HC_H0102 phh2 on  ph.HEALTH_RECORD_CODE=phh2.HEALTH_RECORD_CODE <!--个人基本信息-既往外伤史 -->
+		    left join  PT_HC_H0103 phh3 on  ph.HEALTH_RECORD_CODE=phh3.HEALTH_RECORD_CODE <!-- 个人基本信息-既往手术史 -->
+		    left join  PT_HC_H0104 phh4 on  ph.HEALTH_RECORD_CODE=phh4.HEALTH_RECORD_CODE <!-- 个人基本信息-既往疾病史 -->
+		    left join  PT_HC_H0105 phh5 on  ph.HEALTH_RECORD_CODE=phh5.HEALTH_RECORD_CODE <!-- 个人基本信息-既往输血史 -->
+				WHERE 		  
+			<foreach collection="list" index="item" item="item" open="(" separator=" or " close=")">
+             ph.id$= ${item}
+           </foreach>
+	</select>
+	
+	
+	<!-- 个人基本信息的查询返回map -->
+	<select id="getChssInfoByMap" parameterType="map" resultMap="getChssInfoMap">
+		  select 
+      ph.id$ as id,
+      '个人基本信息' as "name",
+      ph.MPIID$ as "mpiid",
+      ph.ORG_CODE as "orgCode",
+      ph.UPLOADFLAG$ as "upLoadFlag",
+      '' as "personalFileIdentifier",
+      '' as "identifierType",
+      '' as "personalIdType",
+      '' as "personalIdNumber",
+      ph.ORTHER_ID_NO_CD as "idType",
+      ph.ID_NO as "idNo",
+      ph.ID_NO as "idCardNumber",
+      ph.HEALTH_RECORD_CODE as "healthFileNumber",
+      '' as "citizenHealthCardNumber",
+      '' as "territorialArea",
+      ph.GENDER_CD as "sexCode",
+      ph.NAMES as "pname",
+      '' as "residentTypeCode",
+      '' as "residentTypeName",
+      ph.MARITAL_ST_NAME as "maritalStatus",
+      to_char(ph.BIRTH_DATE, 'yyyy-mm-dd ') as "birthDate",
+      '' as "birthplace",
+      ph.NATION_CD as "nationalCode",
+      ph.NATION as "nationalName",
+      '' as "nationality",
+      '' as "mobileNo",
+      ph.TEL as "myTelephoneNumber",
+      '' as "workUnitZipCode",
+      ph.WOKING_UNIT_NAME as "workUnitZipName",
+      '' as "workUnitAddress",
+      '' as "DivisionCode",
+      '' as "residenceProvinceCode",
+      '' as "residenceProvince",
+      '' as "residencecityCode",
+      '' as "residenceCity",
+      '' as "residenceCountyCode",
+      '' as "residenceCounty",
+      '' as "residenceCountrysideCode",
+      '' as "residenceCountryside",
+      '' as "residenceResidenceCode",
+      ph.VILLAGE_NAME as "residenceResidence",
+      '' as "residenceVillage",
+      '' as "residenceRoad",
+      '' as "residenceBuildingNo",
+      '' as "residenceDoorNumber",
+      ph.ADDR as "currentAddress",
+      '' as "AdminPlaceResidence",
+      '' as "birthPlaceProvinceCode",
+      '' as "birthPlaceProvince",
+      '' as "birthPlaceCityCode",
+      '' as "birthPlaceCity",
+      '' as "birthPlaceCountyCode",
+      '' as "birthPlaceCounty",
+      '' as "birthPlaceCountrysideCode",
+      '' as "birthPlaceCountryside",
+      '' as "birthPlaceResidenceCode",
+      '' as "birthPlaceResidence",
+      '' as "birthPlaceVillage",
+      '' as "birthPlaceRoad",
+      '' as "birthPlaceBuildingNo",
+      '' as "birthPlaceDoorNumber",
+      ph.REG_ADDR as "residence",
+      '' as "addressZipCode",
+      ph.LINKMAN as "contactName",
+      '' as "contactConCode",
+      '' as "contactConName",
+      '' as "addressVarchar",
+      '' as "contactPerson",
+      '' as "contactNumber",
+      ph.LINKMAN_TEL as "phoneNumberContact",
+      ph.IS_OPERATION as "surgicalHistory",
+      '' as "operationHistory",
+      ph.IS_TRAUMA as "historyTrauma",
+      ph.IS_TRANSFUSION as "bloodTransfusionMark",
+      ph.GENETIC_DEC as "hereditaryDiseaseHistory",
+      ph.ERF_EXPOSURE_CODE as "environmentalCategoryCode",
+      '' as "securityClassification",
+      '' as "modifierFlags",
+      '' as "creatDate",
+      phh1.id$ as id1,
+      phh1.disease_name as "diseaseName1",
+      <!-- phh1.relationship AS "relationship1", -->
+      (    select  t.item_name  from  GWC_BASEDATA_DETAIL t where t.basedataclass_code='DE02.01.017.00' and t.item_code =phh1.relationship)  AS "relationship1",
+      phh2.id$ as id2,
+      phh2.trauma_name AS "traumaName2",
+      to_char(phh2.trauma_time, 'yyyy-mm-dd ') as "traumaTime2",
+      phh3.id$ as id3,
+      phh3.operation_name AS operationName3,
+      to_char(phh3.operation_time, 'yyyy-mm-dd ') as "operationTime3",
+      phh4.id$ as id4,
+      phh4.Medical_History_Name as "medicalHistoryName4",
+      to_char(phh4.diagnose_time, 'yyyy-mm-dd ') as "diagnoseTime4",
+      phh5.id$ as id5,
+      phh5.transfusion_reason as "transfusionReason5",
+      to_char(phh5.transfusion_time, 'yyyy-mm-dd ') as "transfusionTime5"
+      
+    from pt_hc_h01 ph
+    left join  PT_HC_H0101 phh1 on  ph.HEALTH_RECORD_CODE=phh1.HEALTH_RECORD_CODE <!-- 个人基本信息-家族史 -->
+    left join  PT_HC_H0102 phh2 on  ph.HEALTH_RECORD_CODE=phh2.HEALTH_RECORD_CODE <!--个人基本信息-既往外伤史 -->
+    left join  PT_HC_H0103 phh3 on  ph.HEALTH_RECORD_CODE=phh3.HEALTH_RECORD_CODE <!-- 个人基本信息-既往手术史 -->
+    left join  PT_HC_H0104 phh4 on  ph.HEALTH_RECORD_CODE=phh4.HEALTH_RECORD_CODE <!-- 个人基本信息-既往疾病史 -->
+    left join  PT_HC_H0105 phh5 on  ph.HEALTH_RECORD_CODE=phh5.HEALTH_RECORD_CODE <!-- 个人基本信息-既往输血史 -->
+		WHERE ph.mpiid$ = #{mpiid, jdbcType = VARCHAR}
+	</select>
+	
+	<select id="queryServiceDiabetesManagementCardDtoById" parameterType="map" resultMap="serviceDiabetesVisitCardMap">
+		    select
+	        gl.ID$ as "IDt",
+	        '糖尿病随访卡' as "name",
+	        
+	        to_char(MEDICAL_DATE, 'yyyy-mm-dd') as "medicalDate", 
+			MEDICAL_ORG AS "medicalOrg",
+			CASE_SOURCE AS "caseSource",
+			DM_TYPE AS "dmType",
+			(select  item_name  from gwc_basedata_detail g1 where g1.item_code='1' and  g1.basedataclass_code='DE02.10.039.00') as "diseaseType" ,
+			DOCTOR_NAME AS "doctorName",
+			to_char(CARD_DATE, 'yyyy-mm-dd') as "cardDate",
+			LESIONS_CODE AS  "lesionsCode",
+			
+	        gl.NAMES as pnamet,
+	        to_char(gl.CARD_DATE, 'yyyy-mm-dd ') as "confirmedDatet",
+	        '' as "orgCodet",
+	        '' as "deptCodet",
+	        gl.MEDICAL_ORG as "deptNamet",
+	        '' as "doctorNamet",
+	        '' as "orgNamet",
+	        to_char(gl.CARD_DATE, 'yyyy-mm-dd ') as "serviceTimet",
+	        gl.HEALTH_RECORD_CODE as "diabetesManagementCardIdt",
+	       phh.ID$ as "idd",
+	       to_char(phh.THIS_FOLLOW_DTAE, 'yyyy-mm-dd ') as labCheckDated,
+	       phh.TARGET_DRINK_MILLILITER as targetDayDrinkd,
+	       phh.TARGET_EXERCISE_TIMES as targetSportTimed,
+	       '' as sourceidd,
+	       phh.TARGET_STAPLE_FOOD as targetMainEatd,
+	       phh.DIABETES_RECORD_CODE as type2DiabetesNod,
+	       '' as contryHealthNumberd,
+	       phh.RESPON_DOCTOR_NAME as dutyDoctorNamed,
+	       phh.VISIT_DOCTOR_NAME as doctorNamed,
+	       to_char(phh.NEXT_VISIT_DATE, 'yyyy-mm-dd ') as nextTimeFollowDated,
+	       phh.SMOKE_START_DAY_NUM as daySmokd,
+	       phh.DRINK_MILLILITER as dayDrinkd,
+	       phh.EXERCISE_CODE as sportFrequencyCoded,
+	       phh.EXERCISE_TIMES as sportTimed,
+	       phh.STAPLE_FOOD as mainEatd,
+	       phh.DIASTOLIC_PRESSURE as relaxd,
+	       phh.WEIGHT as weightd,
+	       phh.HEIGHT as heightd,
+	       phh.SYMPTOM_CODE as symptomCoded,
+	       phh.SYMPTOM_NAME as symptomNamed,
+	       phh.ADVERSE_REACTION_MARK as drugBadReactionFlagd,
+	       phh.ADVERSE_REACTION_DESCRIBE as drugBadReactionDescd,
+	       phh.SYSTOLIC_PRESSURE as shrinkd,
+	       phh.BODY_INDEX as physiqueIndexd,
+	       phh.FOOT_ARTERY_SIGN as arteryPulseFlagd,
+	       phh.OTHER_POSITIVE_SIGNS as otherPositivePhysiqued,
+	       phh.FASTING_BLOOD_GLUCOSE as limosisBGd,
+	       phh.BLOOD_GLUCOSE as afterMeal2hourBGd,
+	       phh.SUGAR_HEMOGLOBIN as saccharifyHemoglobind,
+	       phh.THIS_FOLLOW_CODE as followUpTypeCoded,
+	       '' as followEvalCoded,
+	       phh.MENTALITY_ADJUST_CODE as psychologicalEvalCoded,
+	       phh.COMPLY_DOCTOR_CODE as followRegimensEvalCoded,
+	       phh.DOSE_CODE as medComplianceCoded,
+	       phh.HYPOGLYCEMIC_CODE as hypoglycemiaCoded,
+	       phh.TRANSFER_RESON as referralReasond,
+	       phh.TRANSFER_HOSPATIL_NAME as turnMedicalOrgNamed,
+	       phh.TRANSFER_DEPARTMENT_NAME as turnDeptNamed,
+	       to_char(phh.NEXT_VISIT_DATE, 'yyyy-mm-dd ') as nextVisitDated,
+	       phh.TARGET_WEIGHT as targetWeightd,
+	       phh.TARGET_BODY_INDEX as targetPhysiqueIndexd,
+	       phh.TARGET_SMOKE_DAY_NUM as targetDaySmokd,
+	       phh.TRANSFER_DEPARTMENT_NAME as deptNamed,
+	       TO_CHAR(phh.THIS_FOLLOW_DTAE, 'yyyy-mm-dd ') as "serviceTimed",
+	       '' as targerSportFreCoded
+	    FROM PT_HC_H49 gl 
+	    left join PT_HC_H50 phh on gl.Health_Record_Code=phh.HELTH_ARCHIVES_CODE
+	    WHERE gl.ID$ in 
+        <foreach collection="CHM130112" index="index" item="item" open="(" separator="," close=")">
+               #{item}
+         </foreach>
+	</select> 	
+	
+	<!-- 精神病管理卡 -->	
+	<select id="queryHeavyPsychiatricVisitById" parameterType="map" resultMap="serviceHeavyPsychiatricVisitMap">
+		select ph.ID$ as "IDh",
+		   '重性精神病随访卡' as "name",
+	       ph.RESPON_DOCTOR_NAME as "doctorNameh",
+	       to_char(ph.INFORMED_AGREE_DATE, 'yyyy-mm-dd ') as "serviceTimeh",
+	       '精神科' as "deptNameh",
+	       '1' as "deptCodeh",
+	       '' as "orgCodeh",
+	       '' as "orgNameh",
+	       ph.HELTH_ARCHIVES_CODE as "mentalIllnessManagementCardIdh",
+	       t.ID$ as "idt",
+	       t.MPIID$ as "mpiIdt",
+	       t.FOLLOW_UP_SER_RECORD_CODE as "majorPsychiatricFollowRecordId",
+	       t.ORG_CODE as "managementCodet",
+	       t.HEALTH_RECORD_CODE as "mentalIllnessManagementCardIdt",
+	       t.FOLLOW_UP_SER_RECORD_CODE as "numberFollowt",
+	       t.SELF_NAME as "pnamet",
+	       t.FOLLOW_UP_DOCTOR_NAME as "followDoctort",
+	       t.FOLLOW_UP_FLAG as "mentalIllnessMarkt",
+	       t.FOLLOW_UP_DOCTOR_CODE as "followDoctorCodet",
+	       t.DISEASE_NAME as "confirmedDiseaseNamet",
+	       t.CURRENT_SYMPTOM_CODE as "currentSymptomCodet",
+	       t.CURRENT_SYMPTOM_NAME as "currentSymptomNamet",
+	       t.PRE_TREAT_EFFECT_TYPE_CODE as "previousTreatmentCategoryCodet",
+	       t.TREATMENT_FORM_CODE as "treatmentCodet",
+	       t.MENTAL_RECOVERY_CODE as "mentalRehMeasuresCodet",
+	       t.MENTAL_RECOVERY_NAME as "mentalRehMeasuresNamet",
+	       TO_CHAR(t.INVESTIGATION_START_TIME, 'yyyy-mm-dd ') as "surveyStartTimet",
+	       TO_CHAR(t.INVESTIGATION_END_TIME, 'yyyy-mm-dd ') as "surveyClosingTimet",
+	       t.ILL_FAMILY_IMPACT_KIND_CODE as "illnessFamilySocietyCodet",
+	       t.ILL_FAMILY_IMPACT_KIND_NAME as "illnessFamilySocietyNamet",
+	       t.RISK_GARDE_CODE as "hazardRatingCodet",
+	       t.SELFCARE_CODE as "currentFunctionalStatust",
+	       t.HOUSEWORK_ABILITY as "houseworkt",
+	       t.PRODUCTIVE_LABOR_WORK_ABILITY as "productionLaborWorkt",
+	       t.LEARNING_ABILITY as "learningAbilityt",
+	       t.SOCIAL_INTERPERSONAL_COMMUN as "socialInteractiont",
+	       t.MINOR_AFFRAY_NUMBER as "minorNuisancest",
+	       t.DISTURBANCE_NUMBER as "createDisturbanceTimet",
+	       t.ACCIDENT_NUMBER as "causeTroubleTimet",
+	       t.SELF_INJURY_NUMBER as "autolesionTimet",
+	       t.ATTEMPTED_SUICIDE_NUMBER as "attemptedSuicideTimet",
+	       t.INPATIENT_SITUATION_CODE as "hospitalizationCodet",
+	       TO_CHAR(t.LAST_LEAVE_HOSPITAL_DATE, 'yyyy-mm-dd ') as "lastHospitalDatet",
+	       t.CAPTIVITY_CASE_CODE as "captivityCaseCodet",
+	       t.JOB_FUNC_STATU as "currentWorkeStatust",
+	       t.MARRIAGE_FUNC_STATU as "marriageStatust",
+	       t.PARENT_FUNC_STATU as "parentStatust",
+	       t.SOCIAL_WITHDRAWAL_FUNC_STATU as "socialWithdrawalt",
+	       t.SOCIAL_ACTIVITIE_FUNC_STATU as "socialActivitiesOutsideHomet",
+	       t.FAMILY_ACTIVITIE_FUNC_STATU as "familyActivitiest",
+	       t.FAMILY_FUNC_STATU as "familyFunctiont",
+	       t.OUTSIDE_INTEREST_FUNC_STATU as "interestConcernOutsideWorldt",
+	       t.RESPONSIBILITY_FUNC_STATU as "responsibilityPlanningt",
+	       t.SDSS_TOTAL_SCORE as "totalPointst",
+	       t.SELF_KNOW_EVALUATE_RESULT_CODE as "selfKnowledgeEvaluationCodet",
+	       t.SLEEP_SITUATION_CODE as "sleepStatusCodet",
+	       t.EATING_HABIT_CODE as "dietCodet",
+	       t.SOCIAL_FUNCTION_TYPE_CODE as "socialCaseClassificationCodet",
+	       t.SOCIAL_FUNCTION_TYPE_NAME as "socialCaseClassificationNamet",
+	       t.SHGNQKPJDM as "socialFunctionEvaluationCodet",
+	       t.SOMATIC_DISEASE as "sociopathyt",
+	       t.AUXILIARY_EXAMINATION_FLAG as "auxiliaryInspectionMarkt",
+	       t.AUXILIARY_INSPECTION_PROJECT as "auxiliaryInspectionItemst",
+	       t.AUXILIARY_EXAMINATION_RESULT as "auxiliaryInspectionResultst",
+	       t.TEST_PERSON_NAME as "checkPersonNamet",
+	       TO_CHAR(t.EXAMINATION_TIME, 'yyyy-mm-dd ') as "checkDatet",
+	       t.ADVERSE_DRUG_REACTION_FLAG as "adverseDrugReactionMarkerst",
+	       t.ADVERSE_DRUG_REACTION_DESCR as "drugReactionsAdverset",
+	       t.PRE_TREAT_EFFECT_TYPE_CODE as "effectCategoryCodet",
+	       t.PRE_TREAT_EFFECT_TYPE_NAME as "effectCategoryNamet",
+	       t.FOLLOW_UP_EVALUATE_RESULT_CODE as "patientsMentalIllnessCodet",
+	       t.DRUG_COMPLIANCE_CODE as "medicationComplianceCodet",
+	       t.ASSESS_CLASSIFICATION as "evaluationClassificationt",
+	       t.REFERRAL_SIGN as "referralLogot",
+	       t.REFERRAL_CAUSE as "referralReasont",
+	       t.TRANSIN_MED_INST_NAME as "transferOrgNamet",
+	       t.TRANSIN_INST_DEP_NAME as "transferDetNamet",
+	       t.TREATMENT_ADVICE as "treatmentOptionst",
+	       TO_CHAR(t.FOLLOW_UP_DATE, 'yyyy-mm-dd ') as "followUpDatet",
+	       TO_CHAR(t.NEXT_FOLLOW_UP_DATE, 'yyyy-mm-dd ') as "nextVisitDatet",
+	       t.REHABILIT_MEASURES_GUIDANCE as "rehabilitationInstructiont",
+	       t.TEST_PERSON_CODE as "checkPersonnelNot",
+	       t.TEST_PERSON_NAME as "checkPersonnelNamet",
+	       t.MENTAL_ILL_FAMILY_HISTORY_FLAG as "familyHistoryMentalIllnesst",
+	       t.MENTAL_ILL_FAMILY_NAME as "familyNameMentalIllnesst",
+	       t.PRE_MAJOR_MENTAL_SYMPTOMS_CODE as "pastMajorSymptomCodet",
+	       t.PRE_MAJOR_MENTAL_SYMPTOMS_NAME as "pastMajorSymptomNamet",
+	       t.FOLLOW_UP_ORG_CODE as "followUpOrgCodet",
+	       t.FOLLOW_UP_ORG_NAME as "followUpOrgNamet",
+	       
+	       t.TRANSIN_INST_DEP_NAME as "deptNamet",
+	       TO_CHAR(t.FOLLOW_UP_DATE, 'yyyy-mm-dd ') as "serviceTimet",
+	       t.FOLLOW_UP_DOCTOR_NAME as "doctorNamet",
+	       
+	       TO_CHAR(t.UPLOAD_TIME, 'yyyy-mm-dd ') as "creatDatet",
+	       '' as "modifierFlagt",
+	       t.CLASSIFICATION as "securityClassificationt",
+	       pt.ID$ as "IDr",
+	      pt. HELTH_ARCHIVES_CODE as "recordIdr",
+	       '' as "orgCoder",
+	       pt.MENTAL_RECORD_FORM_CODE as "majorRecordIdr",
+	       '' as "drugCoder",
+	       pt.DRUG_NAME as "drugNamer",
+	       '' as "drugTyper",
+	       '' as "singleDoser",
+	       '' as "referenceDoser",
+	       pt.DOSE_UNIT as "dosageDrugDseUnitr",
+	       pt.DOSE_SINGLE as "secondDoseMediciner",
+	       pt.DOSE_TOTAL as "totalDosageMedicationUsedr",
+	       pt.DRUG_WAY_CD as "drugUsePathwayCoder",
+	       pt.USING_DRUG_FREQ as "drugFrequencyr",
+	       pt.DRUE_TYPE_CODE as "chineseMedicineCategoryCoder",
+	       '' as "chineseMedicineCategoryNamer",
+	       '' as "creatDater",
+	       '' as "modifierFlagsr",
+	       '' as "securityClassificationr"
+	  from PT_HC_H48 ph
+	  left join PT_EHR_PSYCH_FOLLOW_UP t
+	    on ph.HELTH_ARCHIVES_CODE = t.Health_Record_Code
+	    left join PT_HC_H4801 pt
+	    on pt.MENTAL_RECORD_FORM_CODE  = t.FOLLOW_UP_SER_RECORD_CODE
+		WHERE
+		ph.ID$ in 
+        <foreach collection="CHM130129" index="index" item="item" open="(" separator="," close=")">
+               #{item}
+         </foreach>
+	</select>	
+    
+    <!-- 高血压管理卡 -->
+    <select id="queryServiceMadmenManagingCardDtoById"
+		parameterType="map" resultMap="serviceMadmenManagingCardMap">
+	select T.ID$ as "IDt",
+	   '高血压患者随访卡' as "name",
+        to_char(t.END_MANAGE_DATE, 'yyyy-mm-dd') as "endManageDate", 
+     t.END_REASON AS "endReason",
+     t.CASE_SOURCE AS "caseSource",
+     t.SELF_CARE_ABILITY AS "selfCareAbility",
+     (select  item_name  from gwc_basedata_detail g1 where g1.item_code='1' and  g1.basedataclass_code='DE02.10.039.00') as "diseaseType",
+     t.DOCTOR_NAME AS "doctorName",
+	  to_char(t.CARD_DATE, 'yyyy-mm-dd') as "cardDate",
+       T.DOCTOR_NAME as "doctorNamet",
+       to_char(T.CARD_DATE, 'yyyy-mm-dd ') as "serviceTimet",
+       '高血压' as "deptNamet",
+       '1' as "deptCodet",
+       '' as "orgCodet",
+       '' as "orgNamet",
+       T.HEALTH_RECORD_CODE as "hypertensionManagementCardIdt",
+       phh.ID$ as "idp",
+       '' as "labCheckDatep",
+       '' as "labAssistCheckResultp",
+       '' as "labAssistCheckItemp",
+       '' as "labRummagerNamep",
+       '' as "drugUseWayCodep",
+       phh.THIS_FOLLOW_CODE as "followUpTypeCodep",
+       phh.MENTALITY_ADJUST_CODE as "psychologicalEvalCodep",
+       '' as "referralFlagp",
+       phh.TRANSFER_RESON as "referralReasonp",
+       phh.TRANSFER_HOSPATIL_NAME as "trunMedicalOrgNamep",
+       phh.TRANSFER_DEPARTMENT_NAME as "trunDeptNamep",
+       phh.TARGET_WEIGHT as "targetWeightp",
+       phh.TARGET_BODY_INDEX as "targetPhysiqueIndexp",
+       phh.TARGET_SALT_LEVEL_CODE as "targetSaltIntakeCodep",
+       '' as "followUpOrgNamep",
+       '' as "sportTimep",
+       phh.SYMPTOM_CODE as "symptomCodep",
+       (select t.item_name
+  from GWC_BASEDATA_DETAIL t
+ where t.basedataclass_code = 'ICD10'
+   and t.item_code = phh.SYMPTOM_CODE) as "symptomNamep",
+        to_char(phh.NEXT_VISIT_DATE, 'yyyy-mm-dd ') as "nextVisitDatep",
+       '' as "targetDaySmokp",
+       '' as "followUpOrgCodep",
+       '' as "dutyDoctorNamep",
+       '' as "targetDayDrinkp",
+       '' as "targerSportFreCodep",
+       phh.EXERCISE_TIMES as "targerSportTimep",
+       '' as "doctorCodep",
+       phh.HYPERTENSION_FORM_CODE as "hypeFollowRecordNop",
+       '' as "patientNamep",
+       phh.VISIT_DOCTOR_NAME as "doctorNamep",
+       '' as "contryHealthNumberp",
+       to_char(phh.THIS_FOLLOW_DTAE, 'yyyy-mm-dd ') as "thisTimeFollowDatep",
+       '' as "nextTimeFollowDatep",
+       phh.SMOKE_START_DAY_NUM as "daySmokp",
+       phh.EXERCISE_CODE as "sportFrequencyCodep",
+       phh.TARGET_SALT_LEVEL_CODE as "saltIntakeCodep",
+       phh.ADVERSE_REACTION_DESCRIBE as "drugBadReactionDescp",
+       phh.DRINK_MILLILITER as "dayDrinkp",
+       phh.ADVERSE_REACTION_MARK as "drugBadReactionFlagp",
+       phh.AUXILIARY_INSPECT_PROJECT as "aidCheckItemp",
+       
+       phh.AUXILIARY_INSPECT_RESULT as "aidCheckResult",
+       
+       '' as "rummagerNamep",
+       '' as "checkDatep",
+       phh.SYSTOLIC_PRESSURE as "shrinkp",
+       phh.DIASTOLIC_PRESSURE as "relaxp",
+       phh.WEIGHT as "weightp",
+       phh.HEIGHT as "heightp",
+       phh.HEART_RATE as "heartRatep",
+       phh.OTHER_POSITIVE_SIGNS as "otherPositivePhysiquep",
+       '' as "drugUseFrequencyp",
+       '' as "medicalTypeCodep",
+       phh.EVALUATION_RESULTS_CODE as "followEvalCodep",
+       phh.COMPLY_DOCTOR_CODE as "followRegimensEvalCodep",
+       phh.DOSE_CODE as "medComplianceCodep",
+       '' as "drugUseTotalDosep",
+       '' as "drugUseTimeDosep",
+       to_char(phh.THIS_FOLLOW_DTAE, 'yyyy-mm-dd ') as "serviceTimep",
+       phh.TRANSFER_DEPARTMENT_NAME as "deptNamep",
+       
+       '' as "drugUseTotalDoseUnitp",
+       phh.BODY_INDEX as "physiqueIndexp",
+       '' as "drugNamep"
+  from PT_HC_H51 t
+  left join PT_HC_H52 phh
+    on t.HEALTH_RECORD_CODE = phh.helth_archives_code
+ WHERE t.ID$ in 
+        <foreach collection="CHM130102" index="index" item="item" open="(" separator="," close=")">
+               #{item}
+         </foreach>
+	</select>
+	
+	<select id="queryHypertensionManagement" parameterType="string" resultType="map">
+		select		 
+			to_char(END_MANAGE_DATE, 'yyyy-mm-dd') as "endManageDate", 
+			END_REASON AS "endReason",
+			CASE_SOURCE AS "caseSource",
+			SELF_CARE_ABILITY AS "selfCareAbility",
+			(select  item_name  from gwc_basedata_detail g1 where g1.item_code='1' and  g1.basedataclass_code='DE02.10.039.00') as "diseaseType",
+			DOCTOR_NAME AS "doctorName",
+			to_char(CARD_DATE, 'yyyy-mm-dd') as "cardDate"
+			from pt_hc_h51 ph51
+					 where ph51.id$ in 
+        <foreach collection="H51" index="index" item="item" open="(" separator="," close=")">
+               #{item}
+         </foreach>
+	</select>
+	<select id="queryDiabetesManagement" parameterType="string" resultType="map">
+	        select
+			to_char(MEDICAL_DATE, 'yyyy-mm-dd') as "medicalDate", 
+			MEDICAL_ORG AS "medicalOrg",
+			CASE_SOURCE AS "caseSource",
+			DM_TYPE AS "dmType",
+			(select  item_name  from gwc_basedata_detail g1 where g1.item_code='1' and  g1.basedataclass_code='DE02.10.039.00') as "diseaseType" ,
+			DOCTOR_NAME AS "doctorName",
+			to_char(CARD_DATE, 'yyyy-mm-dd') as "cardDate",
+			LESIONS_CODE AS  "lesionsCode" from pt_hc_h49 ph49       where ph49.id$ = 
+			 <foreach collection="H49" index="index" item="item" open="(" separator="," close=")">
+               #{item}
+         </foreach>
+      </select>
+      
+      
+       <!-- 健康档案-儿童健康体检表（主表） -->
+    <select id="getChildHealthExaminationByMap" parameterType="map" resultType="map">
+		select 
+				n.ID$ as "ID",
+			   '儿童健康体检' as "name",
+		       <!--  n.HEALTH_RECORD_CODE as "healthRecordCode",-->
+		       '' as "neoBodyTemp",
+		       '' as "pr",
+		       '' as "breatheFreq",
+		       n.weigth as "weight",
+		       n.skin_test_result as "skinTestCode",
+		       n.children_physical_code as "recordNo",
+		       n.NAMES as "names",
+		       n.sex as "genderCd",
+		       n.birth_date as "newbornBirthDate",
+		       '' as "newbornCardType",
+		       '' as "newbornCardId",
+		       n.father_name as "nameFather",
+		       '' as "fatherBirthDate",
+		       n.father_tel as "telFather",
+		       '' as "occupationFatherStype",
+		       n.mother_name as "nameMother",
+		       '' as "motherBirthDate",
+		       n.mother_tel as "telMother",
+		       '' as "occupationMotherType",
+		       n.address_now_province as "addressCrovinceNow",
+		       n.address_now_city as "addressCityNow",
+		       n.address_now_county as "addressCountyNow",
+		       n.address_now_country as "addressCountryNow",
+		       n.address_now_village as "addressVillageNow",
+		       n.address_now_doorplate as "addressDoorplateNow",
+		       '' as "birthPregWeeks",
+		       '' as "gestationComplicationHistry",
+		       '' as "deOrgName",
+		       '' as "lastDeliveryCode",
+		       '' as "isMultipleBirth",
+		       '' as "suffocation",
+		       '' as "apgarValue",
+		       '' as "neoAbnormalMark",
+		       '' as "neoAbnormalDescr",
+		       '' as "nbHearingTest",
+		       n.HEARING_CODE as "hearingCode",
+		       '' as "screenDiseaseCose",
+		       '' as "newbornHeavy",
+		       n.lengthh as "newbornLong",
+		       '' as "feedWayCode",
+		       '' as "nurseFrequency",
+		       '' as "nurseAmount",
+		       '' as "flagVomiting",
+		       '' as "neoStoolRecord",
+		       '' as "neoStoolTimes",
+		       n.complexion_code as "complexionTestResult",
+		       '' as "jaunPart",
+		       '' as "bregamTransDia",
+		       '' as "bregamVertDia",
+		       '' as "bregamTension",
+		       n.eye_test_mark as "eyeTf",
+		       '' as "eyeAspectTestResult",
+		       n.ear_appearance_mark as "earTf",
+		       '' as "earTestResult",
+		       '' as "noseTf",
+		       '' as "noseTestResult",
+		       n.oral_cavity_mark as "oralCavityTf",
+		       '' as "oralCavityTestResult",
+		       n.lungs_mark as "neoLungAuscTf",
+		       '' as "neoLungAuscResult",
+		       n.heart_mark as "neoHeartAuscTf",
+		       '' as "neoHeartAuscResult",
+		       n.abdomen_mark as "bellyTf",
+		       '' as "bellyTestResult",
+		       n.limb_mark as "limbsTf",
+		       '' as "limbsTestResult",
+		       n.neck_mass as "neckMassTf",
+		       '' as "neckMassTestResult",
+		       n.skin_test_result as "skinTestCodee",
+		       n.anus_mark as "anusTf",
+		       '' as "anusTestResult",
+		       n.external_genital_organs_mark as "externaliaTf",
+		       '' as "externaliaTestResult",
+		       '' as "backboneTf",
+		       '' as "backboneTestResult",
+		       n.UMBILICAL_CORD_MARK as "umbilicalCordMark",
+		       '' as "umbilicalCordTestResult",
+		       n.REFERRAL_MARK as "referralMark",
+		       n.CHANGE_INTO_HOSPITAL_NAME as "changeIntoHospitalName",
+		       '' as "changeIntoDepartmentName",
+		       n.REFERRAL_REASON as "referralReason",
+		       n.children_health_code as "visitHealthCode",
+		       n.follow_doctor_name as "visitDoctorName",
+		       n.FOLLOW_DATE as "followDate",
+		       '' as "nextFollowDate",
+		       '' as "nextFollowAddress"
+		  FROM PT_HC_H04 n
+		 WHERE n.ID$ in 
+        <foreach collection="H04" index="index" item="item" open="(" separator="," close=")">
+               #{item}
+         </foreach>
+	</select>
+	
+	 <!-- 健康档案-妇女病普查（主表） -->
+    <select id="getGynecologicalDiseasesSurveyByMap" parameterType="map" resultType="map">
+    
+		select 
+		       t.id$                    as "ID",
+		       '妇女病普查'                   as "name",
+		       t.record_id                    as "record_id",
+		       t.names                        as "names",
+		       to_char(t.born_date,'yyyy-mm-dd')                    as "born_date",
+		       t.id_type                      as "id_type",
+		       t.id_num                       as "id_num",
+		       t.nation_code                  as "nation_code",
+		       t.occupation_code              as "occupation_code",
+		       t.education_code               as "education_code",
+		       t.working_org                  as "working_org",
+		       t.province                     as "province",
+		       t.city                         as "city",
+		       t.county                       as "county",
+		       t.village                      as "village",
+		       t.town                         as "town",
+		       t.house_num                    as "house_num",
+		       t.cant_code                    as "cant_code",
+		       t.postalcode                   as "postalcode",
+		       t.tel_no                       as "tel_no",
+		       t.matrial_status               as "matrial_status",
+		       t.menarche_age                 as "menarche_age",
+		       t.menstrual_days               as "menstrual_days",
+		       t.menstrual_cycle_days         as "menstrual_cycle_days",
+		       t.menstrual_blood_amt_code     as "menstrual_blood_amt_code",
+		       t.menalgia_mask                as "menalgia_mask",
+		       t.last_menstrual_date as "last_menstrual_date",
+		       t.menopause_mask  as "menopause_mask",
+		       t.menopause_age  as "menopause_age",
+		       t.operation_menopause_mask  as "operation_menopause_mask",
+		       t.parityy  as "parityy",
+		       t.gravidity  as "gravidity",
+		       t.induced_abortion_times as "induced_abortion_times",
+		       t.natural_abortion_times  as "natural_abortion_times",
+		       t.vaginal_delivery_times  as "vaginal_delivery_times",
+		       t.cesarean_section_times  as "cesarean_section_times",
+		       t.stillbirth_num  as "stillbirth_num",
+		       t.birth_defect_num  as "birth_defect_num",
+		       to_char(t.last_pregnancy_end_date,'yyyy-mm-dd')    as "last_pregnancy_end_date",
+		       (select e.item_name
+  from GWC_BASEDATA_DETAIL e
+ where e.basedataclass_code = 'CV02.10.002'
+   and e.item_code = t.last_pregnancy_end_code)                    as "last_pregnancy_end_code",
+		       to_char(t.last_delivery_date,'yyyy-mm-dd')    as "last_delivery_date",
+		       t.last_delivery_code as "last_delivery_code",
+		       t.pregnancy_compl_history as "pregnancy_compl_history",
+		       t.contracept_way_code as "contracept_way_code",
+		       t.past_disease_history as "past_disease_history",
+		       t.sexual_blood_history as "sexual_blood_history",
+		       t.family_cancer_history_desc as "family_cancer_history_desc",
+		       t.unwell_symptom_code as "unwell_symptom_code",
+		       t.heart_rate as "heart_rate",
+		       t.systolic_pressure as "systolic_pressure",
+		       t.diastolic_pressure as "diastolic_pressure",
+		       t.vulva_check_result as "vulva_check_result",
+		       t.vaginal_secretions_desc as "vaginal_secretions_desc",
+		       t.vagina_check_result as "vagina_check_result",
+		       t.cervical_check_result as "cervical_check_result",
+		       t.uterus_check_result as "uterus_check_result",
+		       t.left_accessory_check_result as "left_accessory_check_result",
+		       t.right_accessory_check_result as "right_accessory_check_result",
+		       t.left_breast_check_result as "left_breast_check_result",
+		       t.right_breast_check_result as "right_breast_check_result",
+		       t.check_doctor_code as "check_doctor_code",
+		       t.check_doctor_name as "check_doctor_name",
+		       t.trichomonad_check_result as "trichomonad_check_result",
+		       t.candida_check_result as "candida_check_result",
+		       t.vaginal_cleanliness_code as "vaginal_cleanliness_code",
+		       t.gonococcus_check_result as "gonococcus_check_result",
+		       t.syphilis_test_result_code as "syphilis_test_result_code",
+		       t.vaginoscopy_check_result as "vaginoscopy_check_result",
+		       t.cervical_cytology_check_cd as "cervical_cytology_check_cd",
+		       t.cervical_pathology_check_cd as "cervical_pathology_check_cd",
+		       t.breast_ultrasound_check_rt as "breast_ultrasound_check_rt",
+		       t.breast_xray_check_result as "breast_xray_check_result",
+		       t.physical_examination_result as "physical_examination_result",
+		       t.treatment_guidance as "treatment_guidance",
+		       t.check_org_name as "check_org_name",
+		       t.main_check_doctor_code as "main_check_doctor_code",
+		       t.main_check_doctor_name as "main_check_doctor_name",
+		       to_char(t.check_date,'yyyy-mm-dd')    as "check_date"
+		  from PT_HC_H13 t
+		 WHERE t.ID$ in 
+        <foreach collection="H13" index="index" item="item" open="(" separator="," close=")">
+               #{item}
+         </foreach>
+	</select>
+		
+		
+		
+		 <!-- 健康档案-冠心病患者信息（主表） -->
+    <select id="getChdManagerByMap" parameterType="map" resultType="map">
+     select 
+            tt.id$                    as "ID",
+		     '冠心病患者信息'                   as "name",
+          tt.HEALTH_RECORD_CODE as "healthRecordCode",    
+        tt.NAMES as "names",      
+        tt.CZRK_ID as "czrkId",   
+        tt.ID_NUM as "idNum",     
+        tt.OTHER_CARD_CODE as "otherCardCode",    
+        tt.OTHER_CARD_NO as "otherCardNo",    
+        (select e.item_name
+  from GWC_BASEDATA_DETAIL e
+ where e.basedataclass_code = 'SD0000.05'
+   and e.item_code = tt.DIAGNOSISOFCHD)  as  "diagnosisofchd",
+        (select e.item_name
+  from GWC_BASEDATA_DETAIL e
+ where e.basedataclass_code = 'SD0000.06'
+   and e.item_code = tt.DIAGNOSTICBASIS)  as "diagnosticbasis",  
+        to_char(tt.ACCIDENT_DATE,'yyyy-mm-dd hh24:mi:ss') as "accidentDate",
+        to_char(tt.CONFIRMED_DATE,'yyyy-mm-dd hh24:mi:ss') as "confirmedDate",    
+        (select e.item_name
+  from GWC_BASEDATA_DETAIL e
+ where e.basedataclass_code = 'SD88.00005'
+   and e.item_code = tt.IS_FRIST_ATTACK)  as  "isFristAttack",
+        to_char(tt.DATAACQUISITIONDATE, 'yyyy-mm-dd hh24:mi:ss') as "dataacquisitiondate",    
+        tt.DATAACQUISITION_ORG_CODE as "dataacquisitionOrgCode",      
+        tt.DATAACQUISITION_ORG_NAME as "dataacquisitionOrgName",      
+        tt.DATAACQUISITION_PEO_CODE as "dataacquisitionPeoCode" 
+            
+    FROM   PT_HC_H53 tt
+    
+		 WHERE tt.ID$ in
+        <foreach collection="H53" index="index" item="item" open="(" separator="," close=")">
+               #{item}
+         </foreach>
+	</select>
+	
+	<select id="querydeathCertificateById" parameterType="map" resultType="map">
+		select pt29.id$ as "ID",
+			   '死亡医学证明' as "name",
+		       pt29.pid$ as "pid$",
+		       <!-- pt29.sourceid$ as "",
+		       pt29.mpiid$ as "",
+		       pt29.documentid$ as "",
+		       pt29.uploadflag$ as "",
+		       pt29.operationflag$ as "",
+		       pt29.createtime$ as "",
+		       pt29.updatetime$ as "",
+		       pt29.status$ as "",
+		       pt29.xdsdocid$ as "", -->
+		       pt29.health_record_code as "healthRecordCode",
+		       pt29.death_certificate_num as "deathCertificateNum",
+		       pt29.names as "names",
+		       pt29.sex as "sex",
+		       pt29.nation as "nation",
+		       pt29.occupation_code as "occupationCode",
+		       pt29.id_type_code as "idTypeCode",
+		       pt29.id_num as "idNum",
+		       pt29.marital_status_code as "maritalStatusCode",
+		       pt29.education_code as "educationCode",
+		       pt29.workunit_name as "workunitName",
+		       to_char(pt29.born_date, 'yyyy-mm-dd hh24:mi:ss') as "bornDate",
+		       to_char(pt29.death_time, 'yyyy-mm-dd hh24:mi:ss') as "deathTime",
+		       pt29.chronological_age as "chronologicalAge",
+		       pt29.cant_code as "cantCode",
+		       pt29.household_province as "householdProvince",
+		       pt29.household_city as "householdCity",
+		       pt29.household_area as "householdArea",
+		       pt29.household_town as "householdTown",
+		       pt29.household_village as "householdVillage",
+		       pt29.household_house_no as "householdHouseNo",
+		       pt29.province_name as "provinceName",
+		       pt29.city_name as "cityName",
+		       pt29.area_name as "areaName",
+		       pt29.town_name as "townName",
+		       pt29.village_name as "villageName",
+		       pt29.house_no as "houseNo",
+		       pt29.contact_name as "contactName",
+		       pt29.her_contacts_num as "herContactsNum",
+		       pt29.her_workunit_name as "herWorkunitName",
+		       pt29.her_address as "herAddress",
+		       pt29.her_zipcode as "herZipcode",
+		       pt29.family_tele as "familyTele",
+		       pt29.workunit_tele as "workunitTele",
+		       pt29.death_reasona_code as "deathReasonaCode",
+		       pt29.onset_death_hoursa as "onsetDeathHoursa",
+		       pt29.death_reasonb_code as "deathReasonbCode",
+		       pt29.onset_death_hoursb as "onsetDeathHoursb",
+		       pt29.death_reasonc_code as "deathReasoncCode",
+		       pt29.onset_death_hoursc as "onsetDeathHoursc",
+		       pt29.death_reasond_code as "deathReasondCode",
+		       pt29.onset_death_hoursd as "onsetDeathHoursd",
+		       pt29.other_disease_diagnose1 as "otherDiseaseDiagnose1",
+		       pt29.other_disease_diagnose2 as "otherDiseaseDiagnose2",
+		       pt29.other_disease_diagnose3 as "otherDiseaseDiagnose3",
+		       pt29.root_death_code as "rootDeathCode",
+		       pt29.root_death_name as "rootDeathName",
+		       pt29.highest_org_level_code as "highestOrgLevelCode",
+		       pt29.highest_org_level_name as "highestOrgLevelName",
+		       pt29.deadly_highest_org_level_code as "deadlyHighestOrgLevelCode",
+		       pt29.deadly_highest_org_level_name as "deadlyHighestOrgLevelName",
+		       pt29.death_hospital_name as "deathHospitalName",
+		       pt29.death_hospital_code as "deathHospitalCode",
+		       pt29.death_place_code as "deathPlaceCode",
+		       pt29.highest_accord_code as "highestAccordCode",
+		       pt29.highest_accord_name as "highestAccordName",
+		       pt29.admission_number as "admissionNumber",
+		       pt29.report_name as "reportName",
+		       pt29.report_org_name as "reportOrgName",
+		       to_char(pt29.report_time, 'yyyy-mm-dd hh24:mi:ss') as "reportTime",
+		       pt29.country as "country",
+		       pt29.death_pregnancy as "deathPregnancy",
+		       pt29.permanent_address as "permanentAddress",
+		       pt29.family_address as "familyAddress",
+		       pt29.icd_num as "icdNum"
+		       <!-- ,pt29.report_org_code as "" -->
+		  from pt_hc_h29 pt29
+			  where pt29.id$ in
+	 <foreach collection="H29" index="index" item="item" open="(" separator="," close=")">
+               #{item}
+     </foreach>
+	</select>
+	<select id="querybirthMedicalCertById" parameterType="map" resultType="map">
+	select 
+	ID$ as id,
+    PID$ as pid,
+    '出生医学证明' as "name",
+    SOURCEID$ as sourceid,
+    MPIID$ as mpiid,
+    DOCUMENTID$ as documentid,
+    UPLOADFLAG$ as uploadFlag,
+    OPERATIONFLAG$ as operationFlag,
+    CREATEtime$ as createTime,
+    UPDATEtime$ as updateTime,
+    STATUS$ as status,
+    XDSDOCID$ as xdsdocid,     
+    BIRTH_CER_NUM as birthCerNum,
+	NAMES as names,
+    SEX as sex,
+    BORN_DATE as bornDate,
+    BORN_PROVINCE_NAME as bornProvinceName,
+    BORN_CITY_NAME as bornCityName,
+    BORN_AREA_NAME as bornAreaName,
+    MOTHER_NAME as motherName,
+    MOTHER_BORN_date as motherBornDate,
+    MOTHER_COUNTRY as motherCountry,
+    MOTHER_NATION as motherNation,
+    MOTHER_PROVINCE_NAME as motherPROVINCEName,
+    MOTHER_CITY_NAME as motherCityName,
+    MOTHER_AREA_NAME as motherAreaName,
+    MOTHER_TOWN_NAME as motherTownName,
+    MOTHER_VILLAGE_NAME as motherVillageName,
+    MOTHER_HOUSE_NO as motherHouseNo,
+    MOTHER_ID_CODE as motherIdCode,
+    MOTHER_ID as  motherId,  
+    FATHER_NAME  as  fatherName,   
+    FATHER_BORN_date as  fatherBornDate,  
+    FATHER_COUNTRY as fatherCountry,    
+    FATHER_NATION as fatherNation,     
+    FATHER_PROVINCE_NAME as fatherProvinceName,
+    FATHER_CITY_NAME as  fatherCityName, 
+    FATHER_AREA_NAME as  fatherAreaName,
+    FATHER_TOWN_NAME as  fatherTownName,   
+    FATHER_VILLAGE_NAME as fatherVillageName,
+    FATHER_HOUSE_NO as  fatherHouseNo,  
+    FATHER_ID_CODE as  fatherIdCode,   
+    FATHER_ID  as  fatherId,       
+    BIRTH_PREG_WEEKS as  birthPregWeeks,  
+    BIRTH_BODY_LENGTH as  birthBodyLength,  
+    BIRTH_BODY_WEIGHT as  birthBodyWeight, 
+    BIRTH_REC_NAME as  birthRecName,  
+    ORG_NAME  as    orgName,      
+    CERIRFY_REC_NAME as  cerirfyRecName, 
+    CERIRFY_NAME as   cerirfyName,   
+    CERIRFY_DATE as  cerirfyDate,    
+    CERIRFY_ORG_NAME as cerirfyOrgName,  
+    MOTHER_AGE as  motherAge,   
+    FATHER_AGE as  fatherAge,     
+    REPORT_UNIT as  reportUnit, 
+    REPORT_NAME as  reportName,  
+    TELEPHONE as  telephone,           
+    REPORT_DATE as   reportDate,    
+    HEALTH_RECORD_CODE as  healthRecordCode, 
+    ORG_CODE  as   orgCode       
+    from PT_HC_H06 t
+	where t.id$ in
+	 <foreach collection="H06" index="index" item="item" open="(" separator="," close=")">
+               #{item}
+     </foreach>
+	</select>
+	
+	<select id="queryoccupationalDiseaseById" parameterType="map" resultType="map">
+	select t.HEALTH_RECORD_CODE,
+	'职业病报告卡' as "name",
+	t.OCC_CARDID_GB,
+	t.NAME_GB,
+	a.item_name as SEX_GB,
+	to_char(BIRTHDAY_GB, 'yyyy-mm-dd hh24:mi:ss') as BIRTHDAY_GB,
+	CARD_TYPE,
+	CARDID,
+	PUBLIC_CODE_GB,
+	PER_ADD_PROVINCE,
+	PER_ADD_CITY,
+	PER_ADD_COUNTY,
+	PER_ADD_TOWN,
+	PER_ADD_VILLAGE,
+	PER_ADD_HOUSE_NUM,
+	PRE_ADD_PROVINCE,
+	PRE_ADD_CITY,
+	PRE_ADD_COUNTY,
+	PRE_ADD_TOWN,
+	PRE_ADD_VILLAGE,
+	PRE_ADD_HOUSE_NUM,
+	PROVINCE,
+	CITY,
+	COUNTY,
+	TOWN,
+	VILLAGE,
+	HOUSE_NUM,
+	ZIP_GB,
+	TEL_GB,
+	HOME_TEL_GB,
+	COMPANY_TEL_GB,
+	b.item_name as EDUCATION_GB,
+	COMPANY_GB,
+	OCC_DECR_GB,
+	RADIATE_HISTROY_GB,
+	c.item_name as RADIATE_TYPECODE_GB,
+	to_char(RADIATE_STARTTIME_GB, 'yyyy-mm-dd hh24:mi:ss') as RADIATE_STARTTIME_GB,
+	to_char(DUST_STARTTIME_GB, 'yyyy-mm-dd hh24:mi:ss') as
+	DUST_STARTTIME_GB,
+	REALITY_HARM_GB,
+	RADIATE_AGE_GB,
+	RADIATE_HOURS_GB,
+	to_char(RADIATE_DATE_GB, 'yyyy-mm-dd hh24:mi:ss') as RADIATE_DATE_GB,
+	to_char(SYMPTOM_DATE_GB, 'yyyy-mm-dd hh24:mi:ss') as SYMPTOM_DATE_GB,
+	RADIATE_DOSAGE_GB,
+	d.item_name as REDIATE_TYPECODE_GB,
+	e.item_name as REDIATE_RESEAON_GB,
+	f.item_name as OCC_TYPECODE_GB,
+	g.item_name as DUST_TYPECODE_GB,
+	h.item_name as DUST_PERIOD_GB,
+	i.item_name as OCC_NAME_GB,
+	j.item_name as OCC_HURTCODE_GB,
+	k.item_name as OCC_TRANCODE_GB,
+	l.item_name as REDIATE_CODE_GB,
+	m.item_name as REDIATE_GRADE_GB,
+	n.item_name as REDIATE_BYDATE_GB,
+	DUST_ADDSIGN_GB,
+	o.item_name as REDIATE_DEALCODE_GB,
+	to_char(DEATH_DATE_GB,'yyyy-mm-dd hh24:mi:ss') as DEATH_DATE_GB,
+	p.item_name as DEATH_RESEAONCODE_GB,
+	DIAGNOSE_NAME_GB,
+	to_char(DIAGNOSE_DATE_GB,'yyyy-mm-dd hh24:mi:ss') as DIAGNOSE_DATE_GB,
+	DIAGNOSE_DOCRATOR_GB,
+	FILLING_ORG_NAME,
+	FILLING_NAME,
+	to_char(FILLING_DATE,'yyyy-mm-dd hh24:mi:ss') as FILLING_DATE,
+	UNIT_NAME,
+	REGISTRATION_TYPE,
+	UNIT_TRADE,
+	ENTERPRISE_SCALE_CODE,
+	PATIENT_SOURCE_CODE,
+	OCC_NAME,
+	POISONING_ACCIDENT_CODE,
+	SIMULTANEOUS_POISONING_NUMBER,
+	CONTACT_TIME,
+	STATISTICAL_WORK,
+	WORKING_YEARS,
+	to_char(HAPPEN_TIME,'yyyy-mm-dd hh24:mi:ss') as HAPPEN_TIME,
+	DEATH_CAUSE,
+	FILLING_NAME_DUTY,
+	REPORT_CATEGORY,
+	OCCUPATION_CATEGORY,
+	REDIATE_TYPECODE_WAY,
+	MAIN_DIAGNOSTIC_BASIS,
+	DISEASE_DIAGNOSIS_NAME,
+	EXACT_AGE,
+	X_RAY
+	from PT_HC_H36 t
+	left outer join GWC_BASEDATA_DETAIL a
+	on t.sex_gb = a.item_code
+	and a.basedataclass_code = 'GBT2261.1.2003'
+	left outer join GWC_BASEDATA_DETAIL b
+	on t.education_gb = b.item_code
+	and b.basedataclass_code = 'DE02.01.041.00'
+	left outer join GWC_BASEDATA_DETAIL c
+	on t.RADIATE_TYPECODE_GB = c.item_code
+	and c.basedataclass_code = 'CV03.00.201'
+	left outer join GWC_BASEDATA_DETAIL d
+	on t.REDIATE_TYPECODE_GB = d.item_code
+	and d.basedataclass_code = 'DE03.00.060.00'
+	left outer join GWC_BASEDATA_DETAIL e
+	on t.REDIATE_RESEAON_GB = e.item_code
+	and e.basedataclass_code = 'CV03.00.202'
+	left outer join GWC_BASEDATA_DETAIL f
+	on t.OCC_TYPECODE_GB = f.item_code
+	and f.basedataclass_code = 'DE05.01.063.00'
+	left outer join GWC_BASEDATA_DETAIL g
+	on t.DUST_TYPECODE_GB = g.item_code
+	and g.basedataclass_code = 'DE05.01.007.00'
+	left outer join GWC_BASEDATA_DETAIL h
+	on t.DUST_PERIOD_GB = h.item_code
+	and h.basedataclass_code = 'DE05.01.008.00'
+	left outer join GWC_BASEDATA_DETAIL i
+	on t.OCC_NAME_GB = i.item_code
+	and i.basedataclass_code = 'ICD10'
+	left outer join GWC_BASEDATA_DETAIL j
+	on t.OCC_HURTCODE_GB = j.item_code
+	and j.basedataclass_code = 'CV05.10.004'
+	left outer join GWC_BASEDATA_DETAIL k
+	on t.OCC_TRANCODE_GB = k.item_code
+	and k.basedataclass_code = 'CV05.10.010'
+	left outer join GWC_BASEDATA_DETAIL l
+	on t.REDIATE_CODE_GB = l.item_code
+	and l.basedataclass_code = 'DE05.01.064.00'
+	left outer join GWC_BASEDATA_DETAIL m
+	on t.REDIATE_GRADE_GB = m.item_code
+	and m.basedataclass_code = 'CV05.01.033'
+	left outer join GWC_BASEDATA_DETAIL n
+	on t.REDIATE_BYDATE_GB = n.item_code
+	and n.basedataclass_code = 'CV05.01.034'
+	left outer join GWC_BASEDATA_DETAIL o
+	on t.REDIATE_DEALCODE_GB = o.item_code
+	and o.basedataclass_code = 'CV06.00.205'
+	left outer join GWC_BASEDATA_DETAIL p
+	on t.DEATH_RESEAONCODE_GB = p.item_code
+	and p.basedataclass_code = 'ICD10'
+	where t.id$ in
+	 <foreach collection="H36" index="index" item="item" open="(" separator="," close=")">
+               #{item}
+     </foreach>
+	</select>
+	
+	<select id="queryFoodborneDiseaseReportById" parameterType="map" resultType="map">
+		select 
+			ID$ as "ID",
+			'食源性疾病报告卡' AS "name",
+ 			RECORD_ID ,
+	        NAMES,
+	        SEX,
+	        to_char(BORN_DATE,'yyyy-mm-dd hh24:mi:ss') as BORN_DATE,
+	        ID_NO_CD,
+	        ID_NO,
+	        OWN_TEL,
+	        SYSPTOM_CODE,
+	        SYSPTOM_NAME,
+	        REGISTER_PROVINCE,
+	        REGISTER_CITY,
+	        REGISTER_COUNTY,
+	        REGISTER_TOWN,
+	        REGISTER_VILLAGE,
+	        REGISTER_HOUSE_NUM,
+	        PRESENT_PROVINCE,
+	        PRESENT_CITY,
+	        PRESENT_COUNTY,
+	        PRESENT_TOWN,
+	        PRESENT_VILLAGE,
+	        PRESENT_HOUSE_NUM,
+	        ORG_NAME,
+	        to_char(REPORT_DATE,'yyyy-mm-dd hh24:mi:ss') as REPORT_DATE,
+	        REPORT_USER,
+	        REPORT_NO,
+	        to_char(ATTACK_TIME,'yyyy-mm-dd hh24:mi:ss') as ATTACK_TIME,
+	        to_char(DIAGNOSIS_TIME,'yyyy-mm-dd hh24:mi:ss') as DIAGNOSIS_TIME,
+	        SIGNES_DES,
+	        LAB_CHECK_RESULT,
+	        ASSIST_CHECK_RESULT,
+	        DIAGNOSIS_RESULT,
+	        SUSPECTED_CAUSE_CODE,
+	        SUSPECTED_FOOD_NAME,
+	        REPORT_REASON_CODE,
+	        EXACT_AGE
+	   from PT_HC_H46 t
+			  where t.id$ in
+	 <foreach collection="H46" index="index" item="item" open="(" separator="," close=")">
+               #{item}
+     </foreach>
+	</select>
+</mapper>

@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD iBatis Mapper 3.0 //EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<!-- define mapping from database to class -->
+<mapper namespace="com.zhijieyun.datastructure.dao.mapper.TemplateStructureMapper">
+   <!-- 根据不同参数构建不同模板 -->
+   <update id="createTemplateStructure" parameterType="map" timeout="86500">
+		  declare 
+		  countNum number;
+		  maxIndexId number;
+		   data_sql varchar2(8000) default 'select 
+		            SEQ_TEMPTABLENAME.NEXTVAL as rownumcp,
+		            l.*,
+		            r.SERVICE_RECORDTIME,
+					r.HRN,
+					r.METASET_CODE,
+					r.NAME,
+					r.dob,
+					r.sex,
+					r.SERVICE_ORGCODE,
+					r.SERVICE_ORGNAME,
+					r.SERVICE_DOCTORNAME,
+					r.idcard from (select *  from (
+		      select gp.*  from (
+		      select  mpiid,wm_concat(temstr) as temstr from  (
+		      select mpiid, metaset_code|| '||''''||':['||''''||'||wm_concat(dsi.sourceid)||'||''''||']'||''''||' as temstr
+					  from ds_serviceactive_index dsi
+					   where dsi.mpiid is not null
+					   and dsi.metaset_code is not null
+					   and dsi.sourceid is not null
+					   and dsi.id <![CDATA[<=]]> maxIndexId
+					 group by dsi.mpiid, dsi.metaset_code
+					 ) temp group by temp.mpiid)gp )showshow )  l left join 
+		(select * from 
+		  (select 
+		  dsi.SERVICE_RECORDTIME,
+		  dsi.HRN,
+		  dsi.mpiid,
+		  dsi.METASET_CODE,
+		  dsi.NAME,
+		  dsi.dob,
+		  dsi.sex,
+		  dsi.SERVICE_ORGCODE,
+		  dsi.SERVICE_ORGNAME,
+		  dsi.SERVICE_DOCTORNAME,
+		  dsi.idcard AS idcard，row_number() over (partition by mpiid order by 
+		  <!-- 根据特定字符排序H01... -->
+		  case dsi.metaset_code when '||''''||'H01'||''''||' then '||''''||'0'||''''||' else dsi.metaset_code end 
+		 ) as rownum1 from ds_serviceactive_index dsi)
+		   where rownum1 = 1 )  r 
+		on l.mpiid = r.mpiid';
+		  create_sql varchar2(8000) default 'create table  ${tempTableName} as ' || data_sql;
+		  delete_sql varchar2(8000) default 'delete  job_current_batch_maxid jcbm where jcbm.jobname = '||''''||'${jobName}'||''''||'';
+		  insertmaxid_sql  varchar2(8000) default 'insert into job_current_batch_maxid(id$, jobname, shardingitem, maxid, updatetime)values(SEQ_JOB_BATCH_MAXID.NEXTVAL, '||''''||'DataStructureALL'||''''||', -1, maxIndexId, SYSDATE)';
+		  begin
+ 		    select count(1) into countNum from user_tables where table_name = upper('${tempTableName}');
+ 		    select max(id) into maxIndexId from ds_serviceactive_index;
+		    IF countNum = 0 THEN
+		         <!-- 创建表 -->
+		         execute immediate REPLACE(create_sql,'maxIndexId',maxIndexId);
+		         <!-- 创建索引 -->
+		         execute immediate 'alter table ${tempTableName} add constraint ${tempTableName}primarykey primary key (ROWNUMCP)';
+		         execute immediate 'create index ${tempTableName}indexmpiid on ${tempTableName} (mpiid)';
+		         <!-- 保存原始数据 -->
+		         execute immediate REPLACE(insertmaxid_sql,'maxIndexId',maxIndexId);
+                 commit;
+                 <if test="reExtract"><!-- 是否重新抽取数据 临时表不变 -->
+                 execute immediate delete_sql;
+                 commit;
+                 </if>
+		    elsif countNum &gt; 0 THEN
+		        <if test="reExtract"><!-- 是否重新抽取数据 临时表不变 -->
+                 execute immediate delete_sql;
+                </if>
+                 commit;
+		    END  IF; 
+		  end; 
+   </update>
+   
+   <!-- 增量数据处理 -->
+   <update id="createIncrementTemplateStructure" parameterType="map" timeout="86500">
+		  declare 
+		  countNum number;
+		  newMaxIndex number;
+		  oldMaxIndex number;
+		   data_sql varchar2(8000) default 'select 
+		            SEQ_TEMPTABLENAME.NEXTVAL as rownumcp,
+		            l.*,
+		            r.SERVICE_RECORDTIME,
+					r.HRN,
+					r.METASET_CODE,
+					r.NAME,
+					r.dob,
+					r.sex,
+					r.SERVICE_ORGCODE,
+					r.SERVICE_ORGNAME,
+					r.SERVICE_DOCTORNAME,
+					r.idcard from (select *  from (
+		      select gp.*  from (
+		      select  mpiid,wm_concat(temstr) as temstr from  (
+		      select mpiid, metaset_code|| '||''''||':['||''''||'||wm_concat(dsi.sourceid)||'||''''||']'||''''||' as temstr
+					  from ds_serviceactive_index dsi
+					   where dsi.mpiid is not null
+					   and dsi.metaset_code is not null
+					   and dsi.sourceid is not null
+					   and dsi.id <![CDATA[>]]> oldMaxIndex
+					   and dsi.id <![CDATA[<=]]> newMaxIndex
+					 group by dsi.mpiid, dsi.metaset_code
+					 ) temp group by temp.mpiid)gp )showshow )  l left join 
+		(select * from 
+		  (select 
+		  dsi.SERVICE_RECORDTIME,
+		  dsi.HRN,
+		  dsi.mpiid,
+		  dsi.METASET_CODE,
+		  dsi.NAME,
+		  dsi.dob,
+		  dsi.sex,
+		  dsi.SERVICE_ORGCODE,
+		  dsi.SERVICE_ORGNAME,
+		  dsi.SERVICE_DOCTORNAME,
+		dsi.idcard AS idcard，row_number() over (partition by mpiid order by 
+		<!-- 根据特定字符排序H01 -->
+		case dsi.metaset_code when '||''''||'H01'||''''||' then '||''''||'0'||''''||' else dsi.metaset_code end
+		) as rownum1 from ds_serviceactive_index dsi )
+		   where rownum1 = 1 )  r 
+		on l.mpiid = r.mpiid';
+		  <!-- 创建数据 -->
+		  create_sql varchar2(8000) default 'create table  increment${tempTableName} as ' || data_sql;
+		  <!-- 删除数据 -->
+		  delete_sql varchar2(8000) default 'delete  job_current_batch_maxid jcbm where jcbm.jobname = '||''''||'increment${jobName}'||''''||'';
+		  <!-- 销毁表 -->
+		  drop_sql varchar2(8000) default 'drop table  increment${tempTableName}';
+		  <!-- 保存处理后最大值sql -->
+		  insertmaxid_sql  varchar2(8000) default 'insert into job_current_batch_maxid(id$, jobname, shardingitem, maxid, updatetime)values(SEQ_JOB_BATCH_MAXID.NEXTVAL, '||''''||'DataStructureALL'||''''||', -1, newMaxIndex, SYSDATE)';
+		  begin
+ 		    select max(id) into newMaxIndex from ds_serviceactive_index ;
+ 		    select max(maxid) into oldMaxIndex from job_current_batch_maxid where jobname= 'DataStructureALL'  and shardingitem=-1;
+ 		    <!-- 当有增量数据时 -->
+ 		    IF newMaxIndex > oldMaxIndex THEN
+ 		            select count(1) into countNum from user_tables where table_name = upper('increment${tempTableName}');
+ 		            <!-- 当表不存在时 -->
+				    IF countNum = 0 THEN
+				         <!-- 创建表 -->
+				         execute immediate REPLACE(REPLACE(create_sql,'oldMaxIndex',oldMaxIndex),'newMaxIndex',newMaxIndex);
+				         commit;
+				         <!-- 创建索引 -->
+				         execute immediate 'alter table increment${tempTableName} add constraint increment${tempTableName}pk primary key (ROWNUMCP)';
+				         execute immediate 'create index increment${tempTableName}im on increment${tempTableName} (mpiid)';
+				         <!-- 保存增量数据 -->
+                         execute immediate  REPLACE(insertmaxid_sql,'newMaxIndex',newMaxIndex);
+   	                     commit;
+		                 execute immediate delete_sql;
+		                 commit;
+		            <!-- 当表存在时 -->
+				    elsif countNum &gt; 0 THEN
+				         <!-- 销毁表  -->
+				         execute immediate drop_sql;
+				         commit;
+				         <!-- 创建表 -->
+				         execute immediate REPLACE(REPLACE(create_sql,'oldMaxIndex',oldMaxIndex),'newMaxIndex',newMaxIndex);
+				         <!-- 创建索引 -->
+				         execute immediate 'alter table increment${tempTableName} add constraint increment${tempTableName}pk primary key (ROWNUMCP)';
+				         execute immediate 'create index increment${tempTableName}im on increment${tempTableName} (mpiid)';
+				         <!-- 保存增量数据 -->
+				         execute immediate  REPLACE(insertmaxid_sql,'newMaxIndex',newMaxIndex);
+		                 commit;
+		                 execute immediate delete_sql;
+		                 commit;
+				    END  IF; 
+		    <!-- 当第一次抽取时不存在增量数据 创建临时增量表-->
+	        elsif newMaxIndex=oldMaxIndex THEN
+	             select count(1) into countNum from user_tables where table_name = upper('increment${tempTableName}');
+	              IF countNum = 0 THEN
+	               execute immediate REPLACE(REPLACE(create_sql,'oldMaxIndex',oldMaxIndex),'newMaxIndex',newMaxIndex);
+	               commit;
+	              END  IF; 
+		    END  IF; 
+		  end; 
+   </update>
+   
+   	<resultMap id="templateStructureMap" type="java.util.HashMap">
+   		<result property="mpiID" column="mpiid" />
+		<result property="mpiid" column="mpiid" />
+		<result property="temstr" column="temstr" />
+		<result property="rownumcp" column="rownumcp" />
+		<result property="serviceTime" column="serviceTime" />
+		<result property="putOnRecordDate" column="serviceTime" />
+		<result property="hrn" column="hrn" />
+		<result property="idcardNum" column="idcard" />
+		<result property="idcard" column="idcard" />
+		<result property="metaSetCode" column="metaSetCode" />
+		<result property="pname" column="pname" />
+		<result property="dob" column="dob" />
+		<result property="birthday" column="dob" />
+		<result property="sex" column="sex" />
+		<result property="sexCode" column="sex" />
+		<result property="serviceOrgCode" column="serviceOrgCode" />
+		<result property="orgCode" column="serviceOrgCode" />
+		<result property="serviceOrgName" column="serviceOrgName" />
+		<result property="serviceDoctorName" column="serviceDoctorName" />
+		<result property="existsit" column="existsit" />
+	</resultMap>
+	
+   <select id="queryTemplateStructure" parameterType="map" resultMap="templateStructureMap">
+	   select tem.MPIID "mpiid",
+	          tem.TEMSTR "temstr",
+		      tem.ROWNUMCP "rownumcp",
+		      to_char(tem.SERVICE_RECORDTIME, 'yyyy-mm-dd ') as serviceTime,
+			  tem.MPIID as mpiID,
+			  tem.HRN as hrn,
+			  tem.METASET_CODE as metaSetCode,
+			  tem.NAME as pname,
+			  to_char(tem.dob, 'yyyy-mm-dd ') as dob,
+			  tem.sex as sex,
+			  tem.SERVICE_ORGCODE as serviceOrgCode,
+			  tem.SERVICE_ORGNAME as serviceOrgName,
+			  tem.SERVICE_DOCTORNAME as serviceDoctorName,
+			  tem.idcard AS idcard
+		  from (select tt.*
+		          from ${tempTableName} tt
+		         where mod(tt.rownumcp, ${shardingTotalCount}) = ${shardingItem}
+		           and tt.rownumcp > ${maxid}
+		           order by tt.rownumcp) tem
+		 where rownum <![CDATA[ <= ]]> ${extractSize} 
+   </select>
+   
+   <!-- 增量数据处理 -->
+  <select id="queryIncrementTemplateStructure" parameterType="map" resultMap="templateStructureMap">
+	   select tem.MPIID "mpiid",
+	          tem.TEMSTR "temstr",
+		      tem.ROWNUMCP "rownumcp",
+		      to_char(tem.SERVICE_RECORDTIME, 'yyyy-mm-dd ') as serviceTime,
+			  tem.MPIID as mpiID,
+			  tem.HRN as hrn,
+			  tem.METASET_CODE as metaSetCode,
+			  tem.NAME as pname,
+			  to_char(tem.dob, 'yyyy-mm-dd ') as dob,
+			  tem.sex as sex,
+			  tem.SERVICE_ORGCODE as serviceOrgCode,
+			  tem.SERVICE_ORGNAME as serviceOrgName,
+			  tem.SERVICE_DOCTORNAME as serviceDoctorName,
+			  tem.idcard AS idcard,
+			  <!-- 标记数据为第二次抽取数据 -->
+			  (select '1' from ${tempTableName} ttn where ttn.mpiid=tem.mpiid) as existsit
+		  from (select tt.*
+		          from increment${tempTableName} tt
+		         where mod(tt.rownumcp, ${shardingTotalCount}) = ${shardingItem}
+		           and tt.rownumcp > ${maxid}
+		           order by tt.rownumcp) tem
+		 where rownum <![CDATA[ <= ]]> ${extractSize} 
+   </select>
+   
+    <!-- 原始数据处理-保存批次处理最大ID-->
+   	<insert id="saveBatchMaxid" parameterType="map" >
+		insert into job_current_batch_maxid t 
+			(id$, jobname, shardingitem, maxid, updatetime) 
+		values 
+			(SEQ_JOB_BATCH_MAXID.NEXTVAL,
+			 #{jobName, jdbcType=VARCHAR},
+			 #{shardingItem, jdbcType=NUMERIC},
+			 #{maxid, jdbcType=NUMERIC},
+			 sysdate)
+	</insert>
+	<!-- 数据库数据同步 -->
+	<update id="mergeIncrementData" parameterType="map" timeout="86500">
+	  begin
+	   <!-- 同步数据 -->
+		MERGE INTO  ${tempTableName} ttn USING increment${tempTableName}  ittn on (ttn.mpiid=ittn.mpiid)
+		WHEN MATCHED THEN UPDATE SET ttn.temstr=getTemstr(ittn.mpiid)
+		WHEN NOT MATCHED THEN  
+		insert
+		  (ttn.mpiid, ttn.temstr, ttn.rownumcp, ttn.service_recordtime, ttn.hrn, ttn.metaset_code, ttn.name, ttn.dob, ttn.sex, ttn.service_orgcode, ttn.service_orgname, ttn.service_doctorname, ttn.idcard)
+		values
+		  (ittn.mpiid, ittn.temstr, ittn.rownumcp, ittn.service_recordtime, ittn.hrn, ittn.metaset_code, ittn.name, ittn.dob, ittn.sex, ittn.service_orgcode, ittn.service_orgname, ittn.service_doctorname, ittn.idcard);
+		<!-- 删除临时增量表 -->
+		execute immediate 'delete  increment${tempTableName}';
+		commit;
+	   end; 
+	</update>
+</mapper>

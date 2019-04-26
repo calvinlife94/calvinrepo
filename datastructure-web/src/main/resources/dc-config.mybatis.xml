@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC 
+    "-//mybatis.org//DTD Config 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<settings>
+		<setting name="cacheEnabled" value="true"/> <!-- 缓存？ -->
+		<setting name="callSettersOnNulls" value="true"/>  
+		<setting name="jdbcTypeForNull" value="NULL" />
+		
+		<!-- 超时时间不限制 -->
+		<!-- <setting name="defaultStatementTimeout" value="60"/> -->
+	</settings>
+</configuration>

@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:reg="http://www.dangdang.com/schema/ddframe/reg"
+    xmlns:job="http://www.dangdang.com/schema/ddframe/job"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+          http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+          http://www.dangdang.com/schema/ddframe/reg
+          http://www.dangdang.com/schema/ddframe/reg/reg.xsd
+          http://www.dangdang.com/schema/ddframe/job
+          http://www.dangdang.com/schema/ddframe/job/job.xsd
+          http://www.springframework.org/schema/context
+          http://www.springframework.org/schema/context/spring-context-3.2.xsd
+          http://www.springframework.org/schema/util
+          http://www.springframework.org/schema/util/spring-util-3.2.xsd"
+          default-lazy-init="default">
+    
+    <bean id="elasticJobLog" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+        <property name="driverClassName" value="${mysql.jdbc.driver}"/>
+        <property name="url" value="${mysql.jdbc.url}"/>
+        <property name="username" value="${mysql.jdbc.username}"/>
+        <property name="password" value="${mysql.jdbc.password}"/>
+    </bean>
+	
+	<reg:zookeeper id="regCenter" 
+    			   server-lists="${serverLists}" 
+    			   namespace="${namespace}"
+    			   base-sleep-time-milliseconds="${baseSleepTimeMilliseconds}" 
+    			   max-sleep-time-milliseconds="${maxSleepTimeMilliseconds}" 
+    			   max-retries="${maxRetries}" />
+    
+  	<!-- 数据流作业，带事件追踪。-->			  
+  	<job:dataflow id="${job.id}" 
+  				  class="${job.class}" 
+  				  registry-center-ref="regCenter" 
+  				  sharding-total-count="${job.shardingTotalCount}" 
+  				  cron="${job.cron}" 
+  				  sharding-item-parameters="" 
+  				  job-parameter="${job.jobParameter}"
+  				  monitor-execution="${job.monitorExecution}" 
+  				  failover="${job.failover}" 
+  				  max-time-diff-seconds="${job.maxTimeDiffSeconds}" 
+  				  streaming-process="${job.streamingProcess}" 
+  				  description="${job.description}" 
+  				  disabled="${job.disabled}" 
+  				  overwrite="${job.overwrite}" 
+  				  event-trace-rdb-data-source="elasticJobLog">
+				  <job:distributed-listener class="${job.distributedListenerClass}"
+				  							started-timeout-milliseconds="${job.distributedListener.started.timeout}" 
+				  							completed-timeout-milliseconds="${job.distributedListener.completed.timeout}"/> 
+	</job:dataflow>
+	<!-- 增量数据 -->
+    <job:dataflow id="${incrementJob.id}" 
+  				  class="${incrementJob.class}" 
+  				  registry-center-ref="regCenter" 
+  				  sharding-total-count="${incrementJob.shardingTotalCount}" 
+  				  cron="${incrementJob.cron}" 
+  				  sharding-item-parameters="" 
+  				  job-parameter="${incrementJob.jobParameter}"
+  				  monitor-execution="${incrementJob.monitorExecution}" 
+  				  failover="${incrementJob.failover}" 
+  				  max-time-diff-seconds="${incrementJob.maxTimeDiffSeconds}" 
+  				  streaming-process="${incrementJob.streamingProcess}" 
+  				  description="${incrementJob.description}" 
+  				  disabled="${incrementJob.disabled}" 
+  				  overwrite="${incrementJob.overwrite}" 
+  				  event-trace-rdb-data-source="elasticJobLog">
+				  <job:distributed-listener class="${incrementJob.distributedListenerClass}"
+				  							started-timeout-milliseconds="${incrementJob.distributedListener.started.timeout}" 
+				  							completed-timeout-milliseconds="${incrementJob.distributedListener.completed.timeout}"/> 
+	</job:dataflow>
+	
+	<!-- 药品 -->
+    <job:dataflow id="${job_drug.id}" 
+  				  class="${job_drug.class}" 
+  				  registry-center-ref="regCenter" 
+  				  sharding-total-count="${job_drug.shardingTotalCount}" 
+  				  cron="${job_drug.cron}" 
+  				  sharding-item-parameters="" 
+  				  job-parameter="${job_drug.jobParameter}"
+  				  monitor-execution="${job_drug.monitorExecution}" 
+  				  failover="${job_drug.failover}" 
+  				  max-time-diff-seconds="${job_drug.maxTimeDiffSeconds}" 
+  				  streaming-process="${job_drug.streamingProcess}" 
+  				  description="${job_drug.description}" 
+  				  disabled="${job_drug.disabled}" 
+  				  overwrite="${job_drug.overwrite}" 
+  				  event-trace-rdb-data-source="elasticJobLog">
+	</job:dataflow>
+	
+	<!-- 药品 -->
+    <job:dataflow id="${job_item.id}" 
+  				  class="${job_item.class}" 
+  				  registry-center-ref="regCenter" 
+  				  sharding-total-count="${job_item.shardingTotalCount}" 
+  				  cron="${job_item.cron}" 
+  				  sharding-item-parameters="" 
+  				  job-parameter="${job_item.jobParameter}"
+  				  monitor-execution="${job_item.monitorExecution}" 
+  				  failover="${job_item.failover}" 
+  				  max-time-diff-seconds="${job_item.maxTimeDiffSeconds}" 
+  				  streaming-process="${job_item.streamingProcess}" 
+  				  description="${job_item.description}" 
+  				  disabled="${job_item.disabled}" 
+  				  overwrite="${job_item.overwrite}" 
+  				  event-trace-rdb-data-source="elasticJobLog">
+	</job:dataflow>
+  	
+</beans>

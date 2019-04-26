@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Implementation-Title: datastructure-api
+Build-Date: 04/21/2019 08:43
+Implementation-Version: 0.0.1-SNAPSHOT
+Built-By: yinliang
+Implementation-Vendor-Id: com.zhijieyun
+Build-Jdk: 1.8.0_45
+Created-By: Maven Integration for Eclipse
+Implementation-Vendor: Zhijieyun
+

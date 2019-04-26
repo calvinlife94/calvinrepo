@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Built-By: yinliang
+Build-Jdk: 1.8.0_45
+Implementation-Title: datastructure-web Maven Webapp
+Implementation-Version: 0.0.1-SNAPSHOT
+Implementation-Vendor-Id: com.zhijieyun
+Implementation-Vendor: Zhijieyun
+Build-Date: 04/21/2019 08:43
+Created-By: Maven Integration for Eclipse
+

@@ -1,0 +1,674 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD iBatis Mapper 3.0 //EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<!-- define mapping from database to class -->
+<mapper namespace="com.zhijieyun.datastructure.dao.mapper.CommonTempMapper">
+           <!-- 封装的数据查询头部 -->
+      <sql id="sqlHead">
+       select MPIID$ as "mpiidFromTemp",data.*  from  ${tempTableName} temp left join( 
+      </sql>
+     <!-- 封装的数据查询尾部 -->
+	   <sql id="sqlEnd">
+	       ) data  on 
+	       data."orgCodeTemp" =temp.org_code
+	       <if test='ioType=="mz"'>
+	        and data."mzIdTemp"=temp.outpatient_num
+	       </if>
+	       <if test='ioType=="zy"'>
+	        and data."zyIdTemp"=temp.inpatient_num
+	       </if>
+	   </sql>
+	   <sql id="sqlNameTemp">
+	       <if test='ioType=="mz"'>
+		       	poi.id$,poi.outpatient_num,
+			    poi.created_at,poi.doctor_code,
+			    poi.sourceid$,poi.mpiid$,
+			    poi.health_record_num,poi.pname,
+			    poi.born_date,poi.sex_code,
+			    poi.org_name,poi.org_code,
+			    poi.dep_name,poi.dep_code,
+			    poi.doctor_name,
+		    </if>
+		    <if test='ioType=="zy"'>
+		      	poi.mpiid$,
+				poi.ward_num,
+				poi.village,
+				poi.treat_result_code,
+				poi.treat_process,
+				poi.treatment_method,
+				poi.town,
+				poi.tel,
+				poi.tcm_decoction_method,
+				poi.superior_doctor_name,
+				poi.special_exam,
+				poi.signtrue_date,
+				poi.sickbed_num,
+				poi.sex_code,
+				poi.resident_doctor_name,
+				poi.resident_doctor_code,
+				poi.province,
+				poi.postal_code,
+				poi.pname,
+				poi.other_id_num,
+				poi.org_name,
+				poi.org_code,
+				poi.occupation_name,
+				poi.occupation_code,
+				poi.medication_method,
+				poi.marital_status_name,
+				poi.marital_status_code,
+				poi.linkman_tel,
+				poi.linkman_name,
+				poi.in_discharge_signs,
+				poi.inspect_consultation,
+				poi.inpatient_num,
+				poi.inpatient_day,
+				poi.idr,
+				poi.idcard_type,
+				poi.idcard_num,
+				poi.id$,
+				poi.house_num,
+				poi.health_card_num,
+				poi.group_idx,
+				poi.four_diagnosis,
+				poi.flag_four_diagnosis,
+				poi.disease_outcome_code,
+				poi.discharge_situation,
+				poi.discharge_signs,
+				poi.discharge_order,
+				poi.discharge_date,
+				poi.dep_name,
+				poi.dep_code,
+				poi.created_at,
+				poi.county,
+				poi.complication,
+				poi.city,
+				poi.case_history_id,
+				poi.attending_doctor_name,
+				poi.attending_doctor_code,
+				poi.assist_exam_result,
+				poi.area_name,
+				poi.age_years,
+				poi.age_months,
+				poi.age_hours,
+				poi.age_days,
+				poi.admission_situation,
+				poi.admission_date,
+				poi.address_type_code,
+		    </if>
+	   </sql>
+	   <sql id="sqlPiirPed">
+	        <if test='ioType=="mz"'>
+	           PT_OP_REGISTER
+	        </if>
+	        <if test='ioType=="zy"'>
+	           (
+	           select s.* from 
+				(select t.*,row_number() over (partition by t.id$ order by t.id$ ) as group_idx 
+				from (
+				select  
+				      piir.id$,
+				      piir.mpiid$,
+				      piir.inpatient_num,
+				      piir.org_code,
+				      rp.ID$ as idr,
+				      rp.ORG_NAME,
+				      rp.ATTENDING_DOCTOR_CODE,
+				      rp.CREATED_AT,
+				      rp.CASE_HISTORY_ID,
+				      rp.HEALTH_CARD_NUM,
+				      rp.DEP_CODE,
+				      rp.DEP_NAME,
+				      rp.AREA_NAME,
+				      rp.WARD_NUM,
+				      rp.SICKBED_NUM,
+				      rp.IDCARD_NUM,
+				      rp.IDCARD_TYPE,
+				      rp.OTHER_ID_NUM,
+				      rp.PNAME,
+				      rp.SEX_CODE,
+				      rp.AGE_YEARS,
+				      rp.AGE_MONTHS,
+				      rp.AGE_DAYS,
+				      rp.AGE_HOURS,
+				      rp.MARITAL_STATUS_CODE,
+				      rp.MARITAL_STATUS_NAME,
+				      rp.OCCUPATION_CODE,
+				      rp.OCCUPATION_NAME,
+				      rp.TEL,
+				      rp.ADDRESS_TYPE_CODE,
+				      rp.PROVINCE,
+				      rp.CITY,
+				      rp.COUNTY,
+				      rp.TOWN,
+				      rp.VILLAGE,
+				      rp.HOUSE_NUM,
+				      rp.POSTAL_CODE,
+				      rp.LINKMAN_NAME,
+				      rp.LINKMAN_TEL,
+				      rp.ADMISSION_DATE,
+				      rp.DISCHARGE_DATE,
+				      rp.INPATIENT_DAY,
+				      rp.RESIDENT_DOCTOR_CODE,
+				      rp.RESIDENT_DOCTOR_NAME,
+				      rp.ATTENDING_DOCTOR_NAME,
+				      rp.SUPERIOR_DOCTOR_NAME,
+				      rp.SIGNTRUE_DATE,
+				      rp.ADMISSION_SITUATION,
+				      rp.TREAT_RESULT_CODE,
+				      rp.TREAT_PROCESS,
+				      rp.DISCHARGE_SITUATION,
+				      rp.DISCHARGE_SIGNS,
+				      rp.ASSIST_EXAM_RESULT,
+				      rp.IN_DISCHARGE_SIGNS,
+				      rp.INSPECT_CONSULTATION,
+				      rp.SPECIAL_EXAM,
+				      rp.DISEASE_OUTCOME_CODE,
+				      rp.COMPLICATION,
+				      rp.DISCHARGE_ORDER,
+				      rp.FLAG_FOUR_DIAGNOSIS,
+				      rp.FOUR_DIAGNOSIS,
+				      rp.TREATMENT_METHOD,
+				      rp.TCM_DECOCTION_METHOD,
+				      rp.MEDICATION_METHOD from  PT_IP_IN_REG piir  left join PT_EMRI_DISCHARGE rp     on piir.inpatient_num = rp.inpatient_num
+				   and piir.org_code = rp.org_code
+				      and piir.org_code = rp.org_code ) t ) s 
+				where s.group_idx = 1
+				)
+	        </if>
+	   </sql>
+	   <sql id="sqlMetasetCode">
+	      <if test='ioType=="mz"'>'||''''||'HB001'||''''||'</if>
+	      <if test='ioType=="zy"'>'||''''||'HB005'||''''||'</if>
+	   </sql>
+
+	 <update id="createInsertIOTempTableName" parameterType="map">
+	    	declare 
+		  countNum number;
+		  data_sql varchar2(8000) default 'select 
+          <include refid="sqlNameTemp"/>
+		  dsi.sourceid,
+		  dsi.id from (  select n.sourceid, n.id  from (select m.*, ROWNUM RN  from (select t.sourceid, t.id
+		     from ds_serviceactive_index t   
+		               where mod(t.id, ${shardingTotalCount}) = ${shardingItem}
+		                and t.id &gt; ${maxid}
+		                and t.metaset_code = <include refid="sqlMetasetCode"/>
+		                order by t.id ASC) m where 
+		                ROWNUM &lt;= ${end}) n  
+		                where 
+		                RN &gt;= ${start})
+		                dsi, <include refid="sqlPiirPed"/> poi where dsi.sourceid=poi.id$';
+		  insert_sql varchar2(8000) default 'insert into ${tempTableName} ' || data_sql;
+		  create_sql varchar2(8000) default 'create table  ${tempTableName} as ' || data_sql;
+		  delete_sql varchar2(8000) default 'delete ${tempTableName}';
+		  
+		  begin
+		    select count(1) into countNum from user_tables where table_name = upper('${tempTableName}');
+		    IF countNum = 0 THEN
+		         execute immediate create_sql;
+		         commit;
+		    elsif countNum &gt; 0 THEN
+		       execute immediate delete_sql;
+		       commit;
+		       execute immediate insert_sql;
+		       commit;
+		    END  IF;
+		  end;
+	 </update>
+	 <update id="queryAndSaveMaxId" parameterType="map">
+       declare maxId number;
+       begin
+           select max(id) into maxId from ${tempTableName};
+           insert into job_current_batch_maxid t 
+			(id$, jobname, shardingitem, maxid, updatetime) 
+		values 
+			(SEQ_JOB_BATCH_MAXID.NEXTVAL,
+			 #{jobName, jdbcType=VARCHAR},
+			 #{shardingItem, jdbcType=NUMERIC},
+			 maxid,
+			 sysdate);
+       end;
+   </update>
+   <select id="queryLastBatchMaxIdByJobName" parameterType="map" resultType="long">	          
+ 	    select max(t.maxid)
+		          from JOB_CURRENT_BATCH_MAXID t
+		         where t.jobname = #{jobName, jdbcType=VARCHAR}
+		           and t.shardingitem = #{shardingItem, jdbcType=NUMERIC}
+	</select>
+    <!-- 结构化的(门诊,住院)检查记录（主表）Map -->
+	<resultMap id="getCommonExamMap" type="java.util.HashMap">
+	    <id property="id" column="id" />
+	    <result property="name" column="name" />
+		<result property="mpiid" column="mpiid" />
+		<result property="inpatientNum" column="inpatientNum" />
+		<result property="orgCode" column="orgCode" />
+		<result property="recordTime" column="recordTime" />
+		<result property="mzId" column="mzId" />
+		<result property="studyId" column="studyId" />
+		<result property="isInhos" column="isInhos" />
+		<result property="patientLocalId" column="patientLocalId" />
+		<result property="reportDate" column="reportDate" />
+		<result property="studyPart" column="studyPart" />
+		<result property="studyMethod" column="studyMethod" />
+		<result property="reporter" column="reporter" />
+		<result property="expert" column="expert" />
+		<result property="report" column="report" />
+		<result property="conclusion" column="conclusion" />
+		<result property="studyInstanceuId" column="studyInstanceuId" />
+		<result property="pname" column="pname" />
+		<result property="sex" column="sex" />
+		<result property="orgName" column="orgName" />
+		<result property="bedNo" column="bedNo" />
+		<result property="age" column="age" /> 
+		<result property="doctorName" column="doctorName" />
+		<result property="deptName" column="deptName" />
+		<result property="deptCode" column="deptCode" />
+	</resultMap>
+	<!-- 结构化的(门诊,住院)检验主表Map -->
+	<resultMap id="getCommonInspectMap" type="java.util.HashMap">
+	    <id property="id" column="ids" />
+	    <result property="name" column="name" />
+		<result property="mpiid" column="mpiids" />
+		<result property="inpatientNum" column="inpatientNums" />
+		<result property="orgCode" column="orgCodes" />
+		<result property="recordTime" column="recordTimes" />
+		<result property="mzId" column="mzIds" />
+		<result property="inspectCategoryCode" column="inspectCategoryCodes" />
+		<result property="inspectCategoryName" column="inspectCategoryNames" />
+		<result property="specimenName" column="specimenNames" />
+		<result property="pname" column="names" />
+		<result property="sex" column="sexs" />
+		<result property="age" column="ages" />
+		<result property="inspectId" column="inspectIds" />
+		<result property="orgName" column="orgNames" />
+		<result property="doctorName" column="doctorNames" />
+		<result property="doctorCode" column="doctorCodes" />
+		<result property="inspectTime" column="inspectTimes" />
+		<result property="censorshipDoctor" column="censorshipDoctors" />
+		<result property="laboratoryDoctor" column="laboratoryDoctors" />
+		<result property="bedNo" column="bedNos" />
+		<result property="departmentName" column="departmentNames" />
+		<result property="clinicalDiagnosis" column="clinicalDiagnosiss" />
+		<collection property="inhostInspectItemMapList"  ofType="java.util.HashMap" javaType="java.util.ArrayList">
+		        <id property="id" column="idt" />
+		   		<result property="orgCode" column="orgCodet" />
+				<result property="inpatientNum" column="inpatientNumt" />
+				<result property="refLowValue" column="refLowValuet" />
+				<result property="refUpperValue" column="refUpperValuet" />
+				<result property="reportNo" column="reportNot" />
+				<result property="reportRlt" column="reportRltt" />
+				<result property="inspectionUnit" column="inspectionUnitt" />
+				<result property="inspectWayName" column="inspectWayNamet" />
+				<result property="inspectTechSignature" column="inspectTechSignaturet" />
+				<result property="inspectRltCode" column="inspectRltCodet" />
+				<result property="inspectItemType" column="inspectItemTypet" />
+				<result property="inspectTime" column="inspectTimet" />
+				<result property="inspectItemCode" column="inspectItemCodet" />
+				<result property="inspectItemName" column="inspectItemNamet" />
+				<result property="mzId" column="mzIdt" />
+				<result property="orgCode" column="orgCodet" />
+				<result property="resultFlag" column="resultFlagt" />
+		</collection>
+	</resultMap>
+   	<!--(门诊,住院)手术记录主表Map -->
+	<resultMap id="queryCommonSurgeryRecordMap" type="java.util.HashMap">
+	    <id property="id" column="ido" />
+		<result property="sexCode" column="sexCodeo" />
+		<result property="orgCode" column="orgCodeo" />
+		<result property="orgName" column="orgNameo" />
+		<result property="operationDeptName" column="operationDeptNameo" />
+		<result property="outpatientFlagCode" column="outpatientFlagCodeo" />
+		<result property="pname" column="pnameo" />
+		<result property="createdAt" column="createdAto" />
+		<result property="outpatientNum" column="outpatientNumo" />
+		<result property="inpatientNum" column="inpatientNumo" />
+		<result property="operationId" column="operationIdo" />
+		<result property="ageYears" column="ageYearso" />
+		<result property="ageMonths" column="ageMonthso" />
+		<result property="ageDays" column="ageDayso" />
+		<result property="ageHours" column="ageHourso" />
+		<result property="operationRoomNum" column="operationRoomNumo" />
+		<result property="recordPersonCode" column="recordPersonCodeo" />
+		<result property="recordPersonName" column="recordPersonNameo" />
+		<result property="applyDeptCode" column="applyDeptCodeo" />
+		<result property="applyDeptName" column="applyDeptNameo" />
+		<result property="operationDeptCode" column="operationDeptCodeo" />
+		<result property="applyDoctorCode" column="applyDoctorCodeo" />
+		<result property="applyDoctorName" column="applyDoctorNameo" />
+		<result property="operationDoctorCode" column="operationDoctorCodeo" />
+		<result property="operationDoctorName" column="operationDoctorNameo" />
+		<result property="operationContent" column="operationContento" />
+		<result property="operationPlaceCode" column="operationPlaceCodeo" />
+		<result property="operationPlaceName" column="operationPlaceNameo" />
+		<result property="operationApplyDate" column="operationApplyDateo" />
+		<result property="operationDate" column="operationDateo" />
+		<result property="dayFlagCode" column="dayFlagCodeo" />
+		<result property="doctorName" column="doctorNameo" />
+		<result property="deptName" column="deptNameo" />
+		<result property="deptCode" column="deptCodeo" />
+		<collection property="surgeryRecordDetailList"  ofType="java.util.HashMap" javaType="java.util.ArrayList">
+		    		<id property="id" column="idd" />
+		    		<result property="orgCode" column="orgCoded" />
+					<result property="inpatientNum" column="inpatientNumd" />
+					<result property="orgName" column="orgNamed" />
+					<result property="preoperativeDiagnosisName" column="preoperativeDiagnosisNamed" />
+					<result property="postoperativeDiagnosisName" column="postoperativeDiagnosisNamed" />
+					<result property="surgeonName" column="surgeonNamed" />
+					<result property="assistantFirName" column="assistantFirNamed" />
+					<result property="assistantSedName" column="assistantSedNamed" />
+					<result property="anesthesiaDocName" column="anesthesiaDocNamed" />
+					<result property="bleedingNum" column="bleedingNumd" />
+					<result property="transBloodNum" column="transBloodNumd" />
+					<result property="incisionDescrip" column="incisionDescripd" />
+					<result property="operationName" column="operationNamed" />
+					<result property="operationStartTime" column="operationStartTimed" />
+					<result property="operationFinishTime" column="operationFinishTimed" />
+		</collection>
+	</resultMap>
+ 
+		 
+	<!-- org_code和（zyId或mzId）查询住院结构化的检查报告结果（主表）返回List<map> -->
+	<select id="getCommonExamByMap" parameterType="map" resultMap="getCommonExamMap">
+	    <!-- <include refid="sqlHead"/> -->
+		SELECT 
+			ID$ as id,
+			<if test='ioType=="mz"'>
+		    '门诊检查' as "name",
+		    </if>
+		    <if test='ioType=="zy"'>
+		    '住院检查' as "name",
+		    </if>
+			MPIID$ as mpiid,
+			OUTPATIENT_NUM AS mzId,
+			INPATIENT_NUM
+			as inpatientNum,
+			ORG_CODE as orgCode,
+			to_char(e.EXAM_DATE, 'yyyy-mm-dd hh24:mi:ss') as recordTime,
+			IMAGE_NUM as studyId,
+			'' as isInhos,
+			EXAM_ID
+			as patientLocalId,
+			to_char(e.REPORT_DATE, 'yyyy-mm-dd hh24:mi:ss') as
+			reportDate,
+			EXAM_PART as studyPart,
+			EXAM_METHOD as studyMethod,
+			REPORT_DOCTOR_NAME as reporter,
+			EXAM_DEPT_NAME as expert,
+			EXAM_RESULT_FINDING as report,
+			EXAM_RESULT_PROMPT as conclusion,
+			EXAM_NUM as studyInstanceuId,
+			PNAME as pname,
+			SEX_CODE as sex,
+			APPLY_DOCTOR_NAME as doctorName,
+			DEPT_CODE as deptCode,
+			DEPT_NAME as
+			deptName,
+			AGE_YEARS as age,
+			ORG_NAME as orgName,
+			SICKBED_NUM as bedNo,
+			e.org_code AS "orgCodeTemp",
+			e.outpatient_num AS "mzIdTemp",
+			e.inpatient_num AS "zyIdTemp",
+			${param}
+		FROM
+			PT_OI_EXAM_IMAGE_REP e
+		<!-- <include refid="sqlEnd"/> -->
+		where
+		<if test='ioType=="mz"'>
+	        <foreach collection="data" index="index" item="item" open="" separator=" or " close="">
+	          ( e.OUTPATIENT_NUM=#{item.mzId} and e.ORG_CODE=#{item.orgCode} )
+	        </foreach>
+        </if>
+        <if test='ioType=="zy"'>
+           	<foreach collection="data" index="index" item="item" open="" separator=" or " close="">
+	          ( e.INPATIENT_NUM=#{item.zyId} and e.ORG_CODE=#{item.orgCode} )
+	        </foreach>
+        </if>
+	</select>
+	
+	<!-- org_code和（zyId或mzId）查询住院结构化的检验记录返回List<map> -->
+	<select id="getCommonInspectByFormMap" parameterType="map" resultMap="getCommonInspectMap">
+	   <!--  <include refid="sqlHead"/> -->
+		    SELECT 
+	        s.ID$ as ids,
+	        <if test='ioType=="mz"'>
+            '门诊检验' as "name",
+            </if>
+            <if test='ioType=="zy"'>
+            '住院检验' as "name",
+            </if>
+	        s.MPIID$ as mpiids,
+	        s.OUTPATIENT_NUM AS mzIds,
+	        s.INPATIENT_NUM
+	        as inpatientNums,
+	        s.ORG_CODE as orgCodes,
+	        to_char(s.REPORT_DATE, 'yyyy-mm-dd hh24:mi:ss') as recordTimes,
+	        s.INSPECT_REPORT_ID as inspectIds,
+	        s.EXAM_CODE AS
+	        inspectCategoryCodes,
+	        decode(s.EXAM_NAME, null, '', s.EXAM_NAME) AS
+	        inspectCategoryNames,
+	        s.SAMPLE_NAME as specimenNames,
+	        s.PNAME as names,
+	        s.SEX_CODE as sexs,
+	        s.AGE_YEARS as ages,
+	        s.ORG_NAME AS orgNames,
+	        s.APPLY_DOCTOR_NAME as doctorNames,
+	        s.APPLY_DOCTOR_CODE as doctorCodes,
+	        to_char(s.INSPECT_DATE, 'yyyy-mm-dd hh24:mi:ss') as inspectTimes,
+	        s.AUDIT_DOCTOR_NAME as censorshipDoctors,
+	        s.EXAM_DOCTOR_NAME as laboratoryDoctors,
+	        s.SICKBED_NUM as bedNos,
+	        s.APPLY_DEPT_NAME as departmentNames,
+	        decode(s.DISEASE_NAME, null, '',s.DISEASE_NAME) as clinicalDiagnosiss,
+	        T.ID$ as idt,
+			T.ORG_CODE as orgCodet,
+			T.INPATIENT_NUM as inpatientNumt,
+			T.REFER_VALUE_LOWER AS refLowValuet,
+			T.REFER_VALUE_UPPER AS refUpperValuet,
+			T.INSPECT_REPORT_ID AS reportNot,
+			to_char(T.ITEM_RESULT, '9990.99') AS
+			reportRltt,
+			T.UNIT AS inspectionUnitt,
+			T.INSPECT_METHOD AS inspectWayNamet,
+			T.INSPECTOR_NAME AS inspectTechSignaturet,
+			T.LOINC_CODE AS inspectRltCodet,
+			T.INSPECT_TYPE AS inspectItemTypet,
+			to_char(T.REPORT_DATE, 'yyyy-mm-dd hh24:mi:ss') AS inspectTimet,
+			T.ITEM_CODE AS inspectItemCodet,
+			ITEM_NAME AS
+			inspectItemNamet,
+			T.OUTPATIENT_NUM AS mzIdt,
+			T.ABNORMAL_PROMPT as resultFlags,
+			T.org_code AS "orgCodeTemp",
+			T.outpatient_num AS "mzIdTemp",
+			T.inpatient_num AS "zyIdTemp",
+			${param}
+       FROM PT_OI_INSPECT s 
+            left join  PT_OI_INSPECT_ITEM T 
+            on s.Inspect_Report_Id=t.Inspect_Report_Id 
+            and s.org_code=t.org_code
+            <if test='ioType=="mz"'>
+             and s.OUTPATIENT_NUM = t.OUTPATIENT_NUM
+            </if>
+	        <if test='ioType=="zy"'>
+	         and s.inpatient_num = t.inpatient_num
+	        </if>
+		<!-- <include refid="sqlEnd"/> -->
+	    where
+	    <if test='ioType=="mz"'>
+		<foreach collection="data" index="index" item="item" open="" separator=" or " close="">
+	          ( s.OUTPATIENT_NUM=#{item.mzId} and s.ORG_CODE=#{item.orgCode} )
+	      </foreach>
+        </if>
+        <if test='ioType=="zy"'>
+	      <foreach collection="data" index="index" item="item" open="" separator=" or " close="">
+	          ( s.INPATIENT_NUM=#{item.zyId} and s.ORG_CODE=#{item.orgCode} )
+	        </foreach>
+         </if>
+        order by s.REPORT_DATE desc
+	</select>
+	
+	    <!-- orgCode和（zyId或mzId）operationId(可选参数) 门诊住院手术记录详情主表 -->
+	<select id="queryCommonSurgeryRecord" parameterType="map" resultMap="queryCommonSurgeryRecordMap">
+	     <!-- <include refid="sqlHead"/> -->
+		      select 
+		        poo.id$ as ido,
+		        <if test='ioType=="mz"'>
+                '门诊手术' as "name",
+                </if>
+                <if test='ioType=="zy"'>
+                '住院手术' as "name",
+                </if>
+		        poo.ORG_CODE as orgCodeo,
+		        poo.ORG_NAME as orgNameo,
+		        poo.OPERATION_DEPT_NAME as operationDeptNameo,
+		        poo.OUTPATIENT_FLAG_CODE as outpatientFlagCodeo,
+		        poo.PNAME as pnameo,
+		        poo.SEX_CODE as sexCodeo,
+		        to_char(poo.CREATED_AT, 'yyyy-mm-dd hh24:mi:ss') as createdAto,
+		        poo.OUTPATIENT_NUM as outpatientNumo,
+		        poo.INPATIENT_NUM as inpatientNumo,
+		        poo.OPERATION_ID as operationIdo,
+		        poo.AGE_YEARS as ageYearso,
+		        poo.AGE_MONTHS as ageMonthso,
+		        poo.AGE_DAYS as ageDayso,
+		        poo.AGE_HOURS as ageHourso,
+		        poo.OPERATION_ROOM_NUM as operationRoomNumo,
+		        poo.RECORD_PERSON_CODE as recordPersonCodeo,
+		        poo.RECORD_PERSON_NAME as recordPersonNameo,
+		        poo.APPLY_DEPT_CODE as applyDeptCodeo,
+		        poo.APPLY_DEPT_NAME as deptNameo,
+		        poo.OPERATION_DEPT_CODE as deptCodeo,
+		        poo.APPLY_DOCTOR_CODE as applyDoctorCodeo,
+		        poo.APPLY_DOCTOR_NAME as applyDoctorNameo,
+		        poo.OPERATION_DOCTOR_CODE as operationDoctorCodeo,
+		        poo.OPERATION_DOCTOR_NAME as doctorNameo,
+		        poo.OPERATION_CONTENT as operationContento,
+		        poo.OPERATION_PLACE_CODE as operationPlaceCodeo,
+		        poo.OPERATION_PLACE_NAME as operationPlaceNameo,
+		        to_char(poo.OPERATION_APPLY_DATE, 'yyyy-mm-dd hh24:mi:ss') as operationApplyDateo,
+		        to_char(poo.OPERATION_DATE, 'yyyy-mm-dd hh24:mi:ss') as operationDateo,
+		        poo.DAY_FLAG_CODE as dayFlagCodeo,
+		        pood.id$ as idd,
+		        pood.ORG_CODE as orgCoded,
+		        pood.INPATIENT_NUM as inpatientNumd,
+		        pood.ORG_NAME as orgNamed,
+		        pood.PREOPERATIVE_DIAGNOSIS_NAME as preoperativeDiagnosisNamed,
+		        pood.POSTOPERATIVE_DIAGNOSIS_NAME as postoperativeDiagnosisNamed,
+		        pood.SURGEON_NAME as surgeonNamed,
+		        pood.ASSISTANT_FIR_NAME as assistantFirNamed,
+		        pood.ASSISTANT_SED_NAME as assistantSedNamed,
+		        pood.ANESTHESIA_DOC_NAME as anesthesiaDocNamed,
+		        pood.BLEEDING_NUM as bleedingNumd,
+		        pood.TRANS_BLOOD_NUM as transBloodNumd,
+		        pood.INCISION_DESCRIP as incisionDescripd,
+		        pood.OPERATION_NAME as operationNamed,
+		        to_char(pood.OPERATION_START_TIME, 'yyyy-mm-dd hh24:mi:ss') as operationStartTimed,
+		        to_char(pood.OPERATION_FINISH_TIME, 'yyyy-mm-dd hh24:mi:ss') as operationFinishTimed,
+		        poo.org_code AS "orgCodeTemp",
+			    poo.outpatient_num AS "mzIdTemp",
+			    poo.inpatient_num AS "zyIdTemp",
+			    ${param}
+		    FROM PT_OI_OPERATION poo
+		    left join PT_OI_OPERATION_DETAIL pood on poo.org_code=pood.org_code and  poo.operation_id=pood.operation_id
+		     <if test='ioType=="mz"'>
+             and poo.OUTPATIENT_NUM=pood.outpatient_num 
+            </if>
+	        <if test='ioType=="zy"'>
+	          and poo.inpatient_num = pood.inpatient_num
+	        </if>
+		    where
+		    <if test='ioType=="mz"'>
+			    <foreach collection="data" index="index" item="item" open="" separator=" or " close="">
+	             ( poo.OUTPATIENT_NUM=#{item.mzId} and poo.ORG_CODE=#{item.orgCode} )
+	           </foreach>
+	        </if>
+	        <if test='ioType=="zy"'>
+	           <foreach collection="data" index="index" item="item" open="" separator=" or " close="">
+	             ( poo.INPATIENT_NUM=#{item.zyId} and poo.ORG_CODE=#{item.orgCode} )
+	           </foreach>
+	        </if>
+            <!-- <include refid="sqlEnd"/> -->
+	</select>
+	
+	
+		<resultMap id="queryTbDrugMap" type="java.util.HashMap">
+		<result property="id" column="id" />
+		<result property="nationdirectoryNum" column="nationdirectoryNum" />
+		<result property="commonName" column="commonName" />
+		<result property="dosageForm" column="dosageForm" />
+		<result property="unit" column="unit" />
+		<result property="drugspecifications" column="drugspecifications" />
+		<result property="minpackPrice" column="minpackPrice" />
+		<result property="procductCompany" column="procductCompany" />
+	</resultMap>
+	
+		<!-- 价格公示-医疗服务Map -->
+	<resultMap id="queryTbItemPriceMap" type="java.util.HashMap">
+		<result property="id" column="id" />
+		<result property="financeClassify" column="financeClassify" />
+		<result property="priceCode" column="priceCode" />
+		<result property="itemName" column="itemName" />
+		<result property="classifyCode" column="classifyCode" />
+		<result property="classifyName" column="classifyName" />
+		<result property="bigclassCode" column="bigclassCode" />
+		<result property="bigclassName" column="bigclassName" />
+		<result property="subclassCode" column="subclassCode" />
+		<result property="subclassName" column="subclassName" />
+		<result property="itemConnotation" column="itemConnotation" />
+		<result property="exceptContent" column="exceptContent" />
+		<result property="priceUnit" column="priceUnit" />
+		<result property="oneclassPrice" column="oneclassPrice" />
+		<result property="twoclassPrice" column="twoclassPrice" />
+		<result property="threeclassPrice" column="threeclassPrice" />
+		<result property="explain" column="explain" />
+		<result property="source" column="source" />
+	</resultMap>
+	<!-- 价格公示-药品 
+		 由于数据量并不大，所以不用分页-->
+	<select id="queryTbDrug" resultMap="queryTbDrugMap">
+		select 
+			   ID as id,
+			   NATIONDIRECTORY_NUM as nationdirectoryNum,
+		       COMMON_NAME         as commonName,
+		       DOSAGE_FORM         as dosageForm,
+		       UNIT                as unit,
+		       DRUGSPECIFICATIONS  as drugspecifications,
+		       MINPACK_PRICE       as minpackPrice,
+		       PROCDUCT_COMPANY    as procductCompany
+		  from TB_DRUG_PRICE t
+	</select>
+	
+		<!-- 价格公示-服务医疗 
+	 	  由于数据量并不大，所以不用分页-->
+	<select id="queryTbItemPrice" resultMap="queryTbItemPriceMap">
+		select
+			id as ID,
+			finance_classify as financeClassify,
+			price_code as priceCode,
+			item_name
+			as itemName,
+			classify_code as classifyCode,
+			classify_name as
+			classifyName,
+			bigclass_code as bigclassCode,
+			bigclass_name as
+			bigclassName,
+			subclass_code as subclassCode,
+			subclass_name as
+			subclassName,
+			item_connotation as itemConnotation,
+			except_content as
+			exceptContent,
+			price_unit as priceUnit,
+			oneclass_price as oneclassPrice,
+			twoclass_price as twoclassPrice,
+			threeclass_price as threeclassPrice,
+			explain as explain,
+			source as source
+		from
+			TB_ITEM_PRICE t
+	</select>
+</mapper>
+

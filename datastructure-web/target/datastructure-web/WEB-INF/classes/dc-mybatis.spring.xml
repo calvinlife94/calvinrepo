@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+                        http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+                        http://www.springframework.org/schema/context
+                        http://www.springframework.org/schema/context/spring-context-3.1.xsd
+                        http://www.springframework.org/schema/mvc
+                        http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
+    <!-- 自动扫描 -->  
+    <context:component-scan base-package="com.zhijieyun.datastructure.dao.mapper" />
+  
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource"  init-method="init"
+        destroy-method="close">
+        <property name="driverClassName" value="${jdbc.driver}" />  
+        <property name="url" value="${jdbc.url}" />
+        <property name="username" value="${jdbc.username}" />
+        <property name="password" value="${jdbc.password}" />  
+        <!-- 初始化连接大小 -->  
+        <property name="initialSize" value="${jdbc.initialSize}"></property>  
+        <!-- 连接池最大数量 -->  
+        <property name="maxActive" value="${jdbc.maxActive}"></property>  
+        <!-- 连接池最大空闲, 该属性已过时-->  
+        <!-- <property name="maxIdle" value="${jdbc.maxIdle}"></property>   -->
+        <!-- 连接池最小空闲 -->  
+        <property name="minIdle" value="${jdbc.minIdle}"></property>  
+        <!-- 获取连接最大等待时间 -->  
+        <property name="maxWait" value="${jdbc.maxWait}"></property>  
+        
+        <property name="validationQuery" value="select 'x' from dual" />
+		<property name="testWhileIdle" value="true" />
+		
+		<!-- Driud连接池的配置，只有配置了filters，才可以打印SQL日志 -->
+		<property name="filters" value="log4j" />
+		
+    </bean>  
+    
+    <!-- spring和MyBatis整合，不需要mybatis的配置映射文件 -->  
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">  
+        <property name="dataSource" ref="dataSource" />  
+        <property name="configLocation" value="classpath:dc-config.mybatis.xml" />
+        <!-- 自动扫描mapping.xml文件 -->
+        <property name="mapperLocations" value="classpath*:com/zhijieyun/datastructure/dao/sqlmap/*.xml"></property>  
+    </bean>  
+  
+    <!-- DAO接口所在包名，Spring会自动查找其下的类 --> 
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">  
+        <property name="basePackage" value="com.zhijieyun.datastructure.dao.mapper" />  
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>  
+    </bean>  
+  
+    <!-- (事务管理)transaction manager, use JtaTransactionManager for global tx -->  
+    <bean id="transactionManager1"  
+        class="org.springframework.jdbc.datasource.DataSourceTransactionManager">  
+        <property name="dataSource" ref="dataSource" />  
+    </bean>  
+    
+    <bean id="middleDataSource" class="com.alibaba.druid.pool.DruidDataSource"  init-method="init"
+        destroy-method="close">  
+        <property name="driverClassName" value="${middle.jdbc.driver}" />  
+        <property name="url" value="${middle.jdbc.url}" />  
+        <property name="username" value="${middle.jdbc.username}" />  
+        <property name="password" value="${middle.jdbc.password}" />  
+        <!-- 初始化连接大小 -->  
+        <property name="initialSize" value="${middle.jdbc.initialSize}"></property>  
+        <!-- 连接池最大数量 -->  
+        <property name="maxActive" value="${middle.jdbc.maxActive}"></property>  
+        <!-- 连接池最大空闲, 该属性已过时-->  
+        <!-- <property name="maxIdle" value="${jdbc.maxIdle}"></property>   -->
+        <!-- 连接池最小空闲 -->  
+        <property name="minIdle" value="${middle.jdbc.minIdle}"></property>  
+        <!-- 获取连接最大等待时间 -->  
+        <property name="maxWait" value="${middle.jdbc.maxWait}"></property>  
+        
+        <property name="validationQuery" value="select 'x' from dual" />
+		<property name="testWhileIdle" value="true" />
+		
+		<!-- Driud连接池的配置，只有配置了filters，才可以打印SQL日志 -->
+		<!-- <property name="filters" value="stat,log4j" /> -->
+		<property name="filters" value="" />
+		
+		 <!-- 配置监控统计拦截的filters 
+        Druid的监控统计功能是通过filter-chain扩展实现，如果你要打开监控统计功能，配置StatFilter，具体看这里
+        -->
+    </bean>
+  
+</beans>  

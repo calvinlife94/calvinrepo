@@ -1,0 +1,1381 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD iBatis Mapper 3.0 //EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<!-- define mapping from database to class -->
+<mapper namespace="com.zhijieyun.datastructure.dao.mapper.HospitalizationMapper">
+		<!--住院-出院小结主表Map -->
+<resultMap id="inHospitalRecords" type="java.util.HashMap">
+        <!-- 主表id -->
+	    <id property="id" column="idr" />
+	    <!-- 字表id -->
+	    <result property="pedId" column="idq" />
+	    <result property="mpiid" column="mpiid" />
+	    <result property="name" column="name" />
+		<result property="orgCode" column="orgCode" />
+		<result property="orgName" column="orgName" />
+		<result property="zyId" column="inpatientNum" />
+		<result property="inpatientNum" column="inpatientNum" />
+		<result property="serviceDoctorCode" column="serviceDoctorCode" />
+		<result property="createdAt" column="createdAt" />
+		<result property="caseHistoryId" column="caseHistoryId" />
+		<result property="healthCardNum" column="healthCardNum" />
+		<result property="deptCode" column="deptCode" />
+		<result property="deptName" column="deptName" />
+		<result property="areaName" column="areaName" />
+		<result property="wardNum" column="wardNum" />
+		<result property="sickbedNum" column="sickbedNum" />
+		<result property="idCard" column="idcardNum" />
+		<result property="idcard" column="idcardNum" />
+		<result property="idcardNum" column="idcardNum" />
+		<result property="idcardType" column="idcardType" />
+		<result property="otherIdNum" column="otherIdNum" />
+		<result property="pname" column="pname" />
+		<result property="sexCode" column="sexCode" />
+		<result property="ageYears" column="ageYears" />
+		<result property="ageMonths" column="ageMonths" />
+		<result property="ageDays" column="ageDays" />
+		<result property="ageHours" column="ageHours" />
+		<result property="maritalStatusCode" column="maritalStatusCode" />
+		<result property="maritalStatusName" column="maritalStatusName" />
+		<result property="occupationCode" column="occupationCode" />
+		<result property="occupationName" column="occupationName" />
+		<result property="tel" column="tel" />
+		<result property="addressTypeCode" column="addressTypeCode" />
+		<result property="province" column="province" />
+		<result property="city" column="city" />
+		<result property="county" column="county" />
+		<result property="town" column="town" />
+		<result property="village" column="village" />
+		<result property="houseNum" column="houseNum" />
+		<result property="postalCode" column="postalCode" />
+		<result property="linkmanName" column="linkmanName" />
+		<result property="linkmanTel" column="linkmanTel" />
+		<result property="serviceTime" column="serviceTime" />
+		<result property="admissionDate" column="admissionDate" />
+		<result property="dischargeDate" column="dischargeDate" />
+		<result property="inpatientDay" column="inpatientDay" />
+		<result property="residentDoctorCode" column="residentDoctorCode" />
+		<result property="residentDoctorName" column="residentDoctorName" />
+		<result property="attendingDoctorCode" column="attendingDoctorCode" />
+		<result property="attendingDoctorName" column="attendingDoctorName" />
+		<result property="superiorDoctorName" column="superiorDoctorName" />
+		<result property="admissionSituation" column="admissionSituation" />
+		<result property="treatResultCode" column="treatResultCode" />
+		<result property="treatProcess" column="treatProcess" />
+		<result property="dischargeSituation" column="dischargeSituation" />
+		<result property="dischargeSigns" column="dischargeSigns" />
+		<result property="assistExamResult" column="assistExamResult" />
+		<result property="inDischargeSigns" column="inDischargeSigns" />
+		<result property="inspectConsultation" column="inspectConsultation" />
+		<result property="specialExam" column="specialExam" />
+		<result property="diseaseOutcomeCode" column="diseaseOutcomeCode" />
+		<result property="complication" column="complication" />
+		<result property="dischargeOrder" column="dischargeOrder" />
+		<result property="flagFourDiagnosis" column="flagFourDiagnosis" />
+		<result property="fourDiagnosis" column="fourDiagnosis" />
+		<result property="treatmentMethod" column="treatmentMethod" />
+		<result property="tcmDecoctionMethod" column="tcmDecoctionMethod" />
+		<result property="medicationMethod" column="medicationMethod" />
+		<result property="doctorName" column="doctorName" />
+</resultMap>
+<resultMap id="getAllSetDaysResult" type="java.util.HashMap">
+        <id property="id" column="idq" />
+        <result property="name" column="name" />
+		<result property="mpiid" column="mpiidq" />
+		<result property="orderId" column="orderIdq" />
+		<result property="hospitalizedTime" column="hospitalizedTimeq" />
+		<result property="marriageFlag" column="marriageFlagq" />
+		<result property="patientMonthAge" column="patientMonthAgeq" />
+		<result property="nowAddressCity" column="nowAddressCityq" />
+		<result property="patientPhoneNumber" column="patientPhoneNumberq" />
+		<result property="caseHistoryId" column="caseHistoryIdq" />
+		<result property="healthNumber" column="healthNumberq" />
+		<result property="medicalCard" column="medicalCardq" />
+		<result property="patientName" column="patientNameq" />
+		<result property="patientBirth" column="patientBirthq" />
+		<result property="patientIdCard" column="patientIdCardq" />
+		<result property="patientAge" column="patientAgeq" />
+		<result property="contactProvince" column="contactProvinceq" />
+		<result property="contactPatient" column="contactPatientq" />
+		<result property="registeredNumber" column="registeredNumberq" />
+		<result property="inpatientNum" column="inpatientNumq" />
+		<result property="contactCity" column="contactCityq" />
+		<result property="hailCity" column="hailCityq" />
+		<result property="hailProvince" column="hailProvinceq" />
+		<result property="birthCounty" column="birthCountyq" />
+		<result property="nowPostalNumber" column="nowPostalNumberq" />
+		<result property="registeredCity" column="registeredCityq" />
+		<result property="orgName" column="orgNameq" />
+		<result property="hospitalizationDay" column="hospitalizationDayq" />
+		<result property="recordTime" column="recordTimeq" />
+		<result property="contactDoorplate" column="contactDoorplateq" />
+		<result property="contactTowns" column="contactTownsq" />
+		<result property="patientSex" column="patientSexq" />
+		<result property="residentIdCard" column="residentIdCardq" />
+		<result property="birthProvince" column="birthProvinceq" />
+		<result property="nation" column="nationq" />
+		<result property="nationality" column="nationalityq" />
+		<result property="nowProvince" column="nowProvinceq" />
+		<result property="nowCounty" column="nowCountyq" />
+		<result property="idCardNumber" column="idCardNumberq" />
+		<result property="contactName" column="contactNameq" />
+		<result property="registeredCounty" column="registeredCountyq" />
+		<result property="registeredProvince" column="registeredProvinceq" />
+		<result property="birthCity" column="birthCityq" />
+		<result property="contactPhone" column="contactPhoneq" />
+		<result property="orgCode" column="orgCodeq" />
+		<result property="outHospitalTime" column="outHospitalTimeq" />
+		<result property="contactVillage" column="contactVillageq" />
+		<result property="contactCounty" column="contactCountyq" />
+		<result property="workVillage" column="workVillageq" />
+		<result property="workCounty" column="workCountyq" />
+		<result property="workProvince" column="workProvinceq" />
+		<result property="workAddressNumber" column="workAddressNumberq" />
+		<result property="jobTypeCode" column="jobTypeCodeq" />
+		<result property="workName" column="workNameq" />
+		<result property="workCity" column="workCityq" />
+		<result property="workTowns" column="workTownsq" />
+		<result property="workDoorplate" column="workDoorplateq" />
+		<result property="workPhoneNumber" column="workPhoneNumberq" />
+		<result property="inpatientWards" column="inpatientWardsq" />
+		<result property="birthWeight" column="birthWeightq" />
+		<result property="turnDeptName" column="turnDeptNameq" />
+		<result property="enterSituation" column="enterSituationq" />
+		<result property="outWard" column="outWardq" />
+		<result property="hospitalFrequency" column="hospitalFrequencyq" />
+		<result property="enterWeight" column="enterWeightq" />
+		<result property="outHospitalDeptName" column="outHospitalDeptNameq" />
+		<result property="hospitalizedFee" column="hospitalizedFeeq" />
+		<result property="paymentCode" column="paymentCodeq" />
+		<result property="enterPathway" column="enterPathwayq" />
+		<result property="deptName" column="deptNameq" />
+		<result property="deptCode" column="deptCodeq" />
+		<result property="serviceTime" column="serviceTimeq" />
+			<collection property="assistList"  ofType="java.util.HashMap" javaType="java.util.ArrayList">
+			    <id property="id" column="idw" />
+		   		<result property="orgCode" column="orgCodew" />
+				<result property="inpatientNum" column="inpatientNumw" />
+				<result property="pathologyDiagnosisCode" column="pathologyDiagnosisCodew" />
+				<result property="pathologyDiagnosisName" column="pathologyDiagnosisNamew" />
+				<result property="autopsyFlag" column="autopsyFlagw" />
+				<result property="backHospitalFlag" column="backHospitalFlagw" />
+				<result property="acceptOrgName" column="acceptOrgNamew" />
+				<result property="chargeDate" column="chargeDatew" />
+				<result property="recordQuality" column="recordQualityw" />
+				<result property="backHospital" column="backHospitalw" />
+				<result property="comaTime" column="comaTimew" />
+				<result property="rhaboCode" column="rhaboCodew" />
+				<result property="comaAfterTime" column="comaAfterTimew" />
+				<result property="allergyDrug" column="allergyDrugw" />
+				<result property="pathologyNumber" column="pathologyNumberw" />
+				<result property="poisoningDiagnosisCode" column="poisoningDiagnosisCodew" />
+				<result property="poisoningCause" column="poisoningCausew" />
+				<result property="hospitalMode" column="hospitalModew" />
+				<result property="receiveOrgName" column="receiveOrgNamew" />
+				<result property="internshipSignature" column="internshipSignaturew" />
+				<result property="nurseSignature" column="nurseSignaturew" />
+				<result property="hospitalSignature" column="hospitalSignaturew" />
+				<result property="doctorSignature" column="doctorSignaturew" />
+				<result property="healthNameSignature" column="healthNameSignaturew" />
+				<result property="chargeNurseSignature" column="chargeNurseSignaturew" />
+				<result property="deptDoctorSignature" column="deptDoctorSignaturew" />
+				<result property="indicationsSignature" column="indicationsSignaturew" />
+				<result property="studiesSignature" column="studiesSignaturew" />
+				<result property="chargeSignature" column="chargeSignaturew" />
+				<result property="allergyFlag" column="allergyFlagw" />
+				<result property="aboCode" column="aboCodew" />
+		</collection>
+	    <collection property="diagnoseList"  ofType="java.util.HashMap" javaType="java.util.ArrayList">
+	            <id property="id" column="ide" />
+		   		<result property="orgCode" column="orgCodee" />
+				<result property="inpatientNum" column="inpatientNume" />
+				<result property="outOtherDiagnosisCode" column="outOtherDiagnosisCodee" />
+				<result property="outOthersDiagnosisCode" column="outOthersDiagnosisCodee" />
+				<result property="outDiagnosisName" column="outDiagnosisNamee" />
+				<result property="outDiagnosisCode" column="outDiagnosisCodee" />
+				<result property="outpatientDiagnosisCode" column="outpatientDiagnosisCodee" />
+				<result property="outOthersDiagnosisName" column="outOthersDiagnosisNamee" />
+				<result property="outCode" column="outCodee" />
+				<result property="outPatientDiagnosis4TCS" column="outPatientDiagnosis4TCSe" />
+				<result property="outpatientDiagnosisCode4TCS" column="outpatientDiagnosisCode4TCSe" />
+				<result property="outDiagnosisName4TCS" column="outDiagnosisName4TCSe" />
+				<result property="outDiagnosisCode4TCS" column="outDiagnosisCode4TCSe" />
+				<result property="outCode4TCS" column="outCode4TCSe" />
+				<result property="outOthersDiagnosisName4TCS" column="outOthersDiagnosisName4TCSe" />
+				<result property="outOthersDiagnosisCode4TCS" column="outOthersDiagnosisCode4TCSe" />
+				<result property="outOtherDiagnosisCode4TCS" column="outOtherDiagnosisCode4TCSe" />
+				<result property="outPatientDiagnosis" column="outPatientDiagnosise" />
+				<result property="caseHistoryId" column="caseHistoryIde" />
+		</collection>
+		<collection property="costList"  ofType="java.util.HashMap" javaType="java.util.ArrayList">
+		        <id property="id" column="idr" />
+				<result property="orgCode" column="orgCoder" />
+				<result property="inpatientNum" column="inpatientNumr" />
+				<result property="westernFee" column="westernFeer" />
+				<result property="anesthesiaFee" column="anesthesiaFeer" />
+				<result property="operatingFee" column="operatingFeer" />
+				<result property="surgeryFee" column="surgeryFeer" />
+				<result property="bloodFee" column="bloodFeer" />
+				<result property="diagnosisFee" column="diagnosisFeer" />
+				<result property="generalFee" column="generalFeer" />
+				<result property="diagnosisItemFee" column="diagnosisItemFeer" />
+				<result property="portraitDiagnosisFee" column="portraitDiagnosisFeer" />
+				<result property="oterFee" column="oterFeer" />
+				<result property="productsFee" column="productsFeer" />
+				<result property="antibacterialsFee" column="antibacterialsFeer" />
+				<result property="herbsFee" column="herbsFeer" />
+				<result property="hospitalPaysMoney" column="hospitalPaysMoneyr" />
+				<result property="compositeOterFee" column="compositeOterFeer" />
+				<result property="testdiagnosisFee" column="testdiagnosisFeer" />
+				<result property="cureItemFee" column="cureItemFeer" />
+				<result property="cureSurgeryFee" column="cureSurgeryFeer" />
+				<result property="centerSurgeryFee" column="centerSurgeryFeer" />
+				<result property="materialFee" column="materialFeer" />
+				<result property="globulinFee" column="globulinFeer" />
+				<result property="medicineFee" column="medicineFeer" />
+				<result property="albuminFee" column="albuminFeer" />
+				<result property="rehabilitationFee" column="rehabilitationFeer" />
+				<result property="physicsFee" column="physicsFeer" />
+				<result property="compositeNurseFee" column="compositeNurseFeer" />
+				<result property="cruorFee" column="cruorFeer" />
+				<result property="censorMaterialFee" column="censorMaterialFeer" />
+				<result property="operationMaterialFee" column="operationMaterialFeer" />
+				<result property="caseHistoryId" column="caseHistoryIdr" />
+		</collection>
+		<collection property="OperateRecordList"  ofType="java.util.HashMap" javaType="java.util.ArrayList">
+		    <id property="id" column="idt" />
+		   	<result property="inpatientNum" column="inpatientNumt" />
+			<result property="operateCureLevel" column="operateCureLevelt" />
+			<result property="surgeryLevel" column="surgeryLevelt" />
+			<result property="surgeryType" column="surgeryTypet" />
+			<result property="operateCode" column="operateCodet" />
+			<result property="operateDoctor" column="operateDoctort" />
+			<result property="assistantName1" column="assistantName1t" />
+			<result property="assistantName2" column="assistantName2t" />
+			<result property="orgCode" column="orgCodet" />
+			<result property="operateName" column="operateNamet" />
+			<result property="anesthesiaDoctor" column="anesthesiaDoctort" />
+			<result property="assistantName" column="assistantNamet" />
+			<result property="anesthesiaType" column="anesthesiaTypet" />
+			<result property="caseHistoryId" column="caseHistoryIdt" />
+			<result property="operateDate" column="operateDatet" />
+		</collection>
+	</resultMap>
+	
+<!-- 入院记录主表Map -->
+<resultMap id="admissionRecordMap" type="java.util.HashMap">
+	    <id property="id" column="idq" />
+	    <result property="name" column="name" />
+		<result property="mpiid" column="mpiId" />
+		<result property="orgCode" column="orgCode" />
+		<result property="orgName" column="orgName" />
+		<result property="createdAt" column="createdAt" />
+		<result property="inpatientNum" column="inpatientNum" />
+		<result property="caseHistoryId" column="caseHistoryId" />
+		<result property="areaName" column="areaName" />
+		<result property="depCode" column="depCode" />
+		<result property="depName" column="depName" />
+		<result property="wardNum" column="wardNum" />
+		<result property="sickbedNum" column="sickbedNum" />
+		<result property="pname" column="pname" />
+		<result property="sexCode" column="sexCode" />
+		<result property="idcardType" column="idcardType" />
+		<result property="otherIdNum" column="otherIdNum" />
+		<result property="idcardNum" column="idcardNum" />
+		<result property="ageYears" column="ageYears" />
+		<result property="ageMonths" column="ageMonths" />
+		<result property="ageDays" column="ageDays" />
+		<result property="ageHours" column="ageHours" />
+		<result property="nationCode" column="nationCode" />
+		<result property="nationName" column="nationName" />
+		<result property="maritalStatusCode" column="maritalStatusCode" />
+		<result property="maritalStatusName" column="maritalStatusName" />
+		<result property="occupationCode" column="occupationCode" />
+		<result property="occupationName" column="occupationName" />
+		<result property="province" column="province" />
+		<result property="provinceName" column="provinceName" />
+		<result property="city" column="city" />
+		<result property="cityName" column="cityName" />
+		<result property="county" column="county" />
+		<result property="countyName" column="countyName" />
+		<result property="town" column="town" />
+		<result property="townName" column="townName" />
+		<result property="village" column="village" />
+		<result property="houseNum" column="houseNum" />
+		<result property="workingOrg" column="workingOrg" />
+		<result property="admissionDate" column="admissionDate" />
+		<result property="chiefComplaint" column="chiefComplaint" />
+		<result property="presentIllness" column="presentIllness" />
+		<result property="diseasesHistory" column="diseasesHistory" />
+		<result property="isInfectious" column="isInfectious" />
+		<result property="infectionHistory" column="infectionHistory" />
+		<result property="vaccinationHistory" column="vaccinationHistory" />
+		<result property="surgeryHistory" column="surgeryHistory" />
+		<result property="btHistory" column="btHistory" />
+		<result property="allergyHistory" column="allergyHistory" />
+		<result property="personalHistory" column="personalHistory" />
+		<result property="maritalHistory" column="maritalHistory" />
+		<result property="menstruationHistory" column="menstruationHistory" />
+		<result property="familyHistory" column="familyHistory" />
+		<result property="flagFourDiagnosis" column="flagFourDiagnosis" />
+		<result property="fourDiagnosis" column="fourDiagnosis" />
+		<result property="therapeuticTreatment" column="therapeuticTreatment" />
+		<result property="representorName" column="representorName" />
+		<result property="linkmanRelationCode" column="linkmanRelationCode" />
+		<result property="linkmanRelationName" column="linkmanRelationName" />
+		<result property="isReliable" column="isReliable" />
+		<result property="receptionDoctorCode" column="receptionDoctorCode" />
+		<result property="receptionDoctorName" column="receptionDoctorName" />
+		<result property="admissionDoctorCode" column="admissionDoctorCode" />
+		<result property="admissionDoctorName" column="admissionDoctorName" />
+		<result property="attendingDoctorCode" column="attendingDoctorCode" />
+		<result property="attendingDoctorName" column="attendingDoctorName" />
+		<result property="chiefDoctorCode" column="chiefDoctorCode" />
+		<result property="chiefDoctorName" column="chiefDoctorName" />
+		<result property="audtorName" column="audtorName" />
+		<result property="inpatientTimes" column="inpatientTimes" />
+		<result property="admissionTypeCode" column="admissionTypeCode" />
+		<result property="admissionTypeName" column="admissionTypeName" />
+		<result property="outOrdersDoctorName" column="outOrdersDoctorName" />
+		<result property="thereDiagnosisDatail" column="thereDiagnosisDatail" />
+		<result property="temperature" column="temperature" />
+		<result property="pulseRate" column="pulseRate" />
+		<result property="breathingRate" column="breathingRate" />
+		<result property="pressureH" column="pressureH" />
+		<result property="pressureL" column="pressureL" />
+		<result property="height" column="height" />
+		<result property="weight" column="weight" />
+		<result property="generalExamResult" column="generalExamResult" />
+		<result property="skinExamResult" column="skinExamResult" />
+		<result property="lymphExamResult" column="lymphExamResult" />
+		<result property="headExamResult" column="headExamResult" />
+		<result property="neckExamResult" column="neckExamResult" />
+		<result property="chestExamResult" column="chestExamResult" />
+		<result property="bellyExamResult" column="bellyExamResult" />
+		<result property="anusExamResult" column="anusExamResult" />
+		<result property="genitalsExamResult" column="genitalsExamResult" />
+		<result property="spineExamResult" column="spineExamResult" />
+		<result property="armsLegsExamResult" column="armsLegsExamResult" />
+		<result property="eervousSysExamResult" column="eervousSysExamResult" />
+		<result property="specialExamResult" column="specialExamResult" />
+		<result property="generalHealth" column="generalHealth" />
+		<result property="doctorName" column="doctorName" />
+		<result property="serviceTime" column="serviceTime" />
+		 <collection property="admissionRecordDiagList"  ofType="java.util.HashMap" javaType="java.util.ArrayList">
+		    <id property="id" column="idw" />
+		   	<result property="orgCode" column="orgCodew" />
+			<result property="orgName" column="orgNamew" />
+			<result property="updateTime" column="updateTimew" />
+			<result property="inpatientNum" column="inpatientNumw" />
+			<result property="caseHistoryId" column="caseHistoryIdw" />
+			<result property="diagnosisTypeCode" column="diagnosisTypeCodew" />
+			<result property="diagnosisTypeName" column="diagnosisTypeNamew" />
+			<result property="diseaseCode" column="diseaseCodew" />
+			<result property="disease" column="diseasew" />
+			<result property="chDiseaseName" column="chDiseaseNamew" />
+			<result property="chDiseaseCode" column="chDiseaseCodew" />
+			<result property="chDiseaseName1" column="chDiseaseName1w" />
+			<result property="chDiseaseCode1" column="chDiseaseCode1w" />
+			<result property="diagnosisDate" column="diagnosisDatew" />
+			<result property="primaryDiagnosisMark" column="primaryDiagnosisMarkw" />
+			<result property="diseaseNum" column="diseaseNumw" />
+		</collection>
+		<collection property="admissionRecordExamList"  ofType="java.util.HashMap" javaType="java.util.ArrayList">
+		    <id property="id" column="ide" />
+		   	<result property="orgCode" column="orgCodee" />
+			<result property="orgName" column="orgNamee" />
+			<result property="updateTime" column="updateTimee" />
+			<result property="inpatientNum" column="inpatientNume" />
+			<result property="caseHistoryId" column="caseHistoryIde" />
+			<result property="examItem" column="examIteme" />
+			<result property="examResult" column="examResulte" />
+			<result property="examTime" column="examTimee" />
+			<result property="examType" column="examTypee" />
+		</collection>
+	</resultMap>
+	
+<resultMap id="getOrdersMapUnion" type="java.util.HashMap">
+        <id property="id" column="iddo" />
+		<result property="inpatientNum" column="inpatientNum" />
+		<result property="validPeriod" column="validPeriod" />
+		<result property="pname" column="name" />
+		<result property="orderType" column="orderType" />
+		<result property="sickbedNum" column="sickbedNum" />
+		<result property="deptName" column="deptName" />
+		<result property="orderDeptCode" column="orderDeptCode" />
+		<result property="orderDeptName" column="orderDeptName" />
+		<result property="orderDocCode" column="orderDocCode" />
+		<result property="remark" column="remark" />
+		<result property="stopNurseName" column="stopNurseName" />
+		<result property="orderDocName" column="orderDocName" />
+		<result property="orderExcutionCode" column="orderExcutionCode" />
+		<result property="orderAdviceUsage" column="orderAdviceUsage" />
+		<result property="dispensingNum" column="dispensingNum" />
+		<result property="dispensingNumUnit" column="dispensingNumUnit" />
+		<result property="orderExcutionName" column="orderExcutionName" />
+		<result property="orderItemName" column="orderItemName" />
+		<result property="everyTimeDose" column="everyTimeDose" />
+		<result property="orderExeEndTime" column="orderExeEndTime" />
+		<result property="orderTime" column="orderTime" />
+		<result property="orderStopTime" column="orderStopTime" />
+		<result property="orderExeStartTime" column="orderExeStartTime" />
+		<result property="stopDocCode" column="stopDocCode" />
+		<result property="orderAdviceNum" column="orderAdviceNum" />
+		<result property="orderAdviceFrequency" column="orderAdviceFrequency" />
+		<result property="eachUsageUnit" column="eachUsageUnit" />
+		<result property="stopDocName" column="stopDocName" />
+		<result property="orderItemTypeName" column="orderItemTypeName" />
+		<result property="orderItemGroup" column="orderItemGroup" />
+		<result property="orderExeDeptCode" column="orderExeDeptCode" />
+		<result property="eachNumber" column="eachNumber" />
+		<result property="eachDosageUnit" column="eachDosageUnit" />
+		<result property="orderExeDeptName" column="orderExeDeptName" />
+		<result property="orderProofreadNurseName" column="orderProofreadNurseName" />
+		<result property="orgCode" column="orgCode" />
+		<result property="updateTime" column="updateTime" />
+		<result property="confrirmStopTime" column="confrirmStopTime" />
+		<result property="orderItemTypeCode" column="orderItemTypeCode" />
+		<result property="orderAuditorName" column="orderAuditorName" />
+		<result property="orderStartTime" column="orderStartTime" />
+		<result property="orderItemCode" column="orderItemCode" />
+		<result property="days" column="days" />
+		<result property="orgCode" column="orgCode" />
+		<result property="orgName" column="orgName" />
+		<result property="orderId" column="orderId" />
+	</resultMap>
+	
+<!-- 住院医嘱主表Map -->
+<resultMap id="getOrdersMap" type="java.util.HashMap">
+	    <id property="id" column="id" />
+	    <result property="name" column="name" />
+		<result property="mpiid" column="mpiid" />
+		<result property="inpatientNum" column="inpatientNum" />
+		<result property="orgCode" column="orgCode" />
+		<result property="orgName" column="orgName" />
+		<result property="recordTime" column="recordTime" />
+		<result property="pname" column="pname" />
+		<result property="validPeriod" column="validPeriod" />
+		<result property="sickbedNum" column="sickbedNum" />
+		<result property="deptCode" column="deptCode" />
+		<result property="deptName" column="deptName" />
+		<result property="orderDocCode" column="orderDocCode" />
+		<result property="remark" column="remark" />
+		<result property="orderId" column="OrderId" />
+		<result property="doctorName" column="doctorName" />
+		<result property="orderDeptCode" column="orderDeptCode" />
+		<result property="orderDeptName" column="orderDeptName" />
+		<collection property="orderDrugsList"  ofType="java.util.HashMap" javaType="java.util.ArrayList">
+		            <id property="id" column="iddo" />
+					<result property="inpatientNum" column="inpatientNum" />
+					<result property="validPeriod" column="validPeriod" />
+					<result property="pname" column="name" />
+					<result property="orderType" column="orderType" />
+					<result property="sickbedNum" column="sickbedNum" />
+					<result property="deptName" column="deptName" />
+					<result property="orderDeptCode" column="orderDeptCode" />
+					<result property="orderDeptName" column="orderDeptName" />
+					<result property="orderDocCode" column="orderDocCode" />
+					<result property="remark" column="remark" />
+					<result property="stopNurseName" column="stopNurseName" />
+					<result property="orderDocName" column="orderDocName" />
+					<result property="orderExcutionCode" column="orderExcutionCode" />
+					<result property="orderAdviceUsage" column="orderAdviceUsage" />
+					<result property="dispensingNum" column="dispensingNum" />
+					<result property="dispensingNumUnit" column="dispensingNumUnit" />
+					<result property="orderExcutionName" column="orderExcutionName" />
+					<result property="orderItemName" column="orderItemName" />
+					<result property="everyTimeDose" column="everyTimeDose" />
+					<result property="orderExeEndTime" column="orderExeEndTime" />
+					<result property="orderTime" column="orderTime" />
+					<result property="orderStopTime" column="orderStopTime" />
+					<result property="orderExeStartTime" column="orderExeStartTime" />
+					<result property="stopDocCode" column="stopDocCode" />
+					<result property="orderAdviceNum" column="orderAdviceNum" />
+					<result property="orderAdviceFrequency" column="orderAdviceFrequency" />
+					<result property="eachUsageUnit" column="eachUsageUnit" />
+					<result property="stopDocName" column="stopDocName" />
+					<result property="orderItemTypeName" column="orderItemTypeName" />
+					<result property="orderItemGroup" column="orderItemGroup" />
+					<result property="orderExeDeptCode" column="orderExeDeptCode" />
+					<result property="eachNumber" column="eachNumber" />
+					<result property="eachDosageUnit" column="eachDosageUnit" />
+					<result property="orderExeDeptName" column="orderExeDeptName" />
+					<result property="orderProofreadNurseName" column="orderProofreadNurseName" />
+					<result property="orgCode" column="orgCode" />
+					<result property="updateTime" column="updateTime" />
+					<result property="confrirmStopTime" column="confrirmStopTime" />
+					<result property="orderItemTypeCode" column="orderItemTypeCode" />
+					<result property="orderAuditorName" column="orderAuditorName" />
+					<result property="orderStartTime" column="orderStartTime" />
+					<result property="orderItemCode" column="orderItemCode" />
+					<result property="days" column="days" />
+					<result property="orgCode" column="orgCode" />
+					<result property="orgName" column="orgName" />
+					<result property="orderId" column="orderId" />
+		</collection>
+	</resultMap>		
+
+<!-- 住院费用主表Map -->
+<resultMap id="getInhostCostMap" type="java.util.HashMap">
+	    <id property="id" column="idq" />
+	    <result property="name" column="name" />
+		<result property="mpiid" column="mpiidq" />
+		<result property="inpatientNum" column="inpatientNumq" />
+		<result property="orgCode" column="orgCodeq" />
+		<result property="orgName" column="orgNameq" />
+		<result property="settlementId" column="settlementIdq" />
+		<result property="chargeStatus" column="chargeStatusq" />
+		<result property="invoiceNum" column="invoiceNumq" />
+		<result property="chargeSceneCode" column="chargeSceneCodeq" />
+		<result property="chargeSceneName" column="chargeSceneNameq" />
+		<result property="patientSource" column="patientSourceq" />
+		<result property="chargeModeCode" column="chargeModeCodeq" />
+		<result property="chargeModeName" column="chargeModeNameq" />
+		<result property="settlementAmount" column="settlementAmountq" />
+		<result property="selfAmount" column="selfAmountq" />
+		<result property="settlementPersonCode" column="settlementPersonCodeq" />
+		<result property="settlementPersonName" column="settlementPersonNameq" />
+		<result property="serviceTime" column="serviceTimeq" />
+			<collection property="costDetailList"  ofType="java.util.HashMap" javaType="java.util.ArrayList">
+			    <id property="id" column="idw" />
+				<result property="orgCode" column="orgCodew" />
+				<result property="inpatientNum" column="inpatientNumw" />
+				<result property="orgName" column="orgNamew" />
+				<result property="chargeId" column="chargeIdw" />
+				<result property="orderId" column="orderIdw" />
+				<result property="settlementId" column="settlementIdw" />
+				<result property="depCode" column="depCodew" />
+				<result property="depName" column="depNamew" />
+				<result property="prescriberCode" column="prescriberCodew" />
+				<result property="prescriberName" column="prescriberNamew" />
+				<result property="performerCode" column="performerCodew" />
+				<result property="performerName" column="performerNamew" />
+				<result property="chargeClassifiedCode" column="chargeClassifiedCodew" />
+				<result property="chargeClassifiedName" column="chargeClassifiedNamew" />
+				<result property="chargeTime" column="chargeTimew" />
+				<result property="itemCode" column="itemCodew" />
+				<result property="itemName" column="itemNamew" />
+				<result property="itemUnit" column="itemUnitw" />
+				<result property="itemPrice" column="itemPricew" />
+				<result property="itemTypeCode" column="itemTypeCodew" />
+				<result property="itemTypeName" column="itemTypeNamew" />
+				<result property="itemCount" column="itemCountw" />
+				<result property="itemReceivableAmount" column="itemReceivableAmountw" />
+				<result property="itemPaidCmount" column="itemPaidCmountw" />
+			</collection>
+	</resultMap>
+
+	<select id="queryBatchHospitalizations" parameterType="java.util.List" resultMap="inHospitalRecords">
+	    <!-- 刷选重复数据第一个 -->  
+	    select  *  from (select temp.*,row_number() over (partition by temp.inpatientNum,temp.orgCode order by temp.idr ) as group_idx from(
+	  
+	    select piir.id$ as idr, 
+	           to_char(piir.admission_date, 'yyyy-mm-dd hh24:mi:ss') as serviceTime,
+	           piir.mpiid$ as mpiid,
+	           piir.ORG_CODE as orgCode,
+	           piir.ORG_NAME as orgName,
+	           piir.INPATIENT_NUM as inpatientNum,
+	           piir.sex_code as sexCode,
+	           piir.INCLINIC_DOCTOR_NAME as  doctorName,
+	           piir.pname as pname,
+	           piir.idcard_num as idcard,
+	           piir.idcard_num as idcardNum,
+	           piir.dep_code as deptCode,
+	           piir.dep_name as  deptName,
+	           tep.* from PT_IP_IN_REG piir left join(
+	    select * from 
+	          (select 
+	                  rp.ID$ as idq,
+	            '出院小结' as name,
+	           'HB005' as metaSetCode,
+	          rp.ORG_CODE as orgCodeTep,
+	          rp.INPATIENT_NUM as inpatientNumTep,
+	          rp.ATTENDING_DOCTOR_CODE as serviceDoctorCode,
+	          to_char(rp.CREATED_AT, 'yyyy-mm-dd hh24:mi:ss') as
+	          createdAt,
+	          rp.CASE_HISTORY_ID as caseHistoryId,
+	          rp.HEALTH_CARD_NUM as healthCardNum,
+	          rp.AREA_NAME as
+	          areaName,
+	          rp.WARD_NUM as wardNum,
+	          rp.SICKBED_NUM as sickbedNum,
+	          rp.IDCARD_TYPE as idcardType,
+	          rp.OTHER_ID_NUM as otherIdNum,
+	          rp.AGE_YEARS as ageYears,
+	          rp.AGE_MONTHS as ageMonths,
+	          rp.AGE_DAYS as ageDays,
+	          rp.AGE_HOURS as ageHours,
+	          rp.MARITAL_STATUS_CODE as maritalStatusCode,
+	          rp.MARITAL_STATUS_NAME as
+	          maritalStatusName,
+	          rp.OCCUPATION_CODE as occupationCode,
+	          rp.OCCUPATION_NAME as
+	          occupationName,
+	          rp.TEL as tel,
+	          rp.ADDRESS_TYPE_CODE as addressTypeCode,
+	          rp.PROVINCE as province,
+	          rp.CITY as city,
+	          rp.COUNTY as county,
+	          rp.TOWN as town,
+	          rp.VILLAGE as village,
+	          rp.HOUSE_NUM as houseNum,
+	          rp.POSTAL_CODE as postalCode,
+	          rp.LINKMAN_NAME as linkmanName,
+	          rp.LINKMAN_TEL as linkmanTel,
+	          to_char(rp.ADMISSION_DATE, 'yyyy-mm-dd hh24:mi:ss') as admissionDate,
+	          to_char(rp.DISCHARGE_DATE, 'yyyy-mm-dd hh24:mi:ss') as dischargeDate,
+	          rp.INPATIENT_DAY as inpatientDay,
+	          rp.RESIDENT_DOCTOR_CODE as
+	          residentDoctorCode,
+	          rp.RESIDENT_DOCTOR_NAME as residentDoctorName,
+	          rp.ATTENDING_DOCTOR_CODE as attendingDoctorCode,
+	          rp.SUPERIOR_DOCTOR_NAME as superiorDoctorName,
+	          rp.ADMISSION_SITUATION as admissionSituation,
+	          rp.TREAT_RESULT_CODE as treatResultCode,
+	          rp.TREAT_PROCESS as treatProcess,
+	          rp.DISCHARGE_SITUATION as dischargeSituation,
+	          rp.DISCHARGE_SIGNS as
+	          dischargeSigns,
+	          rp.ASSIST_EXAM_RESULT as assistExamResult,
+	          rp.IN_DISCHARGE_SIGNS as inDischargeSigns,
+	          rp.INSPECT_CONSULTATION as
+	          inspectConsultation,
+	          rp.SPECIAL_EXAM as specialExam,
+	          rp.DISEASE_OUTCOME_CODE
+	          as diseaseOutcomeCode,
+	          rp.COMPLICATION as complication,
+	          rp.DISCHARGE_ORDER as
+	          dischargeOrder,
+	          rp.FLAG_FOUR_DIAGNOSIS as flagFourDiagnosis,
+	          rp.FOUR_DIAGNOSIS as fourDiagnosis,
+	          rp.TREATMENT_METHOD as treatmentMethod,
+	          rp.TCM_DECOCTION_METHOD as tcmDecoctionMethod,
+	          rp.MEDICATION_METHOD as medicationMethod ,row_number() over (partition by inpatient_num,org_code order by mpiid$ ) as rownum1 from PT_EMRI_DISCHARGE rp)
+	           where rownum1 = 1
+	    ) tep on tep.inpatientNumTep=piir.inpatient_num and tep.orgCodeTep=piir.org_code
+        where 1=1 and 
+          <foreach collection="list" index="item" item="item" open="(" separator=" or " close=")">
+              piir.id$= ${item}
+           </foreach>
+        <!-- 刷选数据结束 -->
+        ) temp) temprow_number where group_idx=1
+	</select>
+<!--org_code和zyId查询病案首页主表 -->
+<select id="getHomePage" parameterType="map" resultMap="getAllSetDaysResult">
+	    <!-- <include refid="dc.dao.mapper.CommonTempMapper.sqlHead"/> -->
+		select
+		d176.id$ as idq,
+		'病案首页' as name,
+		d176.mpiid$ as mpiidq,
+		d176.INPATIENT_NUM as inpatientNumq,
+		d176.ORG_CODE as orgCodeq,
+		to_char(d176.ADMISSION_DATE, 'yyyy-mm-dd hh24:mi:ss') as recordTimeq,
+		to_char(d176.ADMISSION_DATE, 'yyyy-mm-dd hh24:mi:ss') as serviceTimeq,
+		to_char(d176.ADMISSION_DATE, 'yyyy-mm-dd hh24:mi:ss') as
+		hospitalizedTimeq,
+		d176.CASE_HISTORY_ID as caseHistoryIdq,
+		d176.MARITAL_STATUS_NAME as marriageFlagq,
+		d176.AGE_MONTHS as patientMonthAgeq,
+		d176.CURRENT_ADDRESS_CITY as nowAddressCityq,
+		d176.CURRENT_ADDRESS_TEL as patientPhoneNumberq,
+		d176.CASE_NUM as healthNumberq,
+		d176.INSURANCE_NUM as medicalCardq,
+		d176.PNAME as patientNameq,
+		to_char(d176.BORN_DATE, 'yyyy-mm-dd hh24:mi:ss') as patientBirthq,
+		d176.IDCARD_NUM as patientIdCardq,
+		d176.AGE_YEARS as patientAgeq,
+		d176.LINKMAN_ADDRESS_PROVINCE as contactProvinceq,
+		d176.RBT_CONTACT_CODE as contactPatientq,
+		d176.HRA_ADDRESS_ZP as registeredNumberq,
+		d176.LINKMAN_ADDRESS_CITY as contactCityq,
+		d176.NATIVE_PLACE_CITY as hailCityq,
+		d176.NATIVE_PLACE_PROVINCE as hailProvinceq,
+		d176.BORN_ADDRESS_COUNTY as birthCountyq,
+		d176.CURRENT_ADDRESS_ZP as nowPostalNumberq,
+		d176.HRA_ADDRESS_CITY as registeredCityq,
+		d176.ORG_NAME as orgNameq,
+		d176.INPATIENT_DAY_NUM as hospitalizationDayq,
+		d176.LINKMAN_ADDRESS_HN as contactDoorplateq,
+		d176.LINKMAN_ADDRESS_TOWN as contactTownsq,
+		d176.SEX_CODE as patientSexq,
+		d176.HEALTH_CARD_NUM as residentIdCardq,
+		d176.BORN_ADDRESS_PROVINCE as birthProvinceq,
+		d176.NATION_NAME as nationq,
+		d176.COUNTRY_NAME as nationalityq,
+		d176.CURRENT_ADDRESS_PROVINCE as nowProvinceq,
+		d176.CURRENT_ADDRESS_COUNTY as nowCountyq,
+		d176.IDCARD_NUM as idCardNumberq,
+		d176.LINKMAN_NAME as contactNameq,
+		d176.HRA_ADDRESS_COUNTY as registeredCountyq,
+		d176.HRA_ADDRESS_PROVINCE as registeredProvinceq,
+		d176.BORN_ADDRESS_CITY as birthCityq,
+		d176.LINKMAN_TEL as contactPhoneq,
+		to_char(d176.DISCHARGE_DATE, 'yyyy-mm-dd hh24:mi:ss') as outHospitalTimeq,
+		d176.LINKMAN_ADDRESS_VILLAGE as contactVillageq,
+		d176.LINKMAN_ADDRESS_COUNTY as contactCountyq,
+		d176.WORKING_ADDR_VILLAGE as workVillageq,
+		d176.WORKING_ADDR_COUNTY as workCountyq,
+		d176.WORKING_ADDR_PROVINCE as workProvinceq,
+		d176.WORKING_ADDR_ZP as workAddressNumberq,
+		d176.OCCUPATION_NAME as jobTypeCodeq,
+		d176.WORKING_ORG as workNameq,
+		d176.WORKING_ADDR_CITY as workCityq,
+		d176.WORKING_ADDR_TOWN as workTownsq,
+		d176.WORKING_ADDR_HN as workDoorplateq,
+		d176.WORKING_TEL as workPhoneNumberq,
+		d176.IN_WORD as inpatientWardsq,
+		d176.BIRTH_BODY_WEIGHT as birthWeightq,
+		d176.TDEP_NAME as turnDeptNameq,
+		d176.IN_CONDITION_NAME as enterSituationq,
+		d176.OUT_WORD as outWardq,
+		d176.INPATIENT_TIMES as hospitalFrequencyq,
+		d176.ADMISSION_BODY_WEIGHT as enterWeightq,
+		d176.OUT_DEPT_NAME as outHospitalDeptNameq,
+		d176.total_amount as hospitalizedFeeq,
+		d176.CHARGE_MODE_CODE as paymentCodeq,
+		d176.ADMISSION_TYPE_CODE as enterPathwayq,
+		d176.TDEP_CODE as deptCodeq,
+		d176.IN_DEP_NAME as deptNameq,
+		d176.org_code AS "orgCodeTemp",
+		d176.inpatient_num AS "zyIdTemp",
+		d177.ID$ as idw,
+		d177.ORG_CODE as orgCodew,
+		d177.INPATIENT_NUM as inpatientNumw,
+		d177.PATHOLOGY_DISE_CODE as pathologyDiagnosisCodew,
+		d177.PATHOLOGY_DIAG_CODE as pathologyDiagnosisNamew,
+		d177.IS_AUTOPSY as autopsyFlagw,
+		d177.IS_READMISSION as backHospitalFlagw,
+		d177.RECEIVE_ORG_NAME as acceptOrgNamew,
+		d177.CASE_HISTORY_ID as caseHistoryIdw,
+		to_char(d177.QC_DATE, 'yyyy-mm-dd hh24:mi:ss') as chargeDatew,
+		d177.CASE_QUALITY_CODE as recordQualityw,
+		d177.READMISSION_PURPOSE as backHospitalw,
+		d177.AFTER_COMA_HOURS as comaTimew,
+		d177.BLOOD_RH_CODE as rhaboCodew,
+		d177.PRIOR_COMA_HOURS as comaAfterTimew,
+		d177.ALLERG_DRUG as allergyDrugw,
+		d177.PATHOLOGY_NUM as pathologyNumberw,
+		d177.INJURY_CAUSE_CODE as poisoningDiagnosisCodew,
+		d177.INJURY_CAUSE as poisoningCausew,
+		d177.DISCHARGE_TYPE_CODE as hospitalModew,
+		d177.RECEIVE_ORG_NAME as receiveOrgNamew,
+		d177.INTERN_NAME as internshipSignaturew,
+		d177.NURSE_NAME as nurseSignaturew,
+		d177.RESIDENT_NAME as hospitalSignaturew,
+		d177.CHIEF_PHYSICIAN_NAME as doctorSignaturew,
+		d177.CODER_NAME as healthNameSignaturew,
+		d177.QCN_NAME as chargeNurseSignaturew,
+		d177.DIRECTOR_NAME as deptDoctorSignaturew,
+		d177.ATTENDING_PHYSICIAN_NAME as indicationsSignaturew,
+		d177.REFRESHER_DOCTORS_NAME as studiesSignaturew,
+		d177.QCD_NAME as chargeSignaturew,
+		d177.IS_ALLERGY as allergyFlagw,
+		d177.BLOOD_ABO_CODE as aboCodew,
+		d180.ID$ as ide,
+		d180.ORG_CODE as orgCodee,
+		d180.INPATIENT_NUM as inpatientNume,
+		d180.OUT_DIAG_OTHER_IN as outOtherDiagnosisCodee,
+		d180.OUT_DIAG_OTHER_CODE as outOthersDiagnosisCodee,
+		d180.OUT_DIAG_MDISEASE_NAME as outDiagnosisNamee,
+		d180.OUT_DIAG_MDISEASE_CODE as outDiagnosisCodee,
+		d180.DISEASE_CODE as outpatientDiagnosisCodee,
+		d180.OUT_DIAG_OTHER_NAME as outOthersDiagnosisNamee,
+		d180.OUT_DIAG_IN_DISEASE as outCodee,
+		d180.CH_DIAG_NAME as outPatientDiagnosis4TCSe,
+		d180.CH_DIAG_CODE as outpatientDiagnosisCode4TCSe,
+		d180.OUT_CH_DISEASE_NAME as outDiagnosisName4TCSe,
+		d180.OUT_CH_DISEASE_CODE as outDiagnosisCode4TCSe,
+		d180.OUT_CH_DIAG_IN_DISEASE as outCode4TCSe,
+		d180.OUT_CH_DIAG_MDISEASE_NAME as outOthersDiagnosisName4TCSe,
+		d180.OUT_CH_DIAG_MDISEASE_CODE as outOthersDiagnosisCode4TCSe,
+		d180.OUT_CH_DIAG_MDISEASE as outOtherDiagnosisCode4TCSe,
+		d180.CASE_HISTORY_ID as caseHistoryIde,
+		d180.DISEASE_NAME as outPatientDiagnosise,
+		d183.ID$ as idr,
+		d183.ORG_CODE as orgCoder,
+		d183.INPATIENT_NUM as inpatientNumr,
+		d183.COST_DRUG as westernFeer,
+		d183.COST_TREAT_HOCUS as anesthesiaFeer,
+		d183.COST_GENERAL_TREAT as operatingFeer,
+		d183.COST_TREAT_OPTREAT as surgeryFeer,
+		d183.COST_BLOOD as bloodFeer,
+		d183.COST_DIAG_PATHOLOGY as diagnosisFeer,
+		d183.COST_GENERAL_MEDI_SERVICE as generalFeer,
+		d183.COST_DIAG_CLINIC as diagnosisItemFeer,
+		d183.COST_DIAG_IMAGE as portraitDiagnosisFeer,
+		d183.COST_OTHER as oterFeer,
+		d183.COST_BLOOD_CELL as productsFeer,
+		d183.COST_ANTIBAC as antibacterialsFeer,
+		d183.COST_CH_HERBAL as herbsFeer,
+		d183.COST_SELF_PAY as hospitalPaysMoneyr,
+		d183.COST_GENERAL_OTHER as compositeOterFeer,
+		d183.COST_DIAG_LAB as testdiagnosisFeer,
+		d183.COST_TREAT_UNOPERATION as cureItemFeer,
+		d183.COST_TREAT_OPERATION as cureSurgeryFeer,
+		d183.COST_CH_TREAT as centerSurgeryFeer,
+		d183.COST_CONSUMABLE_TREAT as materialFeer,
+		d183.COST_BLOOD_GLOBIN as globulinFeer,
+		d183.COST_CH_PATENT as medicineFeer,
+		d183.COST_BLOOD_HERM as albuminFeer,
+		d183.COST_RECOVERY as rehabilitationFeer,
+		d183.COST_TREAT_PHYSIC as physicsFeer,
+		d183.COST_NURSE as compositeNurseFeer,
+		d183.COST_BLOOD_CRUOR as cruorFeer,
+		d183.COST_CONSUMABLE_EXAM as censorMaterialFeer,
+		d183.CASE_HISTORY_ID as caseHistoryIdr,
+		d183.COST_CONSUMABLE_OP as operationMaterialFeer,
+		d184.id$ as idt,
+		${param},
+	(select w.ITEM_NAME
+          from GWC_BASEDATA_DETAIL w
+         where w.BASEDATACLASS_CODE = 'CV05.10.022'
+           and w.ITEM_CODE = d184.INCISION_CATEGORY_CODE) as operateCureLevelt,
+       d184.INPATIENT_NUM as inpatientNumt,
+       d184.OPERATION_GRADE as surgeryLevelt,
+       (select g.ITEM_NAME
+          from GWC_BASEDATA_DETAIL g
+         where g.BASEDATACLASS_CODE = 'CV05.10.023'
+           and g.ITEM_CODE = d184.HEALING_GRADE_CODE) as surgeryTypet,
+       d184.OPERATION_CODE as operateCodet,
+       d184.SURGEON_NAME as operateDoctort,
+       d184.ASSISTANT_FIR_NAME as assistantName1t,
+       d184.ASSISTANT_SED_NAME as assistantName2t,
+       d184.ORG_CODE as orgCodet,
+       d184.OPERATION_NAME as operateNamet,
+       d184.ANESTHESIA_DOC_NAME as anesthesiaDoctort,
+       d184.HEALING_GRADE_NAME as assistantNamet,
+       d184.ANAESTHESIA_CODE as anesthesiaTypet,
+       d184.CASE_HISTORY_ID as caseHistoryIdt,
+       to_char(d184.OPERATION_DATE, 'yyyy-mm-dd hh24:mi:ss') as operateDatet
+		FROM PT_EMRI_ICH d176
+		left join PT_EMRI_ICH_ASSIST d177
+		on d177.INPATIENT_NUM = d176.INPATIENT_NUM
+		and d177.ORG_CODE = d176.ORG_CODE
+		and d177.CASE_HISTORY_ID = d176.CASE_HISTORY_ID
+        left join PT_EMRI_ICH_DIAGNOSIS d180
+        on d180.INPATIENT_NUM = d176.INPATIENT_NUM
+		and d180.ORG_CODE = d176.ORG_CODE
+		and d180.CASE_HISTORY_ID = d176.CASE_HISTORY_ID
+		left join PT_EMRI_ICH_CHARGE d183
+		on d183.INPATIENT_NUM = d176.INPATIENT_NUM
+		and d183.ORG_CODE = d176.ORG_CODE
+		and d183.CASE_HISTORY_ID = d176.CASE_HISTORY_ID
+		left join PT_EMRI_ICH_OPERATION d184
+		on d184.INPATIENT_NUM = d176.INPATIENT_NUM
+		and d184.ORG_CODE = d176.ORG_CODE
+		and d184.CASE_HISTORY_ID = d176.CASE_HISTORY_ID
+		where 
+        <foreach collection="data" index="index" item="item" open="" separator=" or " close="">
+             ( d176.INPATIENT_NUM=#{item.zyId} and d176.ORG_CODE=#{item.orgCode} )
+         </foreach>
+		<!-- <include refid="dc.dao.mapper.CommonTempMapper.sqlEnd"/> -->
+	</select>
+	
+	
+<!--zyId,orgCode查询  入院记录主表 -->
+<select id="queryAdmissionRecord" parameterType="map" resultMap="admissionRecordMap">
+	   <!--  <include refid="dc.dao.mapper.CommonTempMapper.sqlHead"/> -->
+		select 
+		       t12.ID$ as idq,
+		       '入院记录' as "name",
+			   t12.ORG_CODE as orgCode,
+		       t12.MPIID$ as mpiId,
+		       t12.ORG_NAME as orgName,
+		       to_char(t12.CREATED_AT, 'yyyy-mm-dd hh24:mi:ss') as createdAt,
+		       t12.INPATIENT_NUM as inpatientNum,
+		       t12.CASE_HISTORY_ID as caseHistoryId,
+		       t12.AREA_NAME as areaName,
+		       t12.DEP_CODE as depCode,
+		       t12.DEP_NAME as depName,
+		       t12.WARD_NUM as wardNum,
+		       t12.SICKBED_NUM as sickbedNum,
+		       t12.PNAME as pname,
+		       t12.SEX_CODE as sexCode,
+		       t12.IDCARD_TYPE as idcardType,
+		       t12.OTHER_ID_NUM as otherIdNum,
+		       t12.IDCARD_NUM as idcardNum,
+		       t12.AGE_YEARS as ageYears,
+		       t12.AGE_MONTHS as ageMonths,
+		       t12.AGE_DAYS as ageDays,
+		       t12.AGE_HOURS as ageHours,
+		       t12.NATION_CODE as nationCode,
+		       t12.NATION_NAME as nationName,
+		       t12.MARITAL_STATUS_CODE as maritalStatusCode,
+		       t12.MARITAL_STATUS_NAME as maritalStatusName,
+		       t12.OCCUPATION_CODE as occupationCode,
+		       t12.OCCUPATION_NAME as occupationName,
+		       t12.PROVINCE as province,
+		       t12.PROVINCE_NAME as provinceName,
+		       t12.CITY as city,
+		       t12.CITY_NAME as cityName,
+		       t12.COUNTY as county,
+		       t12.COUNTY_NAME as countyName,
+		       t12.TOWN as town,
+		       t12.TOWN_NAME as townName,
+		       t12.VILLAGE as village,
+		       t12.HOUSE_NUM as houseNum,
+		       t12.WORKING_ORG as workingOrg,
+		       to_char(t12.ADMISSION_DATE, 'yyyy-mm-dd hh24:mi:ss') as admissionDate,
+		       to_char(t12.RECORD_TIME, 'yyyy-mm-dd hh24:mi:ss') as serviceTime,
+		       t12.CHIEF_COMPLAINT as chiefComplaint,
+		       t12.PRESENT_ILLNESS as presentIllness,
+		       t12.DISEASES_HISTORY as diseasesHistory,
+		       t12.IS_INFECTIOUS as isInfectious,
+		       t12.INFECTION_HISTORY as infectionHistory,
+		       t12.VACCINATION_HISTORY as vaccinationHistory,
+		       t12.SURGERY_HISTORY as surgeryHistory,
+		       t12.BT_HISTORY as btHistory,
+		       t12.ALLERGY_HISTORY as allergyHistory,
+		       t12.PERSONAL_HISTORY as personalHistory,
+		       t12.MARITAL_HISTORY as maritalHistory,
+		       t12.MENSTRUATION_HISTORY as menstruationHistory,
+		       t12.FAMILY_HISTORY as familyHistory,
+		       t12.FLAG_FOUR_DIAGNOSIS as flagFourDiagnosis,
+		       t12.FOUR_DIAGNOSIS as fourDiagnosis,
+		       t12.THERAPEUTIC_TREATMENT as therapeuticTreatment,
+		       t12.REPRESENTOR_NAME as representorName,
+		       t12.LINKMAN_RELATION_CODE as linkmanRelationCode,
+		       t12.LINKMAN_RELATION_NAME as linkmanRelationName,
+		       t12.IS_RELIABLE as isReliable,
+		       t12.RECEPTION_DOCTOR_CODE as receptionDoctorCode,
+		       t12.RECEPTION_DOCTOR_NAME as receptionDoctorName,
+		       t12.ADMISSION_DOCTOR_CODE as admissionDoctorCode,
+		       t12.ADMISSION_DOCTOR_NAME as admissionDoctorName,
+		       t12.ATTENDING_DOCTOR_CODE as attendingDoctorCode,
+		       t12.ATTENDING_DOCTOR_NAME as doctorName,
+		       t12.CHIEF_DOCTOR_CODE as chiefDoctorCode,
+		       t12.CHIEF_DOCTOR_NAME as chiefDoctorName,
+		       t12.AUDTOR_NAME as audtorName,
+		       t12.INPATIENT_TIMES as inpatientTimes,
+		       t12.ADMISSION_TYPE_CODE as admissionTypeCode,
+		       t12.ADMISSION_TYPE_NAME as admissionTypeName,
+		       t12.OUT_ORDERS_DOCTOR_NAME as outOrdersDoctorName,
+		       t12.THERE_DIAGNOSIS_DATAIL as thereDiagnosisDatail,
+		       t12.TEMPERATURE as temperature,
+		       t12.PULSE_RATE as pulseRate,
+		       t12.BREATHING_RATE as breathingRate,
+		       t12.PRESSURE_H as pressureH,
+		       t12.PRESSURE_L as pressureL,
+		       t12.HEIGHT as height,
+		       t12.WEIGHT as weight,
+		       t12.GENERAL_EXAM_RESULT as generalExamResult,
+		       t12.SKIN_EXAM_RESULT as skinExamResult,
+		       t12.LYMPH_EXAM_RESULT as lymphExamResult,
+		       t12.HEAD_EXAM_RESULT as headExamResult,
+		       t12.NECK_EXAM_RESULT as neckExamResult,
+		       t12.CHEST_EXAM_RESULT as chestExamResult,
+		       t12.BELLY_EXAM_RESULT as bellyExamResult,
+		       t12.ANUS_EXAM_RESULT as anusExamResult,
+		       t12.GENITALS_EXAM_RESULT as genitalsExamResult,
+		       t12.SPINE_EXAM_RESULT as spineExamResult,
+		       t12.ARMS_LEGS_EXAM_RESULT as armsLegsExamResult,
+		       t12.EERVOUS_SYS_EXAM_RESULT as eervousSysExamResult,
+		       t12.SPECIAL_EXAM_RESULT as specialExamResult,
+		       t12.GENERAL_HEALTH as generalHealth,
+		       t12.org_code AS "orgCodeTemp",
+			   t12.inpatient_num AS "zyIdTemp",
+			    ${param},
+		        t13.ID$ as idw,
+		       	t13.ORG_CODE as orgCodew,
+				t13.ORG_NAME as orgNamew,
+				to_char(t13.CREATED_AT, 'yyyy-mm-dd hh24:mi:ss') as updateTimew,
+				t13.INPATIENT_NUM as inpatientNumw,
+				t13.CASE_HISTORY_ID as caseHistoryIdw,
+				t13.DIAGNOSIS_TYPE_CODE as diagnosisTypeCodew,
+				t13.DIAGNOSIS_TYPE_NAME as diagnosisTypeNamew,
+				t13.DISEASE_CODE as diseaseCodew,
+				t13.DISEASE as diseasew,
+				t13.CH_DISEASE_NAME as chDiseaseNamew,
+				t13.CH_DISEASE_CODE as chDiseaseCodew,
+				t13.CH_DISEASE_NAME1 as chDiseaseName1w,
+				t13.CH_DISEASE_CODE1 as chDiseaseCode1w,
+				to_char(t13.DIAGNOSIS_DATE, 'yyyy-mm-dd hh24:mi:ss') as diagnosisDatew,
+				t13.PRIMARY_DIAGNOSIS_MARK as primaryDiagnosisMarkw,
+				t13.DISEASE_NUM as diseaseNumw,
+				    t14.ID$ as ide,
+				 	t14.ORG_CODE as orgCodee,
+					t14.ORG_NAME as orgNamee,
+					to_char(t14.CREATED_AT, 'yyyy-mm-dd hh24:mi:ss') as updateTimee,
+					t14.INPATIENT_NUM as inpatientNume,
+					t14.CASE_HISTORY_ID as caseHistoryIde,
+					t14.EXAM_ITEM as examIteme,
+					t14.EXAM_RESULT as examResulte,
+					to_char(t14.EXAM_TIME, 'yyyy-mm-dd hh24:mi:ss') as examTimee,
+					t14.EXAM_TYPE as examTypee
+		  FROM PT_EMRI_ADM_REC t12
+		  left join PT_EMRI_ADM_REC_DIAG t13 on
+		  t13.INPATIENT_NUM = t12.INPATIENT_NUM
+			and t13.ORG_CODE = t12.ORG_CODE
+			and t13.CASE_HISTORY_ID = t12.CASE_HISTORY_ID
+			left join PT_EMRI_ADM_EXAM t14 on
+			 t14.INPATIENT_NUM = t12.INPATIENT_NUM
+			and t14.ORG_CODE = t12.ORG_CODE
+			and t14.CASE_HISTORY_ID = t12.CASE_HISTORY_ID
+           <!-- <include refid="dc.dao.mapper.CommonTempMapper.sqlEnd"/> -->
+           where
+         <foreach collection="data" index="index" item="item" open="" separator=" or " close="">
+             ( t12.INPATIENT_NUM=#{item.zyId} and t12.ORG_CODE=#{item.orgCode} )
+         </foreach>
+	</select>
+
+<!--zyId,orgCode查询 出院小结详情 -->
+<select id="queryOutHospitalRecordsByMap" parameterType="map" resultMap="inHospitalRecords">
+		SELECT 
+		    rp.ID$ as idq,
+		    '出院小结' as name,
+			rp.ORG_CODE as orgCode,
+			rp.ORG_NAME as orgName,
+			rp.INPATIENT_NUM as inpatientNum,
+			rp.ATTENDING_DOCTOR_CODE as
+			serviceDoctorCode,
+			to_char(rp.CREATED_AT, 'yyyy-mm-dd hh24:mi:ss') as
+			createdAt,
+			rp.CASE_HISTORY_ID as caseHistoryId,
+			rp.HEALTH_CARD_NUM as
+			healthCardNum,
+			rp.DEP_CODE as deptCode,
+			rp.DEP_NAME as deptName,
+			rp.AREA_NAME as
+			areaName,
+			rp.WARD_NUM as wardNum,
+			rp.SICKBED_NUM as sickbedNum,
+			rp.IDCARD_NUM as
+			idcardNum,
+			rp.IDCARD_TYPE as idcardType,
+			rp.OTHER_ID_NUM as otherIdNum,
+			rp.PNAME
+			as pname,
+			rp.SEX_CODE as sexCode,
+			rp.AGE_YEARS as ageYears,
+			rp.AGE_MONTHS as
+			ageMonths,
+			rp.AGE_DAYS as ageDays,
+			rp.AGE_HOURS as ageHours,
+			rp.MARITAL_STATUS_CODE as maritalStatusCode,
+			rp.MARITAL_STATUS_NAME as
+			maritalStatusName,
+			rp.OCCUPATION_CODE as occupationCode,
+			rp.OCCUPATION_NAME as
+			occupationName,
+			rp.TEL as tel,
+			rp.ADDRESS_TYPE_CODE as addressTypeCode,
+			rp.PROVINCE as province,
+			rp.CITY as city,
+			rp.COUNTY as county,
+			rp.TOWN as town,
+			rp.VILLAGE as village,
+			rp.HOUSE_NUM as houseNum,
+			rp.POSTAL_CODE as postalCode,
+			rp.LINKMAN_NAME as linkmanName,
+			rp.LINKMAN_TEL as linkmanTel,
+			to_char(rp.ADMISSION_DATE, 'yyyy-mm-dd hh24:mi:ss') as admissionDate,
+			to_char(rp.DISCHARGE_DATE, 'yyyy-mm-dd hh24:mi:ss') as dischargeDate,
+			rp.INPATIENT_DAY as inpatientDay,
+			rp.RESIDENT_DOCTOR_CODE as
+			residentDoctorCode,
+			rp.RESIDENT_DOCTOR_NAME as residentDoctorName,
+			rp.ATTENDING_DOCTOR_CODE as attendingDoctorCode,
+			rp.ATTENDING_DOCTOR_NAME as
+			doctorName,
+			rp.SUPERIOR_DOCTOR_NAME as superiorDoctorName,
+			to_char(rp.SIGNTRUE_DATE, 'yyyy-mm-dd hh24:mi:ss') as
+			serviceTime,
+			rp.ADMISSION_SITUATION as admissionSituation,
+			rp.TREAT_RESULT_CODE as treatResultCode,
+			rp.TREAT_PROCESS as treatProcess,
+			rp.DISCHARGE_SITUATION as dischargeSituation,
+			rp.DISCHARGE_SIGNS as
+			dischargeSigns,
+			rp.ASSIST_EXAM_RESULT as assistExamResult,
+			rp.IN_DISCHARGE_SIGNS as inDischargeSigns,
+			rp.INSPECT_CONSULTATION as
+			inspectConsultation,
+			rp.SPECIAL_EXAM as specialExam,
+			rp.DISEASE_OUTCOME_CODE
+			as diseaseOutcomeCode,
+			rp.COMPLICATION as complication,
+			rp.DISCHARGE_ORDER as
+			dischargeOrder,
+			rp.FLAG_FOUR_DIAGNOSIS as flagFourDiagnosis,
+			rp.FOUR_DIAGNOSIS as fourDiagnosis,
+			rp.TREATMENT_METHOD as treatmentMethod,
+			rp.TCM_DECOCTION_METHOD as tcmDecoctionMethod,
+			rp.MEDICATION_METHOD as medicationMethod
+		FROM ${tempTableName} rp
+</select>
+	
+<!-- zyId,orgCode查询 住院诊断主表 -->
+<select id="queryInHosDiagnose" parameterType="map" resultType="map">
+	   <!--  <include refid="dc.dao.mapper.CommonTempMapper.sqlHead"/> -->
+		select
+		    id$ as "id",
+		    '住院诊断' as "name",
+			ORG_CODE as "orgCode",
+			ORG_NAME as "orgName",
+			INPATIENT_NUM as
+			"inpatientNum",
+			to_char(CREATED_AT, 'yyyy-mm-dd hh24:mi:ss') as
+			"createdAt",
+			DIAG_ID as "diagId",
+			PNAME as "pname",
+			IDCARD_NUM as
+			"idcardNum",
+			IDCARD_TYPE as "idcardType",
+			OTHER_ID_NUM as "otherIdNum",
+			DIAGNOSIS_CHIEF_FLAG as "diagnosisChiefFlag",
+			DIAGNOSIS_TYPE as
+			"diagnosisType",
+			HG_IN_OUT_SIGN_CODE as "hgInOutSignCode",
+			TCM_WM_MARK_CODE as "tcmWmMarkCode",
+			DIAGNOSIS_CODE as
+			"diagnosisIllCode",
+			DIAGNOSIS_NAME as "diagnosisIllName",
+			DIAGNOSIS_DOCTOR_NAME as "doctorName",
+			'' as "personIdentityType",
+			'' as
+			"personalIdentificationNumber",
+			'' as "recordState",
+			to_char(CREATED_AT, 'yyyy-mm-dd hh24:mi:ss') as
+			"diagnosisDate",
+			'' as "diagnosticCode",
+			'' as "diagnosticStandardCode",
+			DIAGNOSIS_TYPE as "diagnosticTypeCode",
+			'' as "diseaseDifferentiationCode",
+			'' as
+			"syndromeId",
+			'' as "diagnosisOrder",
+			'' as "diagnosisCode",
+			DIAGNOSIS_NAME as
+			"diagnosisName",
+			'' as "isDiagnose",
+			'' as "dischargeStatusCode",
+			'' as
+			"writeTime",
+			'' as "cancelTime",
+			'' as "editTime",
+			org_code AS "orgCodeTemp",
+			inpatient_num AS "zyIdTemp",
+			${param}
+		from PT_IP_DIAGNOSE t
+		where
+		<foreach collection="data" index="index" item="item" open="" separator=" or " close="">
+             ( t.INPATIENT_NUM=#{item.zyId} and t.ORG_CODE=#{item.orgCode} )
+         </foreach>
+       <!--  <include refid="dc.dao.mapper.CommonTempMapper.sqlEnd"/> -->
+	</select>
+
+<!-- org_code和zyId查询医嘱主表表返回List<map> -->
+<select id="getOrdersByMap" parameterType="map" resultMap="getOrdersMap">
+         <!-- <include refid="dc.dao.mapper.CommonTempMapper.sqlHead"/> -->
+             select  *  from (	
+			            select 
+						o.ID$ as id,
+						'住院医嘱' as name,
+						o.MPIID$ as mpiid,
+						o.INPATIENT_NUM as inpatientNum,
+						o.INPATIENT_NUM as "zyIdTemp",
+						o.ORG_CODE as orgCode,
+						o.ORG_CODE as "orgCodeTemp",
+						o.ORG_NAME as orgName,
+						to_char(o.ORDER_TIME, 'yyyy-mm-dd hh24:mi:ss') as recordTime,
+						o.ORDER_ID as OrderId,
+						o.REMARK as
+						remark,
+						o.PNAME as pname,
+						o.VALID_PERIOD as validPeriod,
+						o.SICKBED_NUM as sickbedNum,
+						o.DEPT_CODE as deptCode,
+						o.DEPT_NAME as deptName,
+						o.ORDER_DEPT_CODE as orderDeptCode,
+						o.ORDER_DEPT_NAME as orderDeptName,
+						o.ORDER_DOC_CODE as orderDocCode,
+						o.ORDER_DOC_NAME as doctorName,
+						${param},
+						d.id$ as iddo,
+						to_char(d.ORDER_CREATE_TIME, 'yyyy-mm-dd hh24:mi:ss') as orderTime,
+						ORDER_ADVICE_NUM as orderAdviceNum,
+						ORDER_ITEM_GROUP as orderItemGroup,
+						to_char(d.ORDER_EXECUTE_START_TIME, 'yyyy-mm-dd hh24:mi:ss') as
+						orderExeStartTime,
+						to_char(d.ORDER_EXECUTE_END_TIME, 'yyyy-mm-dd hh24:mi:ss') as
+						orderExeEndTime,
+						ORDER_EXE_DEPT_CODE as
+						orderExeDeptCode,
+						ORDER_EXE_DEPT_NAME as orderExeDeptName,
+						ORDER_AUDITOR_NAME as orderAuditorName,
+						ORDER_EXECUTION_CODE as
+						orderExcutionCode,
+						ORDER_EXECUTION_NAME as orderExcutionName,
+						to_char(d.ORDER_EXE_TIME, 'yyyy-mm-dd hh24:mi:ss') as orderStartTime,
+						to_char(d.ORDER_STOP_TIME, 'yyyy-mm-dd hh24:mi:ss') as orderStopTime,
+						to_char(d.CONFIRM_STOP_TAIME, 'yyyy-mm-dd hh24:mi:ss') as confrirmStopTime,
+						STOP_DOCTOR_CODE as
+						stopDocCode,
+						STOP_DOCTOR_NAME as stopDocName,
+						ORDER_DATAIL_CODE as
+						orderItemCode,
+						ORDER_DATAIL_NAME as orderItemName,
+						ORDER_ITEM_TYPE_CODE
+						as orderItemTypeCode,
+						ORDER_ITEM_TYPE_NAME as orderItemTypeName,
+						ORDER_ADVICE_USEAGE as orderAdviceUsage,
+						ORDER_ADVICE_FREQUENCY as
+						orderAdviceFrequency,
+						to_char(d.EVERY_TIME_DOSE, '9990.99') as
+						everyTimeDose,
+						EACH_DOSAGE_UNITS as eachDosageUnit,
+						to_char(d.NUMBER_EACH_USEAGE) as eachNumber,
+						UNIT_EACH_USEAGE as
+						eachUsageUnit,
+						to_char(d.DISPENSING_QUANTITY) as dispensingNum,
+						DISPENSING_QUANTITY_UNIT as dispensingNumUnit,
+						to_char(d.DRUG_DAYS) as
+						days,
+						ORDER_PROOFREAD_NURSE_NAME as orderProofreadNurseName,
+						STOP_NURSE_NAME as stopNurseName
+				FROM
+					PT_IP_ORDERS o
+					left join PT_IP_ORDER_DRUGS d
+					on  o.ORG_CODE=d.ORG_CODE
+					and o.INPATIENT_NUM=d.INPATIENT_NUM
+					and o.ORDER_ID=d.ORDER_ID
+			union
+					select 
+					o.ID$ as id,
+					'住院医嘱' as name,
+					o.MPIID$ as mpiid,
+					o.INPATIENT_NUM as inpatientNum,
+					o.INPATIENT_NUM as "zyIdTemp",
+					o.ORG_CODE as orgCode,
+					o.ORG_CODE as "orgCodeTemp",
+					o.ORG_NAME as orgName,
+					to_char(o.ORDER_TIME, 'yyyy-mm-dd hh24:mi:ss') as recordTime,
+					o.ORDER_ID as OrderId,
+					o.REMARK as remark,
+					o.PNAME as pname,
+					o.VALID_PERIOD as validPeriod,
+					o.SICKBED_NUM as sickbedNum,
+					o.DEPT_CODE as deptCode,
+					o.DEPT_NAME as deptName,
+					o.ORDER_DEPT_CODE as orderDeptCode,
+					o.ORDER_DEPT_NAME as orderDeptName,
+					o.ORDER_DOC_CODE as orderDocCode,
+					o.ORDER_DOC_NAME as doctorName,
+					${param},
+		            d1.id$ as iddo,
+					to_char(d1.ORDER_START_TIME, 'yyyy-mm-dd hh24:mi:ss') as orderTime,
+					ORDER_ADVICE_NUM as orderAdviceNum,
+					ORDER_ITEM_GROUP as orderItemGroup,
+					to_char(d1.ORDER_EXE_START_TIME, 'yyyy-mm-dd hh24:mi:ss') as orderExeStartTime,
+					to_char(d1.ORDER_EXE_END_TIME, 'yyyy-mm-dd hh24:mi:ss') as
+					orderExeEndTime,
+					ORDER_EXE_DEPT_CODE as orderExeDeptCode,
+					ORDER_EXE_DEPT_NAME as orderExeDeptName,
+					'' as orderAuditorName,
+					ORDER_EXECUTION_CODE as orderExcutionCode,
+					ORDER_EXECUTION_NAME as
+					orderExcutionName,
+					to_char(d1.ORDER_START_TIME, 'yyyy-mm-dd hh24:mi:ss')
+					as orderStartTime,
+					to_char(d1.ORDER_STOP_TIME, 'yyyy-mm-dd hh24:mi:ss')
+					as orderStopTime,
+					to_char(d1.CONFIRM_STOP_TAIME, 'yyyy-mm-dd hh24:mi:ss') as confrirmStopTime,
+					STOP_DOCTOR_CODE as stopDocCode,
+					STOP_DOCTOR_NAME as stopDocName,
+					ORDER_ADVICE_DATAIL_CODE as orderItemCode,
+					ORDER_ADVICE_DATAIL_NAME as
+					orderItemName,
+					ORDER_ITEM_TYPE_CODE as orderItemTypeCode,
+					ORDER_ITEM_TYPE_NAME as orderItemTypeName,
+					'' as orderAdviceUsage,
+					EXECUTION_FREQUENCY as orderAdviceFrequency,
+					'' as everyTimeDose,
+					'' as
+					eachDosageUnit,
+					'' as eachNumber,
+					'' as eachUsageUnit,
+					'' as
+					dispensingNum,
+					'' as dispensingNumUnit,
+					'' as days,
+					ORDER_PROOFREAD_NURSE_NAME as orderProofreadNurseName,
+					STOP_NURSE_NAME
+					as stopNurseName
+				FROM
+					PT_IP_ORDERS o,
+					PT_IP_ORDER_OTHERS d1
+					where o.ORG_CODE=d1.ORG_CODE
+					and o.INPATIENT_NUM=d1.INPATIENT_NUM
+					and o.ORDER_ID=d1.ORDER_ID
+					) ord
+					where 
+				   	<foreach collection="data" index="index" item="item" open="" separator=" or " close="">
+			             ( ord.inpatientNum=#{item.zyId} and ord.orgCode=#{item.orgCode} )
+		           </foreach>
+		            order by inpatientNum,orderAdviceNum,recordTime
+	</select>
+	
+<!-- orgCode和zyId查询住院费用主表返回List<map> -->
+<select id="getInhostCostByMap" parameterType="map" resultMap="getInhostCostMap">
+	      <!-- <include refid="dc.dao.mapper.CommonTempMapper.sqlHead"/> -->
+		 select 
+		       d12.ID$ as idq,
+		       '住院费用' as name,
+			   d12.MPIID$ as mpiidq,
+		       d12.INPATIENT_NUM as inpatientNumq,
+		       d12.ORG_CODE as orgCodeq,
+		       to_char(d12.SETTLEMENT_TIME, 'yyyy-mm-dd hh24:mi:ss') as serviceTimeq,
+		       d12.ORG_NAME as orgNameq,
+		       d12.SETTLEMENT_ID as settlementIdq,
+		       d12.CHARGE_STATUS as chargeStatusq,
+		       d12.INVOICE_NUM as invoiceNumq,
+		       d12.CHARGE_SCENE_CODE as chargeSceneCodeq,
+		       d12.CHARGE_SCENE_NAME as chargeSceneNameq,
+		       d12.PATIENT_SOURCE as patientSourceq,
+		       d12.CHARGE_MODE_CODE as chargeModeCodeq,
+		       d12.CHARGE_MODE_NAME as chargeModeNameq,
+		       d12.SETTLEMENT_AMOUNT as settlementAmountq,
+		       d12.SELF_AMOUNT as selfAmountq,
+		       d12.SETTLEMENT_PERSON_CODE as settlementPersonCodeq,
+		       d12.SETTLEMENT_PERSON_NAME as settlementPersonNameq,
+		       d12.org_code AS "orgCodeTemp",
+			   d12.inpatient_num AS "zyIdTemp",
+			   ${param},
+				   d13.ID$ as idw,
+			       d13.ORG_CODE as orgCodew,
+			       d13.INPATIENT_NUM as inpatientNumw,
+			       d13.ORG_NAME as orgNamew,
+			       d13.CHARGE_ID as chargeIdw,
+			       d13.ORDER_ID as orderIdw,
+			       d13.SETTLEMENT_ID as settlementIdw,
+			       d13.DEP_CODE as depCodew,
+			       d13.DEP_NAME as depNamew,
+			       d13.PRESCRIBER_CODE as prescriberCodew,
+			       d13.PRESCRIBER_NAME as prescriberNamew,
+			       d13.PERFORMER_CODE as performerCodew,
+			       d13.PERFORMER_NAME as performerNamew,
+			       d13.CHARGE_CLASSIFIED_CODE as chargeClassifiedCodew,
+			       d13.CHARGE_CLASSIFIED_NAME as chargeClassifiedNamew,
+			       to_char(d13.CHARGE_TIME, 'yyyy-mm-dd hh24:mi:ss') as chargeTimew,
+			       d13.ITEM_CODE as itemCodew,
+			       d13.ITEM_NAME as itemNamew,
+			       d13.ITEM_UNI as itemUnitw,
+			       d13.ITEM_PRICE as itemPricew,
+			       d13.TITEM_TYPE_CODE as itemTypeCodew,
+			       d13.ITEM_TYPE_NAME as itemTypeNamew,
+			       d13.ITEM_COUNT as itemCountw,
+			       d13.ITEM_RECEIVABLE_AMOUNT as itemReceivableAmountw,
+			       d13.ITEM_PAID_CMOUNT as itemPaidCmountw
+		  FROM 
+		     PT_IP_CHARGE d12
+		     left join pt_ip_charge_detail d13 on
+		     d13.inpatient_num = d12.INPATIENT_NUM
+		    AND d13.org_code = d12.ORG_CODE
+			AND d13.settlement_id = d12.SETTLEMENT_ID
+			where
+			<foreach collection="data" index="index" item="item" open="" separator=" or " close="">
+             ( d12.INPATIENT_NUM=#{item.zyId} and d12.ORG_CODE=#{item.orgCode} )
+           </foreach>
+           <!-- <include refid="dc.dao.mapper.CommonTempMapper.sqlEnd"/> -->
+	</select>
+</mapper>
